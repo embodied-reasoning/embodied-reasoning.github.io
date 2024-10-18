@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  </script>
+<script type="text/javascript"
+  src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  </script>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>3D Vision Language Models (VLMs) for Robotics Manipulation: Opportunities and Challenges</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="nav">
+    <div class="nav-container">
+      <img src="./static/images/cvpr2025.png" width="150px" style="margin-right: 30px;">
+      <a href="index.html#">Home</a>
+      <a href="index.html#intro">Introduction</a>
+      <a href="index.html#call">Call for Papers</a>
+      <!-- <a href="index.html#challenge">Challenge</a> -->
+      <a href="index.html#schedule">Schedule</a>
+      <a href="index.html#speakers">Speakers</a>
+      <a href="index.html#organizers">Organizers</a>
+    </div>
+  </div>
+
+  <div class="title-container">
+    <div style="text-align: center;" class="title-text">
+      <div style="width: 90%; margin: auto;z-index: 2; position: relative;">
+      <div class="subtitle">The first CVPR workshop on</div>
+      <h2><b>3D Vision Language Models (VLMs) for Robotics Manipulation: Opportunities and Challenges</b></h1>
+      <div class="subtitle" style="margin: 20px;">
+        June 11, 2025, Seattle, WA. Location: TBA
+      </div>
+      </div>
+    </div>
+</div>
+
+  <!-- <div class="title-container">
+    <div style="text-align: center;" class="title-text">
+      <div style="width: 90%; margin: auto;z-index: 2; position: relative;">
+      <div class="subtitle">The first CVPR workshop on</div>
+      <h1> <b>3D Vision Language Model for Robotics
+        Manipulation: Opportunities and Challenges </b></h1>
+      <div class="subtitle" style=" margin: 20px">
+        June 18, 2024, Seattle, WA. Room: Summit 434.
+      </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="container">
+    <div class="section" id="intro">
+      <h2>Introduction</h2>
+
+      <p>
+
+        The intersection of 3D vision and language models (VLMs) in robotics presents
+        a new frontier, blending spatial understanding with contextual reasoning. This
+        workshop, seeks to explore the opportunities and challenges posed by in-
+        tegrating these technologies to enhance robot perception, decision-making, and
+        interaction with the real world. As robots evolve to operate in increasingly com-
+        plex environments, bridging the gap between 3D spatial reasoning and language
+        understanding becomes critical. Key questions at the heart of this workshop
+        include:
+      <ul>
+        <li> <b>High-level vs. Low-level Representations:</b> Is 3D vision crucial, or
+          can 2D representations suffice for robotic tasks? How should robots inter-
+          pret the world—through point clouds, 3D bounding boxes, or other output
+          formats? What input modalities offer the most efficiency and generaliza-
+          tion?
+        </li>
+        <li> <b>Pretraining for Policy Learning:</b> Do low-level policies require exten-
+          sive pretraining, or could projections from vision-language models serve
+          as adequate features? Is it possible that distilled 2D features are sufficient
+          for policy learning, or is a deeper, 3D-centric approach needed? </li>
+        <li> <b>3D Vision-Language Action Models:</b> What are the specific challenges
+          in using 3D VLMs for robotic actions, particularly regarding sensor cali-
+          bration and real-time performance? </li>
+      </ul>
+
+      We are bringing together a diverse group of leading experts in the field to present their latest research 
+      findings and future perspectives, with an emphasis on scalable, generalizable, and adaptable 3D VLM frameworks for Robotics. 
+      Our goal is for this workshop to inspire and drive future innovations in 3D foundation models specifically realting to the robotics manipulation domain.
+
+      <!-- We invite a diverse
+      group of top experts in the field to share their recent research
+      outcomes and future visions in this regard, with a focus on scalable,
+      generalizable, and adaptable 3D AI frameworks. We hope this workshop
+      will inspire and accelerate the future innovations in 3D foundation
+      models and their broad applications. -->
+
+      </p>
+
+
+    </div>
+
+    <div class="section" id="call">
+      <h2>Call for Papers</h2>
+      <p>
+      Coming soon!
+      </p>
+      <h3>Paper topics</h3>
+      <p>
+      A non-exhaustive list of relevant topics:
+      <ul>
+        <li>3D Vision-Language Policy Learning</li>
+        <li>Pretraining for 3D Vision-Language Models</li>
+        <li>3D Representations for Policy Learning (i.e. NeRF, Gaussian Splatting, SDF)</li>
+        <li>3D Benchmarks and Simulatotion frameworks</li>
+        <li>3D Vision-Language Action Models</li>
+        <li>3D Vision-Language or Large-Language Models for Robotics</li>
+        <li>3D Instruction-tuning datasets for Robotics</li>
+        <li>3D pretraining datasets for Robotics</li>
+        <li>Other topics about 3D Vision-Language Models for Robotics Manipulations</li>
+      </ul>
+      </p>
+      <!-- <h3>Submission Guidelines</h3>
+      <p>
+        <ul>
+          <li><b>Submission Portal:</b> <a href="https://openreview.net/group?id=ICLR.cc/2022/Workshop/GPL">OpenReview</a></li>
+          <li><b>Paper Length:</b> 
+            Submissions could be either <b>4-page</b> short papers or <b>8-page</b> long papers, excluding references, acknowledgements, and appendices. 
+          </li>
+          <li><b>Format:</b>
+            <ul>
+              <li>You must format your submission using the <a href="../assets/gpl_iclr2022.zip"> updated ICLR 2022 LaTeX style file.</a></li>
+              <li>Please include the references and supplementary materials in the same PDF as the main paper. </li>
+              <li>The maximum file size for submissions is 100MB. Submissions that violate the ICLR style (e.g., by decreasing margins or font sizes) or page limits may be rejected without further review. </li>
+            </ul>
+          </li>
+          <li><b>Dual Submission:</b>
+            <ul>
+              <li>Papers to be submitted or in preparation for submission to other major venues (including ICML 2022) in the field are allowed.</li>
+              <li>We also weclome published works, but they must be explicitly stated at the time of submission.</li>
+            </ul>
+          </li>
+          <li><b>Non-archival:</b> The workshop is a non-archival venue and will not have official proceedings. Workshop submissions can be subsequently or concurrently submitted to other venues.</li>
+          <li><b>Visibility:</b> Submissions and reviews will not be public. Only accepted papers will be made public.</li>
+          <li>We encourage the participants of the affiliated challenge to submit technical reports which summarizing their solutions.</li>
+          <li><b>Contact:</b> <a href="mailto:iclr2022gpl@gmail.com">iclr2022gpl@gmail.com</a></li>
+        </ul>
+      </p> -->
+
+    <div class="section" id="schedule">
+      <h2>Workshop Schedule (Tentative)</h2>
+      <style type="text/css">
+        .tg .tg-u4qn {
+          background-color: #D9D9D9;
+          text-align: left;
+          vertical-align: bottom
+        }
+
+        .tg-za14 {
+          width: 600px;
+        }
+
+        /* .tg .tg-7zrl{text-align:left;vertical-align:bottom} */
+      </style>
+      <table class="tg">
+        <thead>
+          <tr>
+            <th class="tg-u4qn"><span style="background-color:#D9D9D9">Start Time (PDT)</span></th>
+            <th class="tg-u4qn"><span style="background-color:#D9D9D9">End Time (PDT)</span></th>
+            <th class="tg-u4qn"><span style="background-color:#D9D9D9">Event</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tg-jkyp">9:00 AM</td>
+            <td class="tg-jkyp">9:10 AM</td>
+            <td class="tg-za14">Opening remarks</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">9:10 AM</td>
+            <td class="tg-jkyp">9:45 AM</td>
+            <td class="tg-za14"><b>Hao Su </b> <br/> Talk Title (TBD)</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">9:45 AM</td>
+            <td class="tg-jkyp">10:20 AM</td>
+            <td class="tg-za14"><b>Chelsea Finn</b> <br/> Pretraining and Posttraining Robotic Foundation Models</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">10:20 AM</td>
+            <td class="tg-jkyp">10:55 AM</td>
+            <td class="tg-za14"><b>Angel Chang</b> <br/> Building vision-language maps for embodied AI</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">10:55 AM</td>
+            <td class="tg-jkyp">11:10 AM</td>
+            <td class="tg-za14">Coffee Break</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">11:10 AM</td>
+            <td class="tg-jkyp">11:45 AM</td>
+            <td class="tg-za14"><b>Yunzhi Li</b> <br> Foundation Models for Structured Scene Modeling in Robotic Manipulation</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">11:45 AM</td>
+            <td class="tg-jkyp">12:20 PM</td>
+            <td class="tg-za14"><b>Katerina Fragkiada</b> <br/> Talk Title (TBD)</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">12:20 PM</td>
+            <td class="tg-jkyp">1:30 PM</td>
+            <td class="tg-za14"><b>Lunch</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">1:30 PM</td>
+            <td class="tg-jkyp">2:00 PM</td>
+            <td class="tg-za14">Poster Session</td>
+          </tr>
+
+
+          <tr>
+            <td class="tg-jkyp">2:00 PM</td>
+            <td class="tg-jkyp">2:35 PM</td>
+            <td class="tg-za14"><b>Ranjay Krishn</b> <br/> Talk Title (TBD)</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">2:35 PM</td>
+            <td class="tg-jkyp">3:10 PM</td>
+            <td class="tg-za14"><b>Chuang Gan</b> <br/> Talk Title (TBD)</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">3:10 PM</td>
+            <td class="tg-jkyp">3:25 PM</td>
+            <td class="tg-za14"><b>Coffee Break</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">3:25 PM</td>
+            <td class="tg-jkyp">4:00 PM</td>
+            <td class="tg-za14">Justin Johnson</b> <br/> Talk Title (TBD)</td>
+          </tr>
+
+
+          <tr>
+            <td class="tg-jkyp">4:00 PM</td>
+            <td class="tg-jkyp">4:45 PM</td>
+            <td class="tg-za14"><b>Spotlight Paper Talks (5 min talk each / 2 min Q&A)</td>
+          </tr>
+
+          <tr>
+            <td class="tg-jkyp">4:45 PM</td>
+            <td class="tg-jkyp">5:00 PM</td>
+            <td class="tg-za14"><b>Ending Remarks and Paper Awards</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+    </div>
+
+    <div class="section" id="speakers">
+      <h2>Invited Speakers</h2>
+      <p> listed alphabetically </p>
+      <div class="people">
+
+
+
+        <a href="https://angelxuanchang.github.io/">
+          <img src="./static/images/angel.jpg">
+          <div>Angel Chang</div>
+          <div class="aff">Technical University of Munich</div>
+        </a>
+
+
+       <a href="https://ai.stanford.edu/~cbfinn/">
+          <img src="./static/images/chelsea.jpg">
+          <div>Chelsea Finn</div>
+          <div class="aff">Stanford University</div>
+        </a>
+
+        <a href="https://people.csail.mit.edu/ganchuang/">
+          <img src="./static/images/chuang.jpg">
+          <div>	Chuang Gan</div>
+          <div class="aff">UMass Amherst</div>
+        </a>
+
+        <a href="https://cseweb.ucsd.edu//~haosu/">
+          <img src="./static/images/haosu.jpeg">
+          <div>Hao Su</div>
+          <div class="aff">UC San Diego</div>
+        </a>
+
+        <a href="https://www.cs.cmu.edu/~katef/">
+          <img src="./static/images/katerina.png">
+          <div>Katerina Fragkiadaki</div>
+          <div class="aff">Carnegie Mellon University</div>
+        </a>
+
+        <a href="https://yunzhuli.github.io/">
+          <img src="./static/images/yunzhu.jpg">
+          <div>Yunzhu Li</div>
+          <div class="aff">Columbia University</div>
+        </a>
+
+        <a href="https://web.eecs.umich.edu/~justincj/">
+          <img src="./static/images/justin.jpg">
+          <div>Justin Johnson </div>
+          <div class="aff">University of Michigan</div>
+        </a>
+
+
+        <a href="https://goldberg.berkeley.edu/">
+          <img src="./static/images/ken.jpg">
+          <div>Ken Goldberg</div>
+          <div class="aff">UC Berkeley</div>
+        </a>
+
+        <a href="http://ranjaykrishna.com/index.html">
+          <img src="./static/images/ranjay.jpeg">
+          <div>Ranjay Krishna</div>
+          <div class="aff">University of Washington</div>
+        </a>
+   
+
+      </div>
+    </div>
+
+
+    <div class="section" id="organizers">
+      <h2>Organizers</h2>
+      <!-- <p> listed alphabetically </p> -->
+      <div class="people">
+        <a href="https://sai-bi.github.io/">
+          <img src="./static/images/jiafei.png">
+          <div>Jiaefei Dian</div>
+          <div class="aff">University of Washington</div>
+        </a>
+
+        <a href="https://geometry.stanford.edu/member/guibas/">
+          <img src="./static/images/zubair.JPG">
+          <div>Zubair Irshad</div>
+          <div class="aff">Toyota Research Institute</div>
+        </a>
+
+        <a href="https://www.3dunderstanding.org/team.html">
+          <img src="./static/images/ishika.jpg">
+          <div>Ishika Singh</div>
+          <div class="aff">USC</div>
+        </a>
+
+        <!-- <a href="http://www.kalyans.org/">
+          <img src="./static/images/kalyan.jpg">
+          <div>Vitor Guizilini</div>
+          <div class="aff">Adobe Research</div>
+        </a>
+
+        <a href="https://www.cs.unc.edu/~airsplay/">
+          <img src="./static/images/haotan.jpeg">
+          <div>Hao Tan</div>
+          <div class="aff">Adobe Research</div>
+        </a>
+
+        <a href="https://stanford.edu/~gordonwz/">
+          <img src="./static/images/gordon_wetzstein_small.jpg">
+          <div>Gordon Wetzstein</div>
+          <div class="aff">Stanford</div>
+        </a>
+
+
+        <a href="https://peterwonka.net/">
+          <img src="./static/images/Peter2020.jpg">
+          <div>Peter Wonka</div>
+          <div class="aff">KAUST</div>
+        </a>
+
+
+        <a href="https://justimyhxu.github.io/">
+          <img src="./static/images/yinghaoxu.jpeg">
+          <div>Yinghao Xu</div>
+          <div class="aff">Stanford</div>
+        </a>
+
+        <a href="https://zexiangxu.github.io/">
+          <img src="./static/images/zexiang.jpg">
+          <div>Zexiang Xu</div>
+          <div class="aff">Adobe Research</div>
+        </a>
+
+        <a href="https://kai-46.github.io/website/">
+          <img src="./static/images/kai.jpg">
+          <div>Kai Zhang</div>
+          <div class="aff">Adobe Research</div>
+        </a> -->
+
+
+      </div>
+    </div>
+
+
+  </div>
+  <div class="foot">
+    The website template is borrowed from <a href="https://ai-workshops.github.io/generalizable-policy-learning-in-the-physical-world/">here </a>. 
+  </div>
+</body>
+
+</html>
