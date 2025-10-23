@@ -27,10 +27,10 @@
 <body>
   <div class="nav">
     <div class="nav-container">
-      <img src="./static/images/cvpr2025.png" width="150px" style="margin-right: 30px;">
+      <img src="./static/images/cvpr2026.png" width="150px" style="margin-right: 30px;">
       <a href="index.html#">Home</a>
       <a href="index.html#intro">Introduction</a>
-      <a href="index.html#call">Call for Papers</a>
+      <a href="index.html#call">Challenges</a>
       <!-- <a href="index.html#challenge">Challenge</a> -->
       <a href="index.html#schedule">Schedule</a>
       <a href="index.html#speakers">Speakers</a>
@@ -42,68 +42,58 @@
     <div style="text-align: center;" class="title-text">
       <div style="width: 90%; margin: auto;z-index: 2; position: relative;">
       <div class="subtitle">The first CVPR workshop on</div>
-      <h2><b>3D Vision Language Models (VLMs) for Robotic Manipulation: Opportunities and Challenges</b></h1>
+      <h2><b>Embodied Reasoning in Action (ERA): Workshop and Challenge on Embodied Reasoning for Robotic Manipulation</b></h1>
       <div class="subtitle" style="margin: 20px;">
-        June 11, 2025, Nashville, TN. Location: 101 A
+        June 3-4, 2026, Denver, CO.
       </div>
       </div>
     </div>
 </div>
-
-  <!-- <div class="title-container">
-    <div style="text-align: center;" class="title-text">
-      <div style="width: 90%; margin: auto;z-index: 2; position: relative;">
-      <div class="subtitle">The first CVPR workshop on</div>
-      <h1> <b>3D Vision Language Model for Robotic
-        Manipulation: Opportunities and Challenges </b></h1>
-      <div class="subtitle" style=" margin: 20px">
-        June 18, 2024, Seattle, WA. Room: Summit 434.
-      </div>
-      </div>
-    </div>
-  </div> -->
 
   <div class="container">
     <div class="section" id="intro">
       <h2>Introduction</h2>
 
       <p>
+        Embodied reasoning—the ability to ground perception, language, and action in the physical world—is becoming
+        central to robotic manipulation. Foundation models (LLMs, VLMs, and 3D vision models) bring broad world knowledge
+        and compositional generalization, yet turning these capabilities into reliable, closed‑loop manipulation remains
+        an open challenge: robots must reason about spatial relations, affordances, dynamics, and causality while adapting
+        online to novel scenes, objects, and tasks. This workshop convenes researchers across robotics, embodied AI,
+        perception, planning, control, simulation, and sim‑to‑real to chart the next steps in reasoning‑centric manipulation.<br><br>
+        
+        We introduce two community challenges to benchmark progress: RoboSpatial, evaluates a model's ability to understand
+        spatial relationships—where to point, fit, and place—across different camera views and scenes, and PointArena (Point‑Bench),
+        Measures precise, language‑guided pointing by asking models to select the correct pixel(s) in an image with automated scoring.
+        Together, these tracks measure generalization across viewpoints, sensors, and object sets; robustness to environmental
+        perturbations; and the fidelity of language‑to‑action grounding.<br><br>
 
-        The intersection of 3D Vision-and-Language models (3D VLMs) in robotics
-        presents a new frontier, blending spatial understanding with contextual reasoning. The Robo-3DVLM workshop seeks to explore the opportunities and
-        challenges posed by integrating these technologies to enhance robot perception,
-        decision-making, and interaction with the real world. As robots evolve to operate in increasingly complex environments, bridging the gap between 3D spatial
-        reasoning and language understanding becomes critical. Key questions at the
-        heart of this workshop include:
-      <ul>
-        <li> <b>High-level vs. Low-level Representations:</b> Is 3D vision crucial, or
-          can 2D representations suffice for robotic tasks? How should robots interpret the world—through point clouds, 3D bounding boxes, or other output
-          formats? What input modalities offer the most efficiency and generalization?
-        </li>
-        <li> <b>Pretraining for Policy Learning:</b> Do low-level policies require extensive pretraining, or could projections from vision-language models serve
-          as adequate features? Is it possible that distilled 2D features are sufficient
-          for policy learning, or is a deeper, 3D-centric approach needed? </li>
-        <li> <b>3D Vision-Language Action Models:</b> What are the specific challenges
-          in using 3D VLMs for robotic actions, particularly regarding sensor calibration and real-time performance? </li>
-      </ul>
-
-      By addressing these questions, the workshop aims to drive conversations
-        around the utility of 3D in robotic vision, the role of language in perception,
-        and the limitations imposed by current data and hardware constraints. Through
-        invited talks and interactive sessions, we aim to unite researchers from diverse
-        disciplines to push the boundaries of multimodal learning in robotics, setting
-        the stage for the next generation of intelligent systems.
-
+        By bringing together diverse perspectives—from algorithmic foundations and datasets to hardware‑aware systems and
+        deployments—we aim to identify what forms of representation, learning, and planning truly scale embodied reasoning
+        for real‑world manipulation, and to catalyze collaboration between academia and industry.
       </p>
 
 
     </div>
 
     <div class="section" id="call">
-      <h2>Call for Papers</h2>
+      <h2>Challenges</h2>
  <p>
-    We are excited to announce the Call for Papers for the Robo-3DVLM workshop. We invite original contributions presenting novel ideas, research, and applications relevant to the workshop’s theme.
+    We are excited to announce the challenges for the ERA workshop.
   </p>
+    
+  <h3>GemBench Challenge</h3>
+  <p><a href="https://www.di.ens.fr/willow/research/gembench/">GemBench</a> comprises 16 training tasks with 31 variations, 
+    covering seven action primitives. The testing set includes 44 tasks with 92 variations, which are organized into four 
+    progressively more challenging levels to systematically evaluate generalization capabilities, namely novel placements, 
+    novel rigid object, novel articulated objects, and long-horizon tasks.</p>
+  <img src="static/images/gembench.png" alt="GemBench" style="max-width: 100%; height: auto;"> <br><br>
+
+  <h3>Colosseum Challenge</h3>
+  <p><a href="https://robot-colosseum.github.io/">Colosseum</a> aims to evaluate models' generalization across various scene perturbations. It encompasses 14 perturbation 
+    factors within 20 distinct RLBench tasks, categorized into three tiers (simple, intermediate, and complex) according to 
+    the number of way-points involved (task horizon). Collectively, Colosseum presents 20,371 unique task perturbations instances.</p>
+  <img src="static/images/colosseum.png" alt="Colosseum" style="max-width: 100%; height: auto;">
 
   <h2>Important Dates</h2>
   <table>
@@ -115,20 +105,20 @@
     </thead>
     <tbody>
       <tr>
-        <td><strong>Call for Papers</strong></td>
-        <td>January 30th, 2025</td>
+        <td><strong>Challenges</strong></td>
+        <td>TBD</td>
       </tr>
       <tr>
         <td><strong>Submission Deadline</strong></td>
-        <td>May 16nd, 2025, 23:59 PST</td>
+        <td>TBD</td>
       </tr>
       <tr>
         <td><strong>Notification</strong></td>
-        <td>May 20th, 2025</td>
+        <td>TBD</td>
       </tr>
       <tr>
         <td><strong>Camera-Ready</strong></td>
-        <td>May 25th, 2025</td>
+        <td>TBD</td>
       </tr>
     </tbody>
   </table>
@@ -161,32 +151,7 @@
         <li>Other topics about 3D Vision-Language Models for Robotic Manipulations</li>
       </ul>
       </p>
-      <!-- <h3>Submission Guidelines</h3>
-      <p>
-        <ul>
-          <li><b>Submission Portal:</b> <a href="https://openreview.net/group?id=ICLR.cc/2022/Workshop/GPL">OpenReview</a></li>
-          <li><b>Paper Length:</b> 
-            Submissions could be either <b>4-page</b> short papers or <b>8-page</b> long papers, excluding references, acknowledgements, and appendices. 
-          </li>
-          <li><b>Format:</b>
-            <ul>
-              <li>You must format your submission using the <a href="../assets/gpl_iclr2022.zip"> updated ICLR 2022 LaTeX style file.</a></li>
-              <li>Please include the references and supplementary materials in the same PDF as the main paper. </li>
-              <li>The maximum file size for submissions is 100MB. Submissions that violate the ICLR style (e.g., by decreasing margins or font sizes) or page limits may be rejected without further review. </li>
-            </ul>
-          </li>
-          <li><b>Dual Submission:</b>
-            <ul>
-              <li>Papers to be submitted or in preparation for submission to other major venues (including ICML 2022) in the field are allowed.</li>
-              <li>We also weclome published works, but they must be explicitly stated at the time of submission.</li>
-            </ul>
-          </li>
-          <li><b>Non-archival:</b> The workshop is a non-archival venue and will not have official proceedings. Workshop submissions can be subsequently or concurrently submitted to other venues.</li>
-          <li><b>Visibility:</b> Submissions and reviews will not be public. Only accepted papers will be made public.</li>
-          <li>We encourage the participants of the affiliated challenge to submit technical reports which summarizing their solutions.</li>
-          <li><b>Contact:</b> <a href="mailto:iclr2022gpl@gmail.com">iclr2022gpl@gmail.com</a></li>
-        </ul>
-      </p> -->
+
 
     <div class="section" id="schedule">
       <h2>Workshop Schedule (Tentative)</h2>
@@ -359,11 +324,6 @@
           <div class="aff">Columbia University</div>
         </a>
 
-<!--         <a href="https://web.eecs.umich.edu/~justincj/">
-          <img src="./static/images/justin.jpg">
-          <div>Justin Johnson </div>
-          <div class="aff">University of Michigan</div>
-        </a> -->
 
         <a href="http://ranjaykrishna.com/index.html">
           <img src="./static/images/ranjay.jpeg">

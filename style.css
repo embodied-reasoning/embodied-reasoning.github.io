@@ -158,15 +158,6 @@ h3 {
     object-fit: cover; /* Prevents image distortion */
 }
 
-/* .title-text {
-    background-image: url("static/images/teaser_ai.png");
-    color: #ffffff;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 400px;
-    position: relative;
-} */
 
 .title-text::before {
     content: '';
