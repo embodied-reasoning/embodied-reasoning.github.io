@@ -95,9 +95,17 @@
   <img src="static/images/robospatial.png" alt="RoboSpatial" style="max-width: 100%; height: auto;"> <br><br>
 
   <h3>PointArena Challenge</h3>
-  <p><a href="https://arxiv.org/abs/2505.09990">Colosseum</a> aims to evaluate models' generalization across various scene perturbations. It encompasses 14 perturbation 
-    factors within 20 distinct RLBench tasks, categorized into three tiers (simple, intermediate, and complex) according to 
-    the number of way-points involved (task horizon). Collectively, Colosseum presents 20,371 unique task perturbations instances.</p>
+  <p><a href="https://arxiv.org/abs/2505.09990">PointArena</a> is the largest benchmark for evaluating language-guided 
+    pointing, comprising 982 text-image pairs with pixel-level target masks collected from public sources after April 20, 2025. 
+    The dataset is evenly divided into five task-driven categories—Spatial, Affordance, Counting, Steerable, and Reasoning—derived 
+    from a survey of question types frequently tackled by open-source MLLMs. Each category targets a distinct capability: 1) Spatial 
+    focuses on positional queries within scenes rich in spatial relationships or repeated objects (e.g., “Point to the leftmost
+     tree in the image”); 2) Affordance emphasizes functional parts of objects, typically in tabletop scenes, prompting queries 
+     like “Point to the handle used for pouring”; 3) Counting features multiple similar items and supports queries about subsets 
+     based on number or attributes, such as “Point to all the blue cars in the image”; 4) Steerable leverages images from the PixMo 
+     dataset that include a reference point, guiding annotators to ask relative-position questions like “Point to the item closest to 
+     the marked point”; and 5) Reasoning presents event-rich or abstract scenes, inviting open-ended queries that require inference, 
+     such as “Point to the tallest man-made object in the image.” </p>
   <img src="static/images/pointarena.png" alt="PointArena" style="max-width: 100%; height: auto;">
 
   <h2>Important Dates</h2>
@@ -110,52 +118,36 @@
     </thead>
     <tbody>
       <tr>
-        <td><strong>Challenges</strong></td>
-        <td>TBD</td>
+        <td><strong>Challenge Launch</strong></td>
+        <td>January 2026 (following workshop acceptance)</td>
       </tr>
       <tr>
-        <td><strong>Submission Deadline</strong></td>
-        <td>TBD</td>
+        <td><strong>Simulation Phase Deadline</strong></td>
+        <td>April 30, 2026</td>
       </tr>
       <tr>
-        <td><strong>Notification</strong></td>
-        <td>TBD</td>
+        <td><strong>Verification Period</strong></td>
+        <td>May 2026</td>
       </tr>
       <tr>
-        <td><strong>Camera-Ready</strong></td>
-        <td>TBD</td>
+        <td><strong>Winner Notifications</strong></td>
+        <td>End of May 2026</td>
       </tr>
     </tbody>
-  </table>
+  </table> <br>
 
-  <h2>Submission Guidelines</h2>
-  <ul>
-    <li><strong>Page Limit:</strong> Submissions can be up to 4 pages for the main content. There is no limit on the number of pages for references or appendices.</li>
-    <li><strong>Formatting:</strong> Submissions are encouraged to use the CVPR template.</li>
-    <li><strong>Anonymity:</strong> All submissions must be anonymized. Please remove any author names, affiliations, or identifying information.</li>
-    <li><strong>Relevant Work:</strong> We welcome references to recently published, relevant work (e.g., RSS, CoRL, ICRA, and ICML).</li>
-    <li><strong>Archival Status:</strong> All accepted papers are non-archival.</li>
-<li><strong>Link:</strong> <a href="https://openreview.net/group?id=thecvf.com/CVPR/2025/Workshop/Robo-3Dvlm&referrer=%5BHomepage%5D(%2F)#tab-your-consoles">openreview submission</a></li>
-        <p>
-    Accepted papers will be presented in the form of posters at the workshop. In addition, selected papers may be invited to deliver spotlight talks.
-  </p>
-  </ul>
-      </p>
-      <h3>Paper topics</h3>
-      <p>
-      A non-exhaustive list of relevant topics:
-      <ul>
-        <li>3D Vision-Language Policy Learning</li>
-        <li>Pretraining for 3D Vision-Language Models</li>
-        <li>3D Representations for Policy Learning (i.e. NeRF, Gaussian Splatting, SDF)</li>
-        <li>3D Benchmarks and Simulatotion frameworks</li>
-        <li>3D Vision-Language Action Models</li>
-        <li>3D Vision-Language or Large-Language Models for Robotics</li>
-        <li>3D Instruction-tuning datasets for Robotics</li>
-        <li>3D pretraining datasets for Robotics</li>
-        <li>Other topics about 3D Vision-Language Models for Robotic Manipulations</li>
-      </ul>
-      </p>
+  <h2>Evaluation Guidelines</h2>
+    <p><b>Evaluation.</b> The two challenges will be evaluated independently. The primary metric is the average success rate across 
+      all tasks. Each challenge includes a public test split, which has already been released with the benchmark. Because participants 
+      can self-evaluate and post results to the leaderboards for both benchmarks, we will require submission of model checkpoints for 
+      verification. To minimize leakage of test information, each team will be limited to a small number of submissions.</p>
+    <p><b>Prizes.</b> Final rankings will be determined by benchmark performance results. Prizes will be awarded to the winners, 
+      contingent on sponsor availability.</p> 
+    <p>We will consider having posters from the challenge participants and invited posters from the main conference papers that are relevant, 
+      but will not hold a paper submission.</p>
+    <br>
+
+
 
 
     <div class="section" id="schedule">
@@ -185,99 +177,91 @@
           <tr>
             <td class="tg-jkyp">9:00 AM</td>
             <td class="tg-jkyp">9:10 AM</td>
-            <td class="tg-za14">Opening remarks</td>
+            <td class="tg-za14">Introduction and welcome</td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">9:10 AM</td>
             <td class="tg-jkyp">9:45 AM</td>
-            <td class="tg-za14"><b>Hao Su </b> <br/> Exploring World Model for Robotic Manipulation</td>
+            <td class="tg-za14"><b>Invited speaker: Furong Huang (UMD)</b></td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">9:45 AM</td>
             <td class="tg-jkyp">10:20 AM</td>
-            <td class="tg-za14"><b>Chelsea Finn</b> <br/> Pretraining and Posttraining Robotic Foundation Models</td>
+            <td class="tg-za14"><b>Invited speaker: Tianmin Shu (JHU)</b></td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">10:20 AM</td>
             <td class="tg-jkyp">10:55 AM</td>
-            <td class="tg-za14"><b>Ranjay Krishna</b> <br/> Preparing perception for robotics</td>
+            <td class="tg-za14"><b>Invited speaker: Ranjay Krishna (UW/Ai2)</b></td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">10:55 AM</td>
             <td class="tg-jkyp">11:10 AM</td>
-            <td class="tg-za14">Coffee Break</td>
+            <td class="tg-za14">Coffee break (Tentative Poster Session)</td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">11:10 AM</td>
             <td class="tg-jkyp">11:45 AM</td>
-            <td class="tg-za14"><b>Yunzhu Li</b> <br> Foundation Models for Structured Scene Modeling in Robotic Manipulation</td>
+            <td class="tg-za14"><b>Invited speaker: Cheng Chi (BAAI)</b></td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">11:45 AM</td>
             <td class="tg-jkyp">12:20 PM</td>
-            <td class="tg-za14"><b>Katerina Fragkiada</b> <br/> 3D Generative Manipulation Policies: Bridging 2D Pre-training with 3D Scene Reasoning</td>
+            <td class="tg-za14">Challenge overview and results summary<br>(Luke Song and Jiafei Duan)</td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">12:20 PM</td>
-            <td class="tg-jkyp">1:30 PM</td>
-            <td class="tg-za14"><b>Lunch</td>
+            <td class="tg-jkyp">12:30 PM</td>
+            <td class="tg-za14">Winner and runner-up presentations for RoboSpatial and Point-Bench challenges</td>
           </tr>
 
           <tr>
-            <td class="tg-jkyp">1:30 PM</td>
+            <td class="tg-jkyp">12:30 PM</td>
             <td class="tg-jkyp">2:00 PM</td>
-            <td class="tg-za14">Poster Session (ExHall D, #357-#371</td>
+            <td class="tg-za14">Lunch</td>
           </tr>
-
 
           <tr>
             <td class="tg-jkyp">2:00 PM</td>
             <td class="tg-jkyp">2:35 PM</td>
-            <td class="tg-za14"><b>Angel Chang</b> <br/> Building vision-language maps for embodied AI</td>
+            <td class="tg-za14">Spotlight Presentation (15mins each)</td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">2:35 PM</td>
             <td class="tg-jkyp">3:10 PM</td>
-            <td class="tg-za14"><b>Dieter Fox</b> <br/> Hierarchical Action Models for Open-World 3D Policies </td>
+            <td class="tg-za14"><b>Invited speaker: Jiajun Wu (Stanford)</b></td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">3:10 PM</td>
             <td class="tg-jkyp">3:25 PM</td>
-            <td class="tg-za14"><b>Coffee Break</td>
+            <td class="tg-za14"><b>Invited speaker: Karl Pertsch (Physical Intelligence)</b></td>
           </tr>
 
           <tr>
             <td class="tg-jkyp">3:25 PM</td>
             <td class="tg-jkyp">4:00 PM</td>
-            <td class="tg-za14"><b>Chuang Gan</b> <br/> Genesis: An Unified and Generative Physics Simulation for Robotics</td>
+            <td class="tg-za14"><b>Invited speaker: Yilun Du (Harvard)</b></td>
           </tr>
 
-            <tr>
-              <td class="tg-jkyp">4:00 PM</td>
-              <td class="tg-jkyp">4:45 PM</td>
-              <td class="tg-za14">
-                <b>Spotlight Paper Talks&nbsp;(5 min talk&nbsp;/ 2 min Q&A)</b><br>
-                &bull; The One RING: A Robotic Indoor Navigation Generalist<br>
-                &bull; Manual2Skill: Learning to Read Manuals and Acquire Robotic Skills for Furniture Assembly Using Vision-Language Models<br>
-                &bull; Agentic Language-Grounded Adaptive Robotic Assembly<br>
-                &bull; ZeroMimic: Distilling Robotic Manipulation Skills from Web Videos
-              </td>
-            </tr>
-
+          <tr>
+            <td class="tg-jkyp">4:00 PM</td>
+            <td class="tg-jkyp">4:45 PM</td>
+            <td class="tg-za14">Panel Discussion</td>
+          </tr>
 
           <tr>
             <td class="tg-jkyp">4:45 PM</td>
             <td class="tg-jkyp">5:00 PM</td>
-            <td class="tg-za14"><b>Ending Remarks and Paper Awards</td>
+            <td class="tg-za14">Award ceremony and closing remark</td>
           </tr>
 
         </tbody>
@@ -290,58 +274,47 @@
       <p> listed alphabetically </p>
       <div class="people">
 
-
-
-        <a href="https://angelxuanchang.github.io/">
-          <img src="./static/images/angel.jpg">
-          <div>Angel Chang</div>
-          <div class="aff">Simon Fraser University</div>
+        <a href="https://chicheng123.github.io/">
+          <img src="./static/images/chengchi.jpg">
+          <div>Cheng Chi</div>
+          <div class="aff">Beijing Academy of Artificial Intelligence</div>
         </a>
 
-
-       <a href="https://ai.stanford.edu/~cbfinn/">
-          <img src="./static/images/chelsea.jpg">
-          <div>Chelsea Finn</div>
-          <div class="aff">Stanford University</div>
+        <a href="https://yilundu.github.io/">
+          <img src="./static/images/yilundu.png">
+          <div>Yilun Du</div>
+          <div class="aff">Harvard University</div>
         </a>
 
-        <a href="https://people.csail.mit.edu/ganchuang/">
-          <img src="./static/images/chuang.jpg">
-          <div>	Chuang Gan</div>
-          <div class="aff">UMass Amherst</div>
+        <a href="https://furong-huang.com/">
+          <img src="./static/images/furonghuang.jpeg">
+          <div>Furong Huang</div>
+          <div class="aff">University of Maryland</div>
         </a>
-
-        <a href="https://cseweb.ucsd.edu//~haosu/">
-          <img src="./static/images/haosu.jpeg">
-          <div>Hao Su</div>
-          <div class="aff">UC San Diego</div>
-        </a>
-
-        <a href="https://www.cs.cmu.edu/~katef/">
-          <img src="./static/images/katerina.png">
-          <div>Katerina Fragkiadaki</div>
-          <div class="aff">Carnegie Mellon University</div>
-        </a>
-
-        <a href="https://yunzhuli.github.io/">
-          <img src="./static/images/yunzhu.jpg">
-          <div>Yunzhu Li</div>
-          <div class="aff">Columbia University</div>
-        </a>
-
 
         <a href="http://ranjaykrishna.com/index.html">
-          <img src="./static/images/ranjay.jpeg">
+          <img src="./static/images/ranjaykrishna.jpeg">
           <div>Ranjay Krishna</div>
-          <div class="aff">University of Washington</div>
+          <div class="aff">University of Washington / Ai2</div>
         </a>
 
-        <a href="https://homes.cs.washington.edu/~fox/">
-          <img src="./static/images/fox-2017.jpg">
-          <div>Dieter Fox</div>
-          <div class="aff">University of Washington</div>
+        <a href="https://kpertsch.github.io/">
+          <img src="./static/images/karlpertsch.jpg">
+          <div>Karl Pertsch</div>
+          <div class="aff">Physical Intelligence</div>
         </a>
-   
+
+        <a href="https://www.tshu.io/">
+          <img src="./static/images/tianminshu.jpg">
+          <div>Tianmin Shu</div>
+          <div class="aff">Johns Hopkins University</div>
+        </a>
+
+        <a href="https://jiajunwu.com/">
+          <img src="./static/images/jiajunwu.jpg">
+          <div>Jiajun Wu</div>
+          <div class="aff">Stanford University</div>
+        </a>
 
       </div>
     </div>
@@ -357,46 +330,58 @@
           <div class="aff">University of Washington</div>
         </a>
 
-        <a href="https://zubairirshad.com">
-          <img src="./static/images/zubair.JPG">
-          <div>Zubair Irshad</div>
-          <div class="aff">Toyota Research Institute</div>
-        </a>
-
-        <a href="https://ishikasingh.github.io/">
-          <img src="./static/images/ishika.jpg">
-          <div>Ishika Singh</div>
-          <div class="aff">USC</div>
-        </a>
-
-        <a href="https://www.linkedin.com/in/vitorguizilini/">
-          <img src="./static/images/vitor.jpg">
-          <div>Vitor Guizilini</div>
-          <div class="aff">Toyota Research Institute</div>
-        </a>
-
-        <a href="https://www.tri.global/about-us/dr-rares-ambrus">
-          <img src="./static/images/rares.jpg">
-          <div>Rares Ambrus</div>
-          <div class="aff">Toyota Research Institute</div>
-        </a>
-
-        <a href="https://faculty.cc.gatech.edu/~zk15/">
-          <img src="./static/images/zsolt.jpg">
-          <div>Zsolt Kira</div>
-          <div class="aff">Georgia Institute of Technology</div>
-        </a>
-
         <a href="https://hq-fang.github.io/">
           <img src="./static/images/haoquan.jpg">
           <div>Haoquan Fang</div>
           <div class="aff">University of Washington</div>
         </a>
 
-        <a href="https://jasonlee328.github.io/">
-          <img src="./static/images/jason.jpg">
-          <div>Jason Lee</div>
+        <a href="https://homes.cs.washington.edu/~fox/">
+          <img src="./static/images/fox-2017.jpg">
+          <div>Dieter Fox</div>
           <div class="aff">University of Washington</div>
+        </a>
+
+        <a href="https://mayasguru.github.io/">
+          <img src="./static/images/mayaguru.jpg">
+          <div>Maya Guru</div>
+          <div class="aff"></div>
+        </a>
+
+        <a href="#">
+          <img src="./static/images/yejinkim.jpg">
+          <div>Yejin Kim</div>
+          <div class="aff"></div>
+        </a>
+
+        <a href="https://mars-tin.github.io/">
+          <img src="./static/images/martin.jpeg">
+          <div>Martin Ziqiao Ma</div>
+          <div class="aff"></div>
+        </a>
+
+        <a href="https://jason718.github.io/">
+          <img src="./static/images/jasonren.jpeg">
+          <div>Jason Ren</div>
+          <div class="aff"></div>
+        </a>
+
+        <a href="https://chanh.ee/">
+          <img src="./static/images/lukesong.jpg">
+          <div>Chan Hee (Luke) Song</div>
+          <div class="aff"></div>
+        </a>
+
+        <a href="https://helen9975.github.io/">
+          <img src="./static/images/helenwang.jpg">
+          <div>Helen Wang</div>
+          <div class="aff"></div>
+        </a>
+
+        <a href="https://wentaoyuan.github.io/">
+          <img src="./static/images/wentaoyuan.jpg">
+          <div>Wentao Yuan</div>
+          <div class="aff"></div>
         </a>
       </div>
     </div>
