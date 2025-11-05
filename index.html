@@ -62,8 +62,8 @@
         online to novel scenes, objects, and tasks. This workshop convenes researchers across robotics, embodied AI,
         perception, planning, control, simulation, and sim‑to‑real to chart the next steps in reasoning‑centric manipulation.<br><br>
         
-        We introduce two community challenges to benchmark progress: RoboSpatial, evaluates a model's ability to understand
-        spatial relationships—where to point, fit, and place—across different camera views and scenes, and PointArena (Point‑Bench),
+        We introduce two community challenges to benchmark progress: <b>RoboSpatial</b>, evaluates a model's ability to understand
+        spatial relationships—where to point, fit, and place—across different camera views and scenes, and <b>PointArena (Point‑Bench)</b>,
         Measures precise, language‑guided pointing by asking models to select the correct pixel(s) in an image with automated scoring.
         Together, these tracks measure generalization across viewpoints, sensors, and object sets; robustness to environmental
         perturbations; and the fidelity of language‑to‑action grounding.<br><br>
@@ -82,18 +82,22 @@
     We are excited to announce the challenges for the ERA workshop.
   </p>
     
-  <h3>GemBench Challenge</h3>
-  <p><a href="https://www.di.ens.fr/willow/research/gembench/">GemBench</a> comprises 16 training tasks with 31 variations, 
-    covering seven action primitives. The testing set includes 44 tasks with 92 variations, which are organized into four 
-    progressively more challenging levels to systematically evaluate generalization capabilities, namely novel placements, 
-    novel rigid object, novel articulated objects, and long-horizon tasks.</p>
-  <img src="static/images/gembench.png" alt="GemBench" style="max-width: 100%; height: auto;"> <br><br>
+  <h3>RoboSpatial Challenge</h3>
+  <p><a href="https://arxiv.org/abs/2411.16537">RoboSpatial</a> evaluates a model’s embodied spatial reasoning 
+    by testing its ability to infer where to point, fit, and place from real-world RGB-D observations. It contains
+    350 spatial question–answer pairs collected across five real apartments, with both RGB and depth data captured 
+    using an iPhone 13 Pro Max. Each scene is annotated under three reasoning types: configuration (object relations), 
+    context (free-space reasoning), and compatibility (affordance and fit). By assessing how models interpret 3D 
+    spatial structure and generalize across diverse indoor scenes and viewpoints, RoboSpatial provides a diagnostic 
+    benchmark for grounding perception and language in actionable spatial understanding, and is increasingly adopted 
+    by frontier models such as Qwen3-VL and Gemini Robotics for evaluating embodied spatial reasoning.</p>
+  <img src="static/images/robospatial.png" alt="RoboSpatial" style="max-width: 100%; height: auto;"> <br><br>
 
-  <h3>Colosseum Challenge</h3>
-  <p><a href="https://robot-colosseum.github.io/">Colosseum</a> aims to evaluate models' generalization across various scene perturbations. It encompasses 14 perturbation 
+  <h3>PointArena Challenge</h3>
+  <p><a href="https://arxiv.org/abs/2505.09990">Colosseum</a> aims to evaluate models' generalization across various scene perturbations. It encompasses 14 perturbation 
     factors within 20 distinct RLBench tasks, categorized into three tiers (simple, intermediate, and complex) according to 
     the number of way-points involved (task horizon). Collectively, Colosseum presents 20,371 unique task perturbations instances.</p>
-  <img src="static/images/colosseum.png" alt="Colosseum" style="max-width: 100%; height: auto;">
+  <img src="static/images/pointarena.png" alt="PointArena" style="max-width: 100%; height: auto;">
 
   <h2>Important Dates</h2>
   <table>
