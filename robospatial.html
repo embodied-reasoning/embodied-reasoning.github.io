@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <title>RoboSpatial Challenge - Submission Instructions</title>
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L553BZYNH0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L553BZYNH0');
+</script>
+
+<body>
+  <div class="nav">
+    <div class="nav-container">
+      <img src="./static/images/cvpr2026.png" width="150px" style="margin-right: 30px;">
+      <a href="index.html#">Home</a>
+      <a href="index.html#intro">Introduction</a>
+      <div class="nav-dropdown">
+        <a href="index.html#call">Challenges</a>
+        <div class="nav-dropdown-content">
+          <a href="index.html#call">Overview</a>
+          <a href="robospatial.html">RoboSpatial Details</a>
+          <a href="pointarena.html">PointArena Details</a>
+        </div>
+      </div>
+      <a href="index.html#schedule">Schedule</a>
+      <a href="index.html#speakers">Speakers</a>
+      <a href="index.html#organizers">Organizers</a>
+    </div>
+  </div>
+
+  <div class="challenge-hero">
+    <img src="./static/images/robospatial_hero.png" alt="RoboSpatial Challenge">
+    <div class="challenge-hero-expand">Click to expand</div>
+    <div class="challenge-hero-subtitle">ERA @ CVPR 2026</div>
+    <div class="challenge-hero-title">RoboSpatial Challenge</div>
+  </div>
+
+  <div class="container">
+    <div class="section" style="margin-top: 0; padding-top: 20px;">
+      <h2>RoboSpatial Challenge: Submission Instructions</h2>
+
+      <h3>Step 1: Run the evaluation locally and get your scores</h3>
+      <p>
+        <b>How to run:</b> Follow the <a href="https://github.com/RoboSpatial/RoboSpatial-Eval">RoboSpatial-Eval README</a> for setup, dataset download, config, and running evaluation. To add your model to the codebase, follow <code>ADDING_MODELS.md</code>.
+      </p>
+      <p>
+        <b>Where to get your scores:</b> After running the evaluation, use either:
+      </p>
+      <ul>
+        <li>The aggregate JSON in your output directory: <code>aggregate_robospatial_home_&lt;model_name&gt;.json</code> &rarr; in <code>category_stats</code>, use the <code>accuracy</code> value for each category, or</li>
+        <li>The printed summary at the end of the run ("Overall per-category accuracy").</li>
+      </ul>
+      <p>
+        Report these three numbers in the Google Form:
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Score Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Configuration (VQA)</td>
+            <td>RoboSpatial-Home Configuration score</td>
+          </tr>
+          <tr>
+            <td>Context (pointing)</td>
+            <td>RoboSpatial-Home Context score</td>
+          </tr>
+          <tr>
+            <td>Compatibility (VQA)</td>
+            <td>RoboSpatial-Home Compatibility score</td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <p>
+        Use one decimal place (e.g. 74.0, 6.6, 55.2). The run you use for these numbers is the one we will verify.
+      </p>
+
+      <h3>Step 2: Fill out the submission form</h3>
+      <p>
+        Submit via the <a href="https://forms.gle/robospatial">Google Form</a>.
+      </p>
+      <p>
+        <b>Important note:</b> We will reproduce your results using your submitted code and checkpoints. In addition, to assess generalizability, we may evaluate your model on an unseen test split containing unseen images but the same question types (strictly no training on the test set).
+      </p>
+      <p>
+        You may update your Google Form submission at any time. We will only consider the highest score achieved by the same model or method at the end of the challenge. Final results will be determined by the organizers based on the official scoresheet and will be announced after the challenge concludes.
+      </p>
+
+      <h3>Step 3: Verification</h3>
+      <p>
+        We will run your code and checkpoints with this repo's evaluation pipeline and confirm the reported scores. Please ensure:
+      </p>
+      <ul>
+        <li>Your code runs with the dependencies and environment you describe (e.g. in a README).</li>
+        <li>Checkpoint links are valid and downloadable (or access is granted).</li>
+        <li>If you use a private repo, <code>chanhee-luke</code> is added as a collaborator.</li>
+      </ul>
+
+      <h3>Common FAQs</h3>
+
+      <p>
+        <b>Q: Do I need to register for the challenge?</b><br>
+        A: No, you do not need to register. The submission itself counts as registration. However, each person is only eligible for one submission, so please include all team members in your submission.
+      </p>
+
+      <p>
+        <b>Q: Do I have to use the depth input?</b><br>
+        A: No, you do not need to, but you are free to use the depth image if you wish.
+      </p>
+
+      <h3>Additional Questions?</h3>
+      <p>
+        For any questions or issues, contact the challenge organizer (Luke Song) at <a href="mailto:chanhee.luke@gmail.com">chanhee.luke@gmail.com</a> or raise a GitHub issue at <a href="https://github.com/RoboSpatial/RoboSpatial-Eval">RoboSpatial-Eval</a>.
+      </p>
+    </div>
+  </div>
+
+  <div class="foot">
+    The website template is borrowed from <a href="https://ai-workshops.github.io/generalizable-policy-learning-in-the-physical-world/">here</a>.
+    <br>
+    For inquiries, contact us <a href="mailto:duanj1cs.Washington.edu">here</a>
+  </div>
+
+  <script>
+    document.querySelector('.challenge-hero').addEventListener('click', function() {
+      this.classList.toggle('expanded');
+      var label = this.querySelector('.challenge-hero-expand');
+      label.textContent = this.classList.contains('expanded') ? 'Click to collapse' : 'Click to expand';
+    });
+  </script>
+</body>
+
+</html>
