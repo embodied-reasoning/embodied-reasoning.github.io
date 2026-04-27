@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ERA @ CVPR 2026 — Social Banner</title>
+  <style>
+    body { margin: 0; background: #060f0a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    svg { max-width: 100%; height: auto; display: block; }
+  </style>
+</head>
+<body>
+
+<!--
+  ============================================================
+  ERA @ CVPR 2026 — Social Banner
+  Size: 680 × 380px  (Twitter/X, LinkedIn, conference web)
+  ============================================================
+
+  LOGO SWAP GUIDE
+  ---------------
+  1. NVIDIA logo  → find the <g id="logo-nvidia"> group below.
+     Replace the <rect> + <text> inside it with your own
+     <image href="nvidia-logo.svg" ...> or inline SVG paths.
+
+  2. bitrobot logo → find the <g id="logo-bitrobot"> group below.
+     Same approach — swap the placeholder shapes for your asset.
+
+  To use an external PNG/SVG file as a logo:
+    <image href="your-logo.png" x="..." y="..." width="..." height="..."/>
+
+  Colors used
+  -----------
+  Background         #060f0a
+  Emerald (Challenge 1)  #059669 / #10b981 / #6ee7b7
+  Teal   (Challenge 2)   #0d9488 / #2dd4bf / #5eead4
+  Gold   (Prize bar)     #f59e0b / #fbbf24 / #fcd34d
+  NVIDIA green       #76b900
+  bitrobot blue      #3b82f6 / #60a5fa
+  Muted text         #475569 / #334155 / #64748b
+  ============================================================
+-->
+
+<svg width="680" height="380" viewBox="0 0 680 380" role="img"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>ERA @ CVPR 2026 — Challenge Banner</title>
+  <desc>Social media banner for the Embodied Reasoning in Action workshop challenges at CVPR 2026.</desc>
+
+  <!-- ── Background ── -->
+  <rect width="680" height="380" fill="#060f0a"/>
+
+  <!-- ── Defs: gradients + grid pattern ── -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-width="0.3" opacity="0.07"/>
+    </pattern>
+    <linearGradient id="grad-indigo" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="grad-teal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0d9488"/>
+      <stop offset="100%" stop-color="#2dd4bf"/>
+    </linearGradient>
+    <linearGradient id="grad-gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#fbbf24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Grid overlay -->
+  <rect width="680" height="380" fill="url(#grid)"/>
+
+  <!-- Ambient glow blobs -->
+  <circle cx="580" cy="60"  r="160" fill="#059669" opacity="0.09"/>
+  <circle cx="100" cy="320" r="140" fill="#0d9488" opacity="0.08"/>
+
+  <!-- ── Top rule ── -->
+  <rect x="40" y="28" width="600" height="1" fill="#ffffff" opacity="0.08"/>
+
+  <!-- ── CVPR 2026 pill ── -->
+  <rect x="40" y="40" width="130" height="24" rx="12" fill="#059669" opacity="0.2"/>
+  <rect x="40" y="40" width="130" height="24" rx="12" fill="none" stroke="#059669" stroke-width="0.8" opacity="0.6"/>
+  <text x="105" y="56" text-anchor="middle"
+        font-family="sans-serif" font-size="11" font-weight="700"
+        fill="#6ee7b7" letter-spacing="1.5">CVPR 2026</text>
+
+  <!-- Location -->
+  <text x="640" y="56" text-anchor="end"
+        font-family="sans-serif" font-size="11" fill="#475569">June 3–4 · Denver, CO</text>
+
+  <!-- ── Main title ── -->
+  <text x="40" y="110"
+        font-family="sans-serif" font-size="32" font-weight="700"
+        fill="#f0fff8" letter-spacing="-0.5">Embodied Reasoning in Action</text>
+  <text x="40" y="138"
+        font-family="sans-serif" font-size="15" fill="#475569">Workshop &amp; Open Challenges — Robotic Manipulation</text>
+
+  <!-- Section divider -->
+  <rect x="40" y="154" width="600" height="0.75" fill="#ffffff" opacity="0.07"/>
+
+  <!-- ══════════════════════════════════════════
+       CHALLENGE 1 — RoboSpatial
+  ══════════════════════════════════════════ -->
+  <rect x="40" y="168" width="290" height="110" rx="10"
+        fill="#091a0e" stroke="#059669" stroke-width="0.75"/>
+  <!-- top accent bar -->
+  <rect x="40" y="168" width="290" height="3" rx="1.5" fill="url(#grad-indigo)"/>
+
+  <text x="56" y="194"
+        font-family="sans-serif" font-size="10" font-weight="700"
+        fill="#059669" letter-spacing="1.2">CHALLENGE 01</text>
+  <text x="56" y="216"
+        font-family="sans-serif" font-size="19" font-weight="700" fill="#e8fff5">RoboSpatial</text>
+  <text x="56" y="230"
+        font-family="sans-serif" font-size="11" fill="#64748b">Point, fit &amp; place from RGB-D home scenes</text>
+  <text x="56" y="243"
+        font-family="sans-serif" font-size="11" fill="#64748b">350 QA pairs · 3 task types · 5 apartments</text>
+
+  <!-- Tags -->
+  <rect x="56"  y="256" width="60" height="18" rx="4" fill="#059669" opacity="0.15"/>
+  <rect x="56"  y="256" width="60" height="18" rx="4" fill="none" stroke="#059669" stroke-width="0.5" opacity="0.4"/>
+  <text x="86"  y="269" text-anchor="middle"
+        font-family="sans-serif" font-size="10" fill="#6ee7b7">Spatial QA</text>
+
+  <rect x="124" y="256" width="48" height="18" rx="4" fill="#059669" opacity="0.15"/>
+  <rect x="124" y="256" width="48" height="18" rx="4" fill="none" stroke="#059669" stroke-width="0.5" opacity="0.4"/>
+  <text x="148" y="269" text-anchor="middle"
+        font-family="sans-serif" font-size="10" fill="#6ee7b7">RGB-D</text>
+
+  <!-- ══════════════════════════════════════════
+       CHALLENGE 2 — PointArena
+  ══════════════════════════════════════════ -->
+  <rect x="350" y="168" width="290" height="110" rx="10"
+        fill="#091a0e" stroke="#0d9488" stroke-width="0.75"/>
+  <!-- top accent bar -->
+  <rect x="350" y="168" width="290" height="3" rx="1.5" fill="url(#grad-teal)"/>
+
+  <text x="366" y="194"
+        font-family="sans-serif" font-size="10" font-weight="700"
+        fill="#0d9488" letter-spacing="1.2">CHALLENGE 02</text>
+  <text x="366" y="216"
+        font-family="sans-serif" font-size="19" font-weight="700" fill="#e8fff5">PointArena</text>
+  <text x="366" y="230"
+        font-family="sans-serif" font-size="11" fill="#64748b">Language-guided pixel pointing · VLM eval</text>
+  <text x="366" y="243"
+        font-family="sans-serif" font-size="11" fill="#64748b">982 pairs · affordance, spatial &amp; reasoning</text>
+
+  <!-- Tags -->
+  <rect x="366" y="256" width="72" height="18" rx="4" fill="#0d9488" opacity="0.15"/>
+  <rect x="366" y="256" width="72" height="18" rx="4" fill="none" stroke="#0d9488" stroke-width="0.5" opacity="0.4"/>
+  <text x="402" y="269" text-anchor="middle"
+        font-family="sans-serif" font-size="10" fill="#5eead4">Pixel Pointing</text>
+
+  <rect x="446" y="256" width="66" height="18" rx="4" fill="#0d9488" opacity="0.15"/>
+  <rect x="446" y="256" width="66" height="18" rx="4" fill="none" stroke="#0d9488" stroke-width="0.5" opacity="0.4"/>
+  <text x="479" y="269" text-anchor="middle"
+        font-family="sans-serif" font-size="10" fill="#5eead4">5 Categories</text>
+
+  <!-- ══════════════════════════════════════════
+       PRIZE BAR
+  ══════════════════════════════════════════ -->
+  <rect x="40" y="294" width="600" height="46" rx="10"
+        fill="#091a0e" stroke="#f59e0b" stroke-width="0.75"/>
+  <!-- left gold accent -->
+  <rect x="40" y="294" width="4" height="46" rx="2" fill="url(#grad-gold)"/>
+
+  <text x="58" y="311"
+        font-family="sans-serif" font-size="10" font-weight="700"
+        fill="#f59e0b" letter-spacing="1">PRIZES</text>
+  <text x="58" y="330"
+        font-family="sans-serif" font-size="13" font-weight="600"
+        fill="#fcd34d">Up to $6K in cash prizes</text>
+
+  <text x="380" y="329"
+        font-family="sans-serif" font-size="11" font-weight="600"
+        fill="#94a3b8">Deadline: May 23, 2026</text>
+
+  <!-- ══════════════════════════════════════════
+       SPONSOR FOOTER
+  ══════════════════════════════════════════ -->
+  <rect x="40" y="352" width="600" height="0.75" fill="#ffffff" opacity="0.07"/>
+
+  <text x="40" y="370"
+        font-family="sans-serif" font-size="10" fill="#334155" letter-spacing="0.8">SPONSORS</text>
+
+  <!-- ── NVIDIA logo placeholder ──────────────
+       id="logo-nvidia"
+       Bounding box: x=115  y=357  width=74  height=20
+       Replace the rect+text below with your real logo asset.
+       Example using an image file:
+         <image href="nvidia-logo.svg" x="115" y="357" width="74" height="20"/>
+  ───────────────────────────────────────────── -->
+  <g id="logo-nvidia">
+    <rect x="115" y="357" width="74" height="20" rx="4" fill="#ffffff"/>
+    <image href="../static/images/nvidialogo.png" x="115" y="357" width="74" height="20" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+
+  <!-- ── bitrobot logo placeholder ───────────
+       id="logo-bitrobot"
+       Bounding box: x=200  y=357  width=72  height=20
+       Replace the shapes below with your real logo asset.
+       Example using an image file:
+         <image href="bitrobot-logo.png" x="200" y="357" width="72" height="20"/>
+  ───────────────────────────────────────────── -->
+  <g id="logo-bitrobot">
+    <image href="../static/images/bitrobotlogo.png" x="200" y="357" width="72" height="20" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+
+  <!-- ── Cortex logo ───────────────────────── -->
+  <g id="logo-cortex">
+    <image href="../static/images/cortexlogo.png" x="282" y="357" width="72" height="20" preserveAspectRatio="xMidYMid meet"/>
+  </g>
+
+  <!-- Website URL -->
+  <text x="640" y="371" text-anchor="end"
+        font-family="monospace" font-size="10" fill="#334155">embodied-reasoning.github.io</text>
+
+</svg>
+
+</body>
+</html>
