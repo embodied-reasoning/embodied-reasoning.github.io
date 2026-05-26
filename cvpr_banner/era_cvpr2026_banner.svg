@@ -45,7 +45,7 @@
 
   <!-- Location -->
   <text x="640" y="56" text-anchor="end"
-        font-family="sans-serif" font-size="11" fill="#475569">June 3–4 · Denver, CO</text>
+        font-family="sans-serif" font-size="11" fill="#475569">June 4 · Denver, CO</text>
 
   <!-- ── Main title ── -->
   <text x="40" y="110"
