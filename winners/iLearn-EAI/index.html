@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PointArena 2026 — 2nd Place | Visual Pointing for Embodied AI</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0D111A;--card:#161B28;--c2:#1E2435;--blue:#4F9CF5;--green:#34D399;--orange:#F59E4F;--purple:#A78BFA;--red:#F87171;--cyan:#22D3EE;--w:#E6E8EC;--gray:#AAABBB;--muted:#707080;--th:#142D52;--sw:250px}
+html{font-size:16px;scroll-behavior:smooth}
+body{font-family:'Segoe UI','Inter',system-ui,sans-serif;background:var(--bg);color:var(--w);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:var(--blue);text-decoration:none}
+.c-af{color:var(--green)}.c-sp{color:var(--blue)}.c-re{color:var(--cyan)}.c-co{color:var(--orange)}.c-st{color:var(--red)}
+.sidebar{position:fixed;top:0;left:0;width:var(--sw);height:100vh;background:rgba(13,17,26,0.97);border-right:1px solid rgba(255,255,255,0.06);z-index:100;display:flex;flex-direction:column;overflow-y:auto;backdrop-filter:blur(12px)}
+.sh{padding:1.2rem 1.1rem 0.8rem;border-bottom:1px solid rgba(255,255,255,0.05)}
+.sh .logo{font-weight:800;font-size:0.95rem;color:var(--blue)}.sh .sub{font-size:0.62rem;color:var(--muted)}.sh .place{display:inline-block;margin-top:0.4rem;padding:0.12rem 0.5rem;border-radius:4px;background:rgba(79,156,245,0.1);color:var(--blue);font-size:0.65rem;font-weight:600}
+.sn{flex:1;padding:0.6rem 0}.sn .ng{margin-bottom:0.3rem}.sn .ngt{font-size:0.58rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--muted);padding:0.4rem 1.1rem 0.2rem}
+.sn a{display:block;padding:0.35rem 1.1rem;font-size:0.74rem;color:var(--gray);transition:all .15s;border-left:2px solid transparent}
+.sn a:hover,.sn a.active{color:var(--w);background:rgba(79,156,245,0.06);border-left-color:var(--blue)}.sn a .num{font-size:0.58rem;color:var(--muted);margin-right:0.35rem}
+.sf{padding:0.8rem 1.1rem;border-top:1px solid rgba(255,255,255,0.05);font-size:0.6rem;color:var(--muted)}
+.main{margin-left:var(--sw);min-height:100vh}
+.sec{max-width:1100px;margin:0 auto;padding:2.5rem 2rem}
+.sec.alt{max-width:100%;background:rgba(22,27,40,0.3)}.sec.alt .sin{max-width:1100px;margin:0 auto}
+.sec.hero{max-width:100%;text-align:center}
+.ey{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.3rem}
+.st{font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.4rem}
+.sd{font-size:0.85rem;color:var(--gray);max-width:700px;margin-bottom:1.2rem;line-height:1.5}
+.card{background:var(--card);border-radius:8px;padding:1rem 1.2rem;border:1px solid rgba(255,255,255,0.05)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:0.8rem}.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem}.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem}
+.tw{overflow-x:auto;background:var(--card);border-radius:8px;padding:0.8rem 1rem;border:1px solid rgba(255,255,255,0.05);margin:0.8rem 0}
+.tw h3{font-size:0.82rem;margin-bottom:0.4rem;font-weight:700}
+.rn{font-size:0.68rem;color:var(--muted);line-height:1.35;margin-top:0.35rem}
+.pill{display:inline-block;padding:0.12rem 0.45rem;border-radius:99px;background:rgba(255,255,255,0.05);font-size:0.62rem;font-weight:700;color:var(--gray);white-space:nowrap}
+.callout{background:rgba(30,36,53,0.65);border-left:3px solid var(--blue);border-radius:8px;padding:0.7rem 0.9rem;margin:0.8rem 0;color:var(--gray);font-size:0.74rem;line-height:1.45}
+.claim{background:linear-gradient(90deg,rgba(167,139,250,0.12),rgba(34,211,238,0.06));border:1px solid rgba(167,139,250,0.22);border-left:3px solid var(--purple);border-radius:8px;padding:0.85rem 1rem;margin:0.9rem 0}
+.claim h3{font-size:0.9rem;margin-bottom:0.25rem;color:var(--w)}
+.claim p{font-size:0.76rem;color:var(--gray);line-height:1.45}
+.proof{display:grid;grid-template-columns:repeat(3,1fr);gap:0.8rem;margin:0.8rem 0}
+.proof .card{padding:0.85rem}
+.proof h4{font-size:0.78rem;margin-bottom:0.35rem}
+.proof p{font-size:0.7rem;color:var(--gray);line-height:1.45}
+.ladder{display:grid;grid-template-columns:repeat(4,1fr);gap:0.75rem;margin:0.9rem 0}
+.step{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-top:3px solid var(--blue);border-radius:8px;padding:0.8rem}
+.step h4{font-size:0.74rem;margin:0.32rem 0;color:var(--w)}
+.step p{font-size:0.68rem;color:var(--gray);line-height:1.4}
+.step .tag{display:inline-block;font-size:0.58rem;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted)}
+.step .numv{font-size:1.05rem;font-weight:850;color:var(--green);margin:0.1rem 0}
+.viz{background:rgba(13,17,26,0.45);border:1px solid rgba(255,255,255,0.05);border-radius:8px;padding:0.75rem;margin:0.55rem 0 0.75rem}
+.viz h4{font-size:0.72rem;margin-bottom:0.5rem;color:var(--w)}
+.barrow{display:grid;grid-template-columns:8.3rem 1fr 4.2rem;gap:0.55rem;align-items:center;margin:0.35rem 0}
+.barrow .lab{font-size:0.64rem;color:var(--gray)}
+.barrow .val{font-size:0.64rem;color:var(--w);font-weight:800;text-align:right}
+.bar{height:0.58rem;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+.bar>span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue),var(--green))}
+.bar.orange>span{background:linear-gradient(90deg,var(--orange),var(--green))}
+.bar.purple>span{background:linear-gradient(90deg,var(--purple),var(--green))}
+.bar.red>span{background:linear-gradient(90deg,var(--red),var(--orange))}
+.chart-note{font-size:0.63rem;color:var(--muted);line-height:1.35;margin-top:0.45rem}
+.badge{display:inline-block;padding:0.08rem 0.35rem;border-radius:4px;font-size:0.58rem;font-weight:800;white-space:nowrap}
+.b-proof{color:var(--green);background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.22)}
+.b-sweep{color:var(--orange);background:rgba(245,158,79,0.12);border:1px solid rgba(245,158,79,0.22)}
+.b-risk{color:var(--red);background:rgba(248,113,113,0.12);border:1px solid rgba(248,113,113,0.22)}
+.b-route{color:var(--purple);background:rgba(167,139,250,0.12);border:1px solid rgba(167,139,250,0.22)}
+tr.proof-row td{background:rgba(52,211,153,0.07)!important}
+tr.risk-row td{background:rgba(248,113,113,0.07)!important}
+tr.sweep-row td{background:rgba(245,158,79,0.06)!important}
+td.mark{box-shadow:inset 0 0 0 1px rgba(52,211,153,0.35);background:rgba(52,211,153,0.08)!important;color:var(--green);font-weight:800}
+td.warn{box-shadow:inset 0 0 0 1px rgba(245,158,79,0.3);background:rgba(245,158,79,0.08)!important;color:var(--orange);font-weight:800}
+td.bad{box-shadow:inset 0 0 0 1px rgba(248,113,113,0.3);background:rgba(248,113,113,0.08)!important;color:var(--red);font-weight:800}
+.split-viz{display:grid;grid-template-columns:1fr 1fr;gap:0.75rem}
+.kv{display:flex;gap:0.5rem;align-items:baseline;margin:0.25rem 0}
+.kv .k{min-width:4.8rem;color:var(--muted);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.04em}
+.kv .v{font-weight:800;font-size:0.88rem}
+.take{font-size:0.7rem;color:var(--gray);line-height:1.4;border-top:1px solid rgba(255,255,255,0.05);margin-top:0.55rem;padding-top:0.55rem}
+.det{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:8px;margin:0.8rem 0;overflow:hidden}
+.det>summary{cursor:pointer;list-style:none;padding:0.75rem 0.9rem;font-size:0.8rem;font-weight:700;color:var(--w);display:flex;align-items:center;justify-content:space-between}
+.det>summary::-webkit-details-marker{display:none}
+.det[open]>summary{border-bottom:1px solid rgba(255,255,255,0.05)}
+.det-body{padding:0.75rem 0.9rem}
+table{width:100%;border-collapse:collapse;font-size:0.7rem}
+thead th{background:var(--th);color:var(--w);font-weight:700;padding:0.3rem;text-align:center;font-size:0.65rem;white-space:nowrap}
+thead th:first-child{border-radius:4px 0 0 0}thead th:last-child{border-radius:0 4px 0 0}
+tbody td{padding:0.3rem;text-align:center;color:var(--gray);border-bottom:1px solid rgba(255,255,255,0.02);font-size:0.67rem}
+tbody tr:nth-child(even) td{background:rgba(30,36,53,0.3)}
+td.hl{color:var(--green);font-weight:700}td.hr{color:var(--red);font-weight:700}td.hb{color:var(--blue);font-weight:700}
+.fc{background:var(--card);border-radius:10px;padding:1rem;border:1px solid rgba(255,255,255,0.05);margin:1rem 0;overflow-x:auto}
+.fc svg{display:block;margin:0 auto;width:100%;height:auto}
+.ib{background:var(--card);border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.05);margin:0.6rem 0}
+.ib img{width:100%;display:block}
+.pipeline-a-samples .ib img,.steer-samples .ib img{width:75%;max-width:400px;margin:0.55rem auto 0}
+.ib .cap{padding:0.45rem 0.8rem;font-size:0.65rem;color:var(--gray);border-top:1px solid rgba(255,255,255,0.04);line-height:1.3}
+.metrics{display:flex;flex-wrap:wrap;gap:0.5rem;margin:1rem 0}
+.met{background:var(--card);border-radius:8px;padding:0.8rem 1rem;text-align:center;min-width:90px;border:2px solid rgba(255,255,255,0.04)}
+.met .val{font-size:1.2rem;font-weight:800}.met .lbl{font-size:0.58rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.04em}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0.8rem;max-width:750px;margin:1.2rem auto}
+.stat-item{background:var(--card);border-radius:8px;padding:1rem 0.6rem;text-align:center;border:1px solid rgba(255,255,255,0.04)}
+.stat-item .val{font-size:1.6rem;font-weight:800}.stat-item .lbl{font-size:0.62rem;color:var(--gray);text-transform:uppercase;letter-spacing:0.05em}
+.code-block{background:#0a0e16;border-radius:6px;padding:0.6rem 0.8rem;margin:0.3rem 0;border:1px solid rgba(255,255,255,0.06);font-family:'Cascadia Code','Consolas',monospace;font-size:0.7rem;line-height:1.35;color:var(--green);white-space:pre-wrap;word-break:break-all}
+
+@media(max-width:900px){.sidebar{display:none}.main{margin-left:0}.sec{padding:2rem 1rem}.g2,.g3,.g4,.proof,.ladder,.split-viz{grid-template-columns:1fr}.stat-grid{grid-template-columns:1fr 1fr}.barrow{grid-template-columns:6.4rem 1fr 3.5rem}}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sh"><div class="logo">PointArena 2026</div><div class="sub">Efficient Visual Pointing</div><div class="place">2nd Place · 77.2%</div></div>
+  <nav class="sn">
+    <div class="ng"><div class="ngt">Overview</div><a href="#hero" class="active"><span class="num">01</span>Cover</a><a href="#motivation"><span class="num">02</span>Motivation</a></div>
+    <div class="ng"><div class="ngt">Data Pipeline</div><a href="#p-overview"><span class="num">03</span>Overview</a><a href="#p-a"><span class="num">04</span>Pipeline A: Gemini</a><a href="#p-b"><span class="num">05</span>Pipeline B: Qwen3</a><a href="#p-c"><span class="num">06</span>Pipeline C: Steerable</a></div>
+    <div class="ng"><div class="ngt">Method &amp; Results</div><a href="#attnres"><span class="num">07</span>AttnRes</a><a href="#abc"><span class="num">08</span>ABC Encoding</a><a href="#results"><span class="num">09</span>Results</a></div>
+  </nav>
+  <div class="sf">Molmo2-8B + LoRA · Zero Human Annotation</div>
+</aside>
+
+<main class="main">
+
+<!-- ═══ HERO ═══ -->
+<section class="sec hero" id="hero">
+  <div style="display:inline-block;padding:0.2rem 0.8rem;border:1px solid rgba(79,156,245,0.3);border-radius:99px;color:var(--blue);font-size:0.68rem;font-weight:600;letter-spacing:0.04em;margin-bottom:0.8rem">PointArena 2026</div>
+  <h1 style="font-size:2.2rem;font-weight:800;letter-spacing:-0.03em;background:linear-gradient(135deg,#FFFFFF 0%,#B0C0D8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Efficient Visual Pointing for Embodied AI</h1>
+  <p style="font-size:0.82rem;color:var(--gray);max-width:600px;margin:0.5rem auto 1rem">Agent-Driven Data Synthesis · AttnRes Fine-Tuning · Iterative Correction · Molmo2-8B</p>
+  <div style="font-size:1.7rem;font-weight:800;color:var(--blue)">2<em style="font-style:normal;color:var(--green)">nd</em> Place — 77.2% Overall</div>
+  <div class="stat-grid">
+    <div class="stat-item" style="border-color:rgba(52,211,153,0.3)"><div class="val c-af">93.9%</div><div class="lbl">Affordance</div></div>
+    <div class="stat-item" style="border-color:rgba(79,156,245,0.3)"><div class="val c-sp">82.6%</div><div class="lbl">Spatial</div></div>
+    <div class="stat-item" style="border-color:rgba(34,211,238,0.3)"><div class="val c-re">78.2%</div><div class="lbl">Reasoning</div></div>
+    <div class="stat-item" style="border-color:rgba(248,113,113,0.3)"><div class="val c-st">63.0%</div><div class="lbl">Steerability</div></div>
+  </div>
+</section>
+
+<!-- ═══ MOTIVATION ═══ -->
+<section class="sec alt" id="motivation"><div class="sin">
+  <span class="ey" style="color:var(--red)">Motivation</span><h2 class="st">Three Bottlenecks</h2>
+  <div class="g3" style="margin-bottom:1rem">
+    <div class="card"><h4 style="color:var(--red)">1. Data Scarcity</h4><p style="font-size:0.78rem;color:var(--gray)">Steerable has ZERO public training data.</p><p style="font-size:0.72rem;color:var(--green);font-weight:600">→ 55K processed, 37.6K trainable</p></div>
+    <div class="card"><h4 style="color:var(--orange)">2. Architecture Gap</h4><p style="font-size:0.78rem;color:var(--gray)">Standard LoRA weakly couples coords with semantics.</p><p style="font-size:0.72rem;color:var(--purple);font-weight:600">→ AttnRes: cross-block attention</p></div>
+    <div class="card"><h4 style="color:var(--cyan)">3. One-Shot Prediction</h4><p style="font-size:0.78rem;color:var(--gray)">Single forward pass, no recovery.</p><p style="font-size:0.72rem;color:var(--cyan);font-weight:600">→ Correction-based training</p></div>
+  </div>
+  <div class="tw"><h3>Molmo2-8B Zero-Shot</h3><table><thead><tr><th>Model</th><th>Afford.</th><th>Spatial</th><th>Reason.</th><th>Counting</th><th>Steer.</th><th>Overall</th></tr></thead><tbody><tr><td>Molmo2-8B</td><td>85.9%</td><td>76.9%</td><td>77.2%</td><td class="hr">73.0%</td><td class="hr">50.5%</td><td>72.7%</td></tr></tbody></table></div>
+</div></section>
+
+<!-- ═══ OVERVIEW ═══ -->
+<section class="sec" id="p-overview">
+  <span class="ey" style="color:var(--green)">Innovation 1</span><h2 class="st">Agent-Driven Data Synthesis Pipeline</h2>
+  <div class="metrics">
+    <div class="met" style="border-color:var(--red)"><div class="val" style="color:var(--red)">22.3M</div><div class="lbl">Raw QA</div></div>
+    <div class="met" style="border-color:var(--orange)"><div class="val" style="color:var(--orange)">~2.5M</div><div class="lbl">Has Coords</div></div>
+    <div class="met" style="border-color:var(--blue)"><div class="val" style="color:var(--blue)">55,372</div><div class="lbl">Processed</div></div>
+    <div class="met" style="border-color:var(--cyan)"><div class="val" style="color:var(--cyan)">37,574</div><div class="lbl">Trainable</div></div>
+    <div class="met" style="border-color:var(--purple)"><div class="val" style="color:var(--purple)">3,815</div><div class="lbl">Early Subset</div></div>
+    <div class="met" style="border-color:var(--green)"><div class="val" style="color:var(--green)">0</div><div class="lbl">Human</div></div>
+  </div>
+  <div class="fc"><svg viewBox="0 0 1100 250" width="100%" height="auto"><defs><marker id="ow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#AAABBB"/></marker></defs>
+    <rect x="30" y="15" width="150" height="36" rx="6" fill="#161B28" stroke="#F87171" stroke-width="1.5"/><text x="105" y="38" text-anchor="middle" fill="#F87171" font-size="12" font-weight="700">22.3M Raw QA</text>
+    <line x1="180" y1="33" x2="218" y2="33" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <rect x="223" y="15" width="160" height="36" rx="6" fill="#161B28" stroke="#F59E4F" stroke-width="1.5"/><text x="303" y="38" text-anchor="middle" fill="#F59E4F" font-size="12" font-weight="700">Filter → ~2.5M</text>
+    <line x1="383" y1="33" x2="420" y2="33" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <rect x="425" y="15" width="150" height="36" rx="6" fill="#161B28" stroke="#F59E4F" stroke-width="1.5"/><text x="500" y="38" text-anchor="middle" fill="#F59E4F" font-size="12" font-weight="700">by_source/*.jsonl</text>
+    <line x1="575" y1="33" x2="575" y2="56" stroke="#AAABBB" stroke-width="2"/>
+    <line x1="80" y1="56" x2="1020" y2="56" stroke="#AAABBB" stroke-width="1.5"/>
+    <line x1="80" y1="56" x2="80" y2="74" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <line x1="575" y1="56" x2="575" y2="74" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <line x1="950" y1="56" x2="950" y2="74" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <rect x="20" y="79" width="330" height="70" rx="7" fill="#161B28" stroke="#4F9CF5" stroke-width="2"/><text x="185" y="102" text-anchor="middle" fill="#4F9CF5" font-size="13" font-weight="700">Pipeline A: Gemini API (5-Class)</text><text x="185" y="120" text-anchor="middle" fill="#AAABBB" font-size="10">Gatekeeper→5-way Classify→MP→Rewrite</text><text x="185" y="137" text-anchor="middle" fill="#707080" font-size="9">gemini-3-flash · ~17s/sample · retry · checkpoint</text>
+    <rect x="370" y="79" width="330" height="70" rx="7" fill="#161B28" stroke="#22D3EE" stroke-width="2"/><text x="535" y="102" text-anchor="middle" fill="#22D3EE" font-size="13" font-weight="700">Pipeline B: Qwen3-8B (3-Class)</text><text x="535" y="120" text-anchor="middle" fill="#AAABBB" font-size="10">Gatekeeper→3-way Classify→MP→Rewrite</text><text x="535" y="137" text-anchor="middle" fill="#707080" font-size="9">vLLM · rules · dedup · 50K counting scans</text>
+    <rect x="720" y="79" width="330" height="70" rx="7" fill="#161B28" stroke="#34D399" stroke-width="2"/><text x="885" y="102" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">Pipeline C: Steerable (LLM-FREE)</text><text x="885" y="120" text-anchor="middle" fill="#AAABBB" font-size="10">18-rule Filter→SAM3→700 Templates→Verify</text><text x="885" y="137" text-anchor="middle" fill="#707080" font-size="9">10K main + 2K reserve · verified</text>
+    <line x1="185" y1="149" x2="185" y2="178" stroke="#4F9CF5" stroke-width="1.5"/>
+    <line x1="535" y1="149" x2="535" y2="178" stroke="#22D3EE" stroke-width="1.5"/>
+    <line x1="885" y1="149" x2="885" y2="178" stroke="#34D399" stroke-width="1.5"/>
+    <line x1="185" y1="178" x2="885" y2="178" stroke="#AAABBB" stroke-width="1.5"/>
+    <line x1="535" y1="178" x2="535" y2="200" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <rect x="350" y="205" width="370" height="34" rx="8" fill="#161B28" stroke="#A78BFA" stroke-width="2"/><text x="535" y="222" text-anchor="middle" fill="#A78BFA" font-size="13" font-weight="700">Audit Pool → Balanced Subsets</text><text x="535" y="236" text-anchor="middle" fill="#707080" font-size="8">55,372 processed · 37,574 trainable · 3,815 early subset</text>
+  </svg></div>
+  <div style="display:none"><svg viewBox="0 0 1100 250" aria-hidden="true">
+    <line x1="80" y1="55" x2="80" y2="72" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <line x1="500" y1="55" x2="500" y2="72" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <line x1="935" y1="55" x2="935" y2="72" stroke="#AAABBB" stroke-width="2" marker-end="url(#ow)"/>
+    <rect x="20" y="77" width="320" height="72" rx="7" fill="#161B28" stroke="#4F9CF5" stroke-width="2"/><text x="180" y="100" text-anchor="middle" fill="#4F9CF5" font-size="12" font-weight="700">Pipeline A: Gemini API (5-Class)</text><text x="180" y="118" text-anchor="middle" fill="#AAABBB" font-size="9">Gatekeeper → 5-way Classify → MP → Rewrite</text><text x="180" y="134" text-anchor="middle" fill="#707080" font-size="8">gemini-3-flash · ~17s/sample · JSON retry · checkpoint</text>
+    <rect x="360" y="77" width="320" height="72" rx="7" fill="#161B28" stroke="#22D3EE" stroke-width="2"/><text x="520" y="100" text-anchor="middle" fill="#22D3EE" font-size="12" font-weight="700">Pipeline B: Qwen3-8B (3-Class)</text><text x="520" y="118" text-anchor="middle" fill="#AAABBB" font-size="9">Gatekeeper → 3-way Classify → MP → Rewrite</text><text x="520" y="134" text-anchor="middle" fill="#707080" font-size="8">vLLM · rules · dedup · 50K counting scans</text>
+    <rect x="700" y="77" width="320" height="72" rx="7" fill="#161B28" stroke="#34D399" stroke-width="2"/><text x="860" y="100" text-anchor="middle" fill="#34D399" font-size="12" font-weight="700">Pipeline C: Steerable (LLM-FREE)</text><text x="860" y="118" text-anchor="middle" fill="#AAABBB" font-size="9">18-rule Filter → SAM3 → 700 Templates → Verify</text><text x="860" y="134" text-anchor="middle" fill="#707080" font-size="8">10K main + 2K reserve · verified</text>
+    <line x1="180" y1="149" x2="180" y2="175" stroke="#4F9CF5" stroke-width="1"/><line x1="520" y1="149" x2="520" y2="175" stroke="#22D3EE" stroke-width="1"/><line x1="860" y1="149" x2="860" y2="175" stroke="#34D399" stroke-width="1"/>
+    <line x1="180" y1="175" x2="860" y2="175" stroke="#AAABBB" stroke-width="1"/><line x1="520" y1="175" x2="520" y2="190" stroke="#AAABBB" stroke-width="1.5" marker-end="url(#ow)"/>
+    <rect x="390" y="190" width="260" height="10" rx="3" fill="#161B28" stroke="#A78BFA" stroke-width="1"/><text x="520" y="199" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="700">Audit Pool → Balanced Subsets</text>
+  </svg></div>
+</section>
+
+<!-- ═══════════ PIPELINE A ═══════════ -->
+<section class="sec alt" id="p-a"><div class="sin">
+  <span class="ey" style="color:var(--blue)">Pipeline A</span>
+  <h2 class="st">Gemini API: 4-Stage Agent — Real Sample Trace + Per-Stage Images</h2>
+  <p class="sd">Sample: "Point to the sign." (source_rank=320928, gemini-3-flash-preview-thinking). Image+data merged per stage below.</p>
+
+  <div class="fc"><svg viewBox="0 0 1100 200" width="100%" height="auto"><defs><marker id="aa" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#AAABBB"/></marker></defs>
+    <rect x="30" y="20" width="220" height="50" rx="7" fill="#161B28" stroke="#F59E4F" stroke-width="2"/><text x="140" y="42" text-anchor="middle" fill="#F59E4F" font-size="11" font-weight="700">Raw Record</text><text x="140" y="58" text-anchor="middle" fill="#707080" font-size="8">query, points_abs, label</text>
+    <line x1="250" y1="45" x2="280" y2="45" stroke="#AAABBB" stroke-width="2" marker-end="url(#aa)"/>
+    <rect x="285" y="20" width="180" height="50" rx="7" fill="#161B28" stroke="#F87171" stroke-width="2"/><text x="375" y="42" text-anchor="middle" fill="#F87171" font-size="11" font-weight="700">Gatekeeper</text><text x="375" y="58" text-anchor="middle" fill="#707080" font-size="8">keep + core_target</text>
+    <line x1="465" y1="45" x2="495" y2="45" stroke="#AAABBB" stroke-width="2" marker-end="url(#aa)"/>
+    <rect x="500" y="20" width="200" height="50" rx="7" fill="#161B28" stroke="#4F9CF5" stroke-width="2"/><text x="600" y="42" text-anchor="middle" fill="#4F9CF5" font-size="11" font-weight="700">5-Way Classify</text><text x="600" y="58" text-anchor="middle" fill="#707080" font-size="8">Aff/Spatial/Reason/ObjRef/Count</text>
+    <line x1="700" y1="45" x2="730" y2="45" stroke="#AAABBB" stroke-width="2" marker-end="url(#aa)"/>
+    <rect x="735" y="20" width="160" height="50" rx="7" fill="#161B28" stroke="#A78BFA" stroke-width="2"/><text x="815" y="42" text-anchor="middle" fill="#A78BFA" font-size="11" font-weight="700">Multipoint</text><text x="815" y="58" text-anchor="middle" fill="#707080" font-size="8">single vs multi</text>
+    <line x1="895" y1="45" x2="925" y2="45" stroke="#AAABBB" stroke-width="2" marker-end="url(#aa)"/>
+    <rect x="930" y="20" width="150" height="50" rx="7" fill="#161B28" stroke="#34D399" stroke-width="2"/><text x="1005" y="42" text-anchor="middle" fill="#34D399" font-size="11" font-weight="700">Rewrite</text><text x="1005" y="58" text-anchor="middle" fill="#707080" font-size="8">canonical format</text>
+    <rect x="150" y="110" width="800" height="45" rx="7" fill="#161B28" stroke="#34D399" stroke-width="1"/><text x="550" y="132" text-anchor="middle" fill="#34D399" font-size="9">Processing workflow: cleaning→multipoint→classification_or_forced_counting→rewrite_same_session · status: completed</text><text x="550" y="148" text-anchor="middle" fill="#707080" font-size="8">Fault tolerance: parse_retries=2, max_retries=6, sample_retries=4, ThreadPoolExecutor(32 workers)</text>
+  </svg></div>
+
+  <!-- PER-STAGE: full-width row, image left + HTML text right -->
+  <h3 style="font-size:1.1rem;margin:1.5rem 0 0.5rem">Per-Stage Visualization — "Point to the DOG NOSE." (Object Reference → rewritten)</h3>
+
+  <style>
+  .stage-row{display:flex;gap:2rem;align-items:flex-start;margin:1.2rem 0;background:var(--card);border-radius:12px;padding:1.5rem;border:1px solid rgba(255,255,255,0.05)}
+  .stage-row .stage-img{flex:0 0 55%;max-width:55%}
+  .stage-row .stage-img img{width:70%;display:block;border-radius:6px;margin:0 auto}
+  .stage-row .stage-text{flex:1;padding-top:0.5rem}
+  .stage-row .stage-text h4{font-size:1.2rem;font-weight:700;margin-bottom:0.8rem;line-height:1.2}
+  .stage-row .stage-text .line{font-size:0.95rem;color:var(--gray);line-height:1.6;margin-bottom:0.3rem}
+  .stage-row .stage-text .line strong{color:var(--w)}
+  @media(max-width:900px){.stage-row{flex-direction:column}.stage-row .stage-img{flex:1 1 100%;max-width:100%}}
+  </style>
+
+  <div class="stage-row">
+    <div class="stage-img"><img src="stage0_input.jpg" alt="Stage 0" loading="lazy"></div>
+    <div class="stage-text">
+      <h4 style="color:#F59E4F">STAGE 0 — Raw Input</h4>
+      <p class="line"><strong>Query:</strong> "Point to the DOG NOSE."</p>
+      <p class="line"><strong>Label:</strong> "DOG NOSE"</p>
+      <p class="line"><strong>Point:</strong> (x, y) pixel coordinates</p>
+      <p class="line"><strong>Source:</strong> pixmo_points dataset</p>
+      <p class="line"><strong>Status:</strong> Unprocessed raw record — enters the 4-stage Agent pipeline</p>
+      <p class="line" style="color:#F59E4F;margin-top:0.5rem">🔍 Orange circle with radar rings = search/scan context</p>
+    </div>
+  </div>
+
+  <div class="stage-row">
+    <div class="stage-img"><img src="stage1_gatekeeper.jpg" alt="Stage 1" loading="lazy"></div>
+    <div class="stage-text">
+      <h4 style="color:#34D399">STAGE 1 — Gatekeeper</h4>
+      <p class="line"><strong>Decision:</strong> <span style="color:#34D399;font-weight:700">KEEP (keep=true)</span></p>
+      <p class="line"><strong>Core target:</strong> "the dog nose"</p>
+      <p class="line"><strong>Rule 1:</strong> Must be a pointing task (GROUNDING) — ✓</p>
+      <p class="line"><strong>Rule 2:</strong> Reject pure QA (text answers) — not applicable</p>
+      <p class="line"><strong>Rule 3:</strong> Accept empty/free space pointing — not applicable</p>
+      <p class="line"><strong>Rule 4:</strong> Accept logical pointing — not applicable</p>
+      <p class="line" style="color:#34D399;margin-top:0.5rem">🟢 Green bounding box + "TARGET LOCKED" = validated and kept</p>
+    </div>
+  </div>
+
+  <div class="stage-row">
+    <div class="stage-img"><img src="stage2_classify.jpg" alt="Stage 2" loading="lazy"></div>
+    <div class="stage-text">
+      <h4 style="color:#4F9CF5">STAGE 2 — 5-Way Classification</h4>
+      <p class="line"><strong>Category:</strong> <span style="color:#4F9CF5;font-weight:700">Object Reference</span></p>
+      <p class="line"><strong>Thought:</strong> "The task is a straightforward request to point to a specific named object without any spatial, functional, or quantitative constraints."</p>
+      <p class="line"><strong>5 classes:</strong> Affordance | Spatial Relation | Reasoning | <span style="color:#4F9CF5;font-weight:700">Object Reference</span> | Counting</p>
+      <p class="line"><strong>Method:</strong> Evaluates cognitive bottleneck, not surface keywords</p>
+      <p class="line"><strong>Model:</strong> gemini-3-flash-preview-thinking · prompt_tokens=457</p>
+      <p class="line" style="color:#4F9CF5;margin-top:0.5rem">🔵 Blue point + 5 category chips (ObjRef highlighted) = classification result</p>
+    </div>
+  </div>
+
+  <div class="stage-row">
+    <div class="stage-img"><img src="stage3_multipoint.jpg" alt="Stage 3" loading="lazy"></div>
+    <div class="stage-text">
+      <h4 style="color:#A78BFA">STAGE 3 — Multipoint Detection</h4>
+      <p class="line"><strong>Result:</strong> <span style="color:#A78BFA;font-weight:700">single_point = TRUE</span></p>
+      <p class="line"><strong>Reason:</strong> "The instruction refers to a singular specific object ('the dog nose') and does not request multiple points, spots, or all instances."</p>
+      <p class="line"><strong>Multi triggers:</strong> all / several / each / every / multiple / free space</p>
+      <p class="line"><strong>This sample:</strong> Unambiguous single target — no multi-instance language</p>
+      <p class="line" style="color:#A78BFA;margin-top:0.5rem">🟣 Purple x1 marker + crossed-out xN = single-point confirmed</p>
+    </div>
+  </div>
+
+  <div class="stage-row">
+    <div class="stage-img"><img src="stage4_rewrite.jpg" alt="Stage 4" loading="lazy"></div>
+    <div class="stage-text">
+      <h4 style="color:#34D399">STAGE 4 — Rewrite</h4>
+      <p class="line"><strong>Output:</strong> <span style="color:#34D399;font-weight:700">"Point to the dog's nose — the prominent sensory organ on the animal's face."</span></p>
+      <p class="line"><strong>Method:</strong> Category-specific REWRITE_PROMPTS["Object Reference"] applied</p>
+      <p class="line"><strong>Effect:</strong> Preserves object identity while enriching with semantic description</p>
+      <p class="line"><strong>Affordance:</strong> Would add interaction/usage cues ("where you would grip...")</p>
+      <p class="line"><strong>Reasoning:</strong> Would add world-knowledge context ("the uppermost body part...")</p>
+      <p class="line" style="color:#34D399;margin-top:0.5rem">🟢 Green text = rewritten output with category-specific enrichment applied</p>
+    </div>
+  </div>
+
+  <!-- 10 BALANCED SAMPLES with rewrite_skill rewrites -->
+  <h3 style="font-size:0.95rem;margin:1.5rem 0 0.3rem">10 Balanced Samples — Skill-Based Rewrites (3 Aff + 3 Spatial + 1 Reason + 3 ObjRef)</h3>
+  <div class="g2 pipeline-a-samples">
+    <div class="ib"><img src="sample01_crop.jpg" alt="s1" loading="lazy"><div class="cap" style="font-size:0.68rem">S1 [Affordance]: "Point to the place to hold coffee cup."<br>→ <em style="color:#34D399">Point to the place for holding a coffee cup — the recessed area in the lid designed for st</em></div></div>
+    <div class="ib"><img src="sample02_crop.jpg" alt="s2" loading="lazy"><div class="cap" style="font-size:0.68rem">S2 [Affordance]: "Point to the area for cutting."<br>→ <em style="color:#34D399">Point to the surface intended for cutting — the flat preparation area suitable for slicing</em></div></div>
+  </div>
+  <div class="g2 pipeline-a-samples">
+    <div class="ib"><img src="sample03_crop.jpg" alt="s3" loading="lazy"><div class="cap" style="font-size:0.68rem">S3 [Affordance]: "Point to the handle where you would hold the knife"<br>→ <em style="color:#34D399">Point to the knife handle — the gripping part of the kitchen tool designed for safe holdin</em></div></div>
+    <div class="ib"><img src="sample04_crop.jpg" alt="s4" loading="lazy"><div class="cap" style="font-size:0.68rem">S4 [Spatial Rela]: "Point to the Bare area in front of rabbit left eye"<br>→ <em style="color:#22D3EE">Point to the bare area located directly in front of the rabbit's left eye — the exposed sk</em></div></div>
+  </div>
+  <div class="g2 pipeline-a-samples">
+    <div class="ib"><img src="sample05_crop.jpg" alt="s5" loading="lazy"><div class="cap" style="font-size:0.68rem">S5 [Spatial Rela]: "Point to the yellow bird on top of head."<br>→ <em style="color:#22D3EE">Point to the yellow bird positioned on top of the head — the small decorative figure situa</em></div></div>
+    <div class="ib"><img src="sample06_crop.jpg" alt="s6" loading="lazy"><div class="cap" style="font-size:0.68rem">S6 [Spatial Rela]: "Point to the rock."<br>→ <em style="color:#22D3EE">Point to the rock situated on the ground surface — the geological object positioned below </em></div></div>
+  </div>
+  <div class="g2 pipeline-a-samples">
+    <div class="ib"><img src="sample07_crop.jpg" alt="s7" loading="lazy"><div class="cap" style="font-size:0.68rem">S7 [Reasoning]: "Point to the head."<br>→ <em style="color:#A78BFA">Point to the head — the uppermost anatomical structure of the human body, identified as th</em></div></div>
+    <div class="ib"><img src="sample08_crop.jpg" alt="s8" loading="lazy"><div class="cap" style="font-size:0.68rem">S8 [Object Refer]: "Point to the window."<br>→ <em style="color:#4F9CF5">Point to the window — the specific text field on the form where a</em></div></div>
+  </div>
+  <div class="g2 pipeline-a-samples">
+    <div class="ib"><img src="sample09_crop.jpg" alt="s9" loading="lazy"><div class="cap" style="font-size:0.68rem">S9 [Object Refer]: "Point to the DOG NOSE."<br>→ <em style="color:#4F9CF5">Point to the dog's nose — the prominent sensory organ visible on the animal's face, identi</em></div></div>
+    <div class="ib"><img src="sample10_crop.jpg" alt="s10" loading="lazy"><div class="cap" style="font-size:0.68rem">S10 [Object Refer]: "Point to the sign."<br>→ <em style="color:#4F9CF5">Point to the sign — the specific information board shown in the image, recognizable by its</em></div></div>
+  </div>
+
+  <div class="tw" style="margin-top:1.5rem"><h3>10-Sample Data Table — Rewrite Applied per Category Skill</h3><table>
+    <thead><tr><th>#</th><th>Query</th><th>Label</th><th>Gatekeeper</th><th>Category</th><th>Multi</th><th>Rewrite (skill-based)</th></tr></thead>
+    <tbody>
+<tr><td>1</td><td>Point to the place to hold coffee cup.</td><td>place to hold coffee</td><td class="hl">keep=true</td><td style="color:#34D399;font-weight:700">Affordance</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the place for holding a coffee cup — the recessed area in the</td></tr>
+<tr><td>2</td><td>Point to the area for cutting.</td><td>area for cutting</td><td class="hl">keep=true</td><td style="color:#34D399;font-weight:700">Affordance</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the surface intended for cutting — the flat preparation area </td></tr>
+<tr><td>3</td><td>Point to the handle where you would hold the knife.</td><td>handle where you wou</td><td class="hl">keep=true</td><td style="color:#34D399;font-weight:700">Affordance</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the knife handle — the gripping part of the kitchen tool desi</td></tr>
+<tr><td>4</td><td>Point to the Bare area in front of rabbit left eye.</td><td>Bare area in front o</td><td class="hl">keep=true</td><td style="color:#22D3EE;font-weight:700">Spatial Relation</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the bare area located directly in front of the rabbit's left </td></tr>
+<tr><td>5</td><td>Point to the yellow bird on top of head.</td><td>yellow bird on top o</td><td class="hl">keep=true</td><td style="color:#22D3EE;font-weight:700">Spatial Relation</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the yellow bird positioned on top of the head — the small dec</td></tr>
+<tr><td>6</td><td>Point to the rock.</td><td>rock</td><td class="hl">keep=true</td><td style="color:#22D3EE;font-weight:700">Spatial Relation</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the rock situated on the ground surface — the geological obje</td></tr>
+<tr><td>7</td><td>Point to the head.</td><td>head</td><td class="hl">keep=true</td><td style="color:#A78BFA;font-weight:700">Reasoning</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the head — the uppermost anatomical structure of the human bo</td></tr>
+<tr><td>8</td><td>Point to the window.</td><td>window</td><td class="hl">keep=true</td><td style="color:#4F9CF5;font-weight:700">Object Reference</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the window — the specific text field</td></tr>
+<tr><td>9</td><td>Point to the DOG NOSE.</td><td>DOG NOSE</td><td class="hl">keep=true</td><td style="color:#4F9CF5;font-weight:700">Object Reference</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the dog's nose — the prominent sensory organ visible on the a</td></tr>
+<tr><td>10</td><td>Point to the sign.</td><td>sign</td><td class="hl">keep=true</td><td style="color:#4F9CF5;font-weight:700">Object Reference</td><td>false</td><td style="color:#34D399;font-size:0.65rem">Point to the sign — the specific information board shown in the image,</td></tr>
+    </tbody>
+  </table></div>
+  <p style="font-size:0.68rem;color:var(--gray);margin-top:0.3rem">Rewrites follow category-specific skills from rewrite_skill.md: Affordance adds functional/interaction cues, Spatial preserves geometric relations, Reasoning adds world-knowledge context, Object Reference adds distinguishing features.</p>
+</div></section>
+
+
+<!-- ========== PIPELINE B ========== -->
+<section class="sec" id="p-b">
+  <span class="ey" style="color:var(--cyan)">Pipeline B</span><h2 class="st">Qwen3-8B Local: 3-Class + Rules + Dedup</h2>
+  <p class="sd">Same 4-stage Agent via vLLM locally. 3 classes (Affordance/ObjRef/Reasoning). 18 keyword + 14 regex rules refine output. Dedicated Counting pipeline.</p>
+  <div class="fc"><svg viewBox="0 0 1100 220" width="100%" height="auto"><defs><marker id="bb2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#AAABBB"/></marker></defs>
+    <rect x="30" y="20" width="220" height="48" rx="6" fill="#161B28" stroke="#22D3EE" stroke-width="2"/><text x="140" y="42" text-anchor="middle" fill="#22D3EE" font-size="11" font-weight="700">Gatekeeper</text><text x="140" y="58" text-anchor="middle" fill="#707080" font-size="8">Validates + extracts target</text>
+    <line x1="250" y1="44" x2="278" y2="44" stroke="#AAABBB" stroke-width="1.5" marker-end="url(#bb2)"/>
+    <rect x="283" y="20" width="240" height="48" rx="6" fill="#161B28" stroke="#22D3EE" stroke-width="2"/><text x="403" y="42" text-anchor="middle" fill="#22D3EE" font-size="11" font-weight="700">3-Way Classify</text><text x="403" y="58" text-anchor="middle" fill="#707080" font-size="8">Affordance / ObjRef / Reasoning</text>
+    <line x1="523" y1="44" x2="551" y2="44" stroke="#AAABBB" stroke-width="1.5" marker-end="url(#bb2)"/>
+    <rect x="556" y="20" width="220" height="48" rx="6" fill="#161B28" stroke="#22D3EE" stroke-width="2"/><text x="666" y="42" text-anchor="middle" fill="#22D3EE" font-size="11" font-weight="700">Multipoint</text><text x="666" y="58" text-anchor="middle" fill="#707080" font-size="8">Single vs multi-point</text>
+    <line x1="776" y1="44" x2="804" y2="44" stroke="#AAABBB" stroke-width="1.5" marker-end="url(#bb2)"/>
+    <rect x="809" y="20" width="240" height="48" rx="6" fill="#161B28" stroke="#22D3EE" stroke-width="2"/><text x="929" y="42" text-anchor="middle" fill="#22D3EE" font-size="11" font-weight="700">Rewrite</text><text x="929" y="58" text-anchor="middle" fill="#707080" font-size="8">Canonical format</text>
+    <line x1="140" y1="68" x2="140" y2="88" stroke="#22D3EE" stroke-width="1"/><line x1="403" y1="68" x2="403" y2="88" stroke="#22D3EE" stroke-width="1"/><line x1="929" y1="68" x2="929" y2="88" stroke="#22D3EE" stroke-width="1"/>
+    <line x1="140" y1="88" x2="929" y2="88" stroke="#22D3EE" stroke-width="1" stroke-dasharray="4,3"/>
+    <rect x="15" y="98" width="340" height="55" rx="6" fill="#161B28" stroke="#F59E4F" stroke-width="1.5"/><text x="185" y="118" text-anchor="middle" fill="#F59E4F" font-size="10" font-weight="700">Rule Refinement (three_type_rules.py)</text><text x="185" y="134" text-anchor="middle" fill="#AAABBB" font-size="8">18 affordance keywords + 14 reasoning regex</text><text x="185" y="148" text-anchor="middle" fill="#707080" font-size="7">refine_three_type_category()</text>
+    <rect x="375" y="98" width="340" height="55" rx="6" fill="#161B28" stroke="#34D399" stroke-width="1.5"/><text x="545" y="118" text-anchor="middle" fill="#34D399" font-size="10" font-weight="700">Dedup (build_exclusion_keys.py)</text><text x="545" y="134" text-anchor="middle" fill="#AAABBB" font-size="8">exclusion_image_keys.json (614K entries)</text><text x="545" y="148" text-anchor="middle" fill="#707080" font-size="7">nodup_reverse: filter B outputs already in Pipeline A</text>
+    <rect x="735" y="98" width="340" height="55" rx="6" fill="#161B28" stroke="#F59E4F" stroke-width="1.5"/><text x="905" y="118" text-anchor="middle" fill="#F59E4F" font-size="10" font-weight="700">Counting Pipeline (build_counting_direct.py)</text><text x="905" y="134" text-anchor="middle" fill="#AAABBB" font-size="8">50K selected scans across four batches</text><text x="905" y="148" text-anchor="middle" fill="#707080" font-size="7">Separate track, Counting-specific rewrite</text>
+    <line x1="185" y1="153" x2="185" y2="175" stroke="#F59E4F" stroke-width="1"/><line x1="545" y1="153" x2="545" y2="175" stroke="#34D399" stroke-width="1"/><line x1="905" y1="153" x2="905" y2="175" stroke="#F59E4F" stroke-width="1"/>
+    <line x1="185" y1="175" x2="905" y2="175" stroke="#AAABBB" stroke-width="1"/><line x1="545" y1="175" x2="545" y2="192" stroke="#AAABBB" stroke-width="1.5" marker-end="url(#bb2)"/>
+    <rect x="370" y="197" width="350" height="20" rx="5" fill="#161B28" stroke="#22D3EE" stroke-width="1.5"/><text x="545" y="212" text-anchor="middle" fill="#22D3EE" font-size="10" font-weight="700">Output: 3-class JSON + Counting JSONL + Dedup Map</text>
+  </svg></div>
+  <div class="tw"><h3>10 Rule-Application Samples</h3><table><thead><tr><th>#</th><th>Input Query</th><th>3-Class Result</th><th>Rules Triggered</th><th>Action</th></tr></thead><tbody>
+    <tr><td>1</td><td>Point to the place to hold coffee cup.</td><td class="hl">Affordance</td><td>"place to hold" keyword</td><td>Keep &middot; Dedup check</td></tr>
+    <tr><td>2</td><td>Point to where you would type in search bar.</td><td class="hl">Affordance</td><td>"where you would" + "type"</td><td>Keep &middot; Dedup check</td></tr>
+    <tr><td>3</td><td>Point to the handle to open door.</td><td class="hl">Affordance</td><td>"handle to open" keyword</td><td>Keep &middot; Dedup check</td></tr>
+    <tr><td>4</td><td>Point to all cups in the image.</td><td class="hr">Counting &rarr; None</td><td>"all" &rarr; multi-instance</td><td class="hr">Route to Counting pipeline</td></tr>
+    <tr><td>5</td><td>Point to the existing point + 5px right.</td><td>Object Reference</td><td>"existing point"/"cursor"</td><td class="hb">Force ObjRef (special rule)</td></tr>
+    <tr><td>6</td><td>Point to the direction the car is moving.</td><td class="hl">Reasoning</td><td>"direction" + "moving"</td><td>Keep &middot; reasoning_candidate_cue</td></tr>
+    <tr><td>7</td><td>Point to the most likely exit.</td><td class="hl">Reasoning</td><td>"most likely"</td><td>Keep &middot; reasoning pattern</td></tr>
+    <tr><td>8</td><td>Point to each person wearing a hat.</td><td class="hr">Counting &rarr; None</td><td>"each" &rarr; multi-instance</td><td class="hr">Route to Counting pipeline</td></tr>
+    <tr><td>9</td><td>Point to the wall.</td><td>Object Reference</td><td>&mdash; (no cue)</td><td>Keep &middot; cross-check vs Pipe A</td></tr>
+    <tr><td>10</td><td>Point to the floor.</td><td class="hr">Spatial &rarr; None</td><td>spatial domain</td><td class="hr">Drop (B keeps 3 classes)</td></tr>
+  </tbody></table></div>
+</section>
+
+<!-- ========== PIPELINE C ========== -->
+<section class="sec alt" id="p-c"><div class="sin">
+  <span class="ey" style="color:var(--green)">Pipeline C</span><h2 class="st">Steerable Pipeline: 5 Sub-Types (LLM-FREE)</h2>
+  <p class="sd">5 task types with distinct pipeline logic. 700 templates x 7 groups, SAM3 masks, CC path verification. The main accepted set has 10K verified samples, with a 2K reserve batch.</p>
+
+  <div class="fc"><svg viewBox="0 0 1100 340" width="100%" height="auto"><defs><marker id="ccx" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#AAABBB"/></marker></defs>
+    <rect x="200" y="12" width="700" height="32" rx="6" fill="#161B28" stroke="#F59E4F" stroke-width="1.5"/><text x="550" y="33" text-anchor="middle" fill="#F59E4F" font-size="11" font-weight="700">Step 1: 18-Rule Filter + SAM3 Masks &rarr; Step 2: 700 Templates &rarr; Step 3: Path Verify</text>
+
+    <rect x="20" y="58" width="200" height="90" rx="7" fill="#161B28" stroke="#34D399" stroke-width="2"/><text x="120" y="80" text-anchor="middle" fill="#34D399" font-size="10" font-weight="700">Type 1 (85%)</text><text x="120" y="98" text-anchor="middle" fill="#AAABBB" font-size="8">move_until_axis_fixed</text><text x="120" y="114" text-anchor="middle" fill="#707080" font-size="7">anchor&rarr;direction</text><text x="120" y="128" text-anchor="middle" fill="#707080" font-size="7">target on same axis</text><text x="120" y="142" text-anchor="middle" fill="#707080" font-size="7">8,500 samples</text>
+
+    <rect x="235" y="58" width="200" height="90" rx="7" fill="#161B28" stroke="#4F9CF5" stroke-width="2"/><text x="335" y="80" text-anchor="middle" fill="#4F9CF5" font-size="10" font-weight="700">Type 2 (5%)</text><text x="335" y="98" text-anchor="middle" fill="#AAABBB" font-size="8">nearest_among_objects</text><text x="335" y="114" text-anchor="middle" fill="#707080" font-size="7">anchor&rarr;direction</text><text x="335" y="128" text-anchor="middle" fill="#707080" font-size="7">nearest in path</text><text x="335" y="142" text-anchor="middle" fill="#707080" font-size="7">500 samples</text>
+
+    <rect x="450" y="58" width="200" height="90" rx="7" fill="#161B28" stroke="#22D3EE" stroke-width="2"/><text x="550" y="80" text-anchor="middle" fill="#22D3EE" font-size="10" font-weight="700">Type 3 (5%)</text><text x="550" y="98" text-anchor="middle" fill="#AAABBB" font-size="8">nearest_axis_constrained</text><text x="550" y="114" text-anchor="middle" fill="#707080" font-size="7">direction + axis</text><text x="550" y="128" text-anchor="middle" fill="#707080" font-size="7">constraint</text><text x="550" y="142" text-anchor="middle" fill="#707080" font-size="7">500 samples</text>
+
+    <rect x="665" y="58" width="200" height="90" rx="7" fill="#161B28" stroke="#A78BFA" stroke-width="2"/><text x="765" y="80" text-anchor="middle" fill="#A78BFA" font-size="10" font-weight="700">Type 4 (2.5%)</text><text x="765" y="98" text-anchor="middle" fill="#AAABBB" font-size="8">move_then_axis_limited</text><text x="765" y="114" text-anchor="middle" fill="#707080" font-size="7">move step</text><text x="765" y="128" text-anchor="middle" fill="#707080" font-size="7">axis-limited search</text><text x="765" y="142" text-anchor="middle" fill="#707080" font-size="7">250 samples</text>
+
+    <rect x="880" y="58" width="200" height="90" rx="7" fill="#161B28" stroke="#F87171" stroke-width="2"/><text x="980" y="80" text-anchor="middle" fill="#F87171" font-size="10" font-weight="700">Type 5 (2.5%)</text><text x="980" y="98" text-anchor="middle" fill="#AAABBB" font-size="8">move_until_from_other</text><text x="980" y="114" text-anchor="middle" fill="#707080" font-size="7">axis from other</text><text x="980" y="128" text-anchor="middle" fill="#707080" font-size="7">object reference</text><text x="980" y="142" text-anchor="middle" fill="#707080" font-size="7">250 samples</text>
+
+    <line x1="120" y1="148" x2="120" y2="175" stroke="#34D399" stroke-width="1"/><line x1="335" y1="148" x2="335" y2="175" stroke="#4F9CF5" stroke-width="1"/><line x1="550" y1="148" x2="550" y2="175" stroke="#22D3EE" stroke-width="1"/><line x1="765" y1="148" x2="765" y2="175" stroke="#A78BFA" stroke-width="1"/><line x1="980" y1="148" x2="980" y2="175" stroke="#F87171" stroke-width="1"/>
+    <line x1="120" y1="175" x2="980" y2="175" stroke="#AAABBB" stroke-width="1.5"/>
+    <line x1="550" y1="175" x2="550" y2="195" stroke="#AAABBB" stroke-width="2" marker-end="url(#ccx)"/>
+
+    <rect x="350" y="200" width="400" height="32" rx="7" fill="#161B28" stroke="#34D399" stroke-width="2"/><text x="550" y="216" text-anchor="middle" fill="#34D399" font-size="12" font-weight="700">Step 4: select_one_candidate_per_image() + CC Path Verify</text><text x="550" y="230" text-anchor="middle" fill="#707080" font-size="8">Tiebreak: nearest &gt; nearest_axis &gt; move_then &gt; move_until_other &gt; move_until_axis_fixed</text>
+
+    <line x1="550" y1="232" x2="550" y2="260" stroke="#AAABBB" stroke-width="2" marker-end="url(#ccx)"/>
+    <rect x="250" y="265" width="600" height="36" rx="7" fill="#161B28" stroke="#34D399" stroke-width="2.5"/><text x="550" y="283" text-anchor="middle" fill="#34D399" font-size="13" font-weight="700">OUTPUT: accepted_samples.jsonl &mdash; 10,000 verified samples across 5 task types</text><text x="550" y="299" text-anchor="middle" fill="#707080" font-size="8">{question, anchor, target, direction, task_type, image_id} &middot; path verified &middot; masks validated</text>
+  </svg></div>
+
+  <h3 style="font-size:1rem;margin:1.2rem 0 0.3rem">SAM3 Mask Generation</h3>
+  <div class="g2">
+    <div class="ib"><img src="sam3_preview.png" alt="Preview" loading="lazy"><div class="cap">SAM3 Preview: 8 objects from control points. Each color = one instance mask.</div></div>
+    <div class="ib"><img src="sam3_overlay.png" alt="Overlay" loading="lazy"><div class="cap">Overlay on source image. CC path verification checks along directional arrow.</div></div>
+  </div>
+
+  <h3 style="font-size:1rem;margin:1.5rem 0 0.3rem">10 Steerable Samples &mdash; 2 per Sub-Type</h3>
+
+    <h4 style="font-size:0.85rem;color:#34D399;margin:0.8rem 0 0.3rem">Type 1: axis_fixed (85%)</h4>
+  <div class="g2 steer-samples">
+    <div class="ib"><img src="steer_sub_00.jpg" alt="T0" loading="lazy"><div class="cap" style="font-size:0.7rem">S1: "Use the blue point as your reference and point to the white stove to t"<br><em style="color:#34D399">anchor=[0.873,0.826] &rarr; target=[0.946,0.838]</em></div></div>
+    <div class="ib"><img src="steer_sub_01.jpg" alt="T1" loading="lazy"><div class="cap" style="font-size:0.7rem">S2: "Take the blue point as the guide and find the quilt fabric to the righ"<br><em style="color:#34D399">anchor=[0.204,0.751] &rarr; target=[0.429,0.779]</em></div></div>
+  </div>
+  <h4 style="font-size:0.85rem;color:#4F9CF5;margin:0.8rem 0 0.3rem">Type 2: nearest_among (5%)</h4>
+  <div class="g2 steer-samples">
+    <div class="ib"><img src="steer_sub_02.jpg" alt="T2" loading="lazy"><div class="cap" style="font-size:0.7rem">S3: "Using the blue point only for distance, show the nearest buritto."<br><em style="color:#4F9CF5">anchor=[0.128,0.443] &rarr; target=[0.184,0.311]</em></div></div>
+    <div class="ib"><img src="steer_sub_03.jpg" alt="T3" loading="lazy"><div class="cap" style="font-size:0.7rem">S4: "Treat the blue point as your guide and locate the bud nearest to it."<br><em style="color:#4F9CF5">anchor=[0.931,0.953] &rarr; target=[0.775,0.926]</em></div></div>
+  </div>
+  <h4 style="font-size:0.85rem;color:#22D3EE;margin:0.8rem 0 0.3rem">Type 3: nearest_axis (5%)</h4>
+  <div class="g2 steer-samples">
+    <div class="ib"><img src="steer_sub_04.jpg" alt="T4" loading="lazy"><div class="cap" style="font-size:0.7rem">S5: "Treat the blue point as your guide and identify the nearest boulder to"<br><em style="color:#22D3EE">anchor=[0.484,0.510] &rarr; target=[0.342,0.485]</em></div></div>
+    <div class="ib"><img src="steer_sub_05.jpg" alt="T5" loading="lazy"><div class="cap" style="font-size:0.7rem">S6: "From the blue point, identify the nearest gold square to the right of "<br><em style="color:#22D3EE">anchor=[0.803,0.453] &rarr; target=[0.936,0.454]</em></div></div>
+  </div>
+  <h4 style="font-size:0.85rem;color:#A78BFA;margin:0.8rem 0 0.3rem">Type 4: then_axis (2.5%)</h4>
+  <div class="g2 steer-samples">
+    <div class="ib"><img src="steer_sub_06.jpg" alt="T6" loading="lazy"><div class="cap" style="font-size:0.7rem">S7: "Proceed up from the blue point, then turn left to select the dog."<br><em style="color:#A78BFA">anchor=[0.942,0.730] &rarr; target=[0.810,0.557]</em></div></div>
+    <div class="ib"><img src="steer_sub_07.jpg" alt="T7" loading="lazy"><div class="cap" style="font-size:0.7rem">S8: "From the blue point, shift up, then shift right, to the hour hand."<br><em style="color:#A78BFA">anchor=[0.401,0.495] &rarr; target=[0.482,0.419]</em></div></div>
+  </div>
+  <h4 style="font-size:0.85rem;color:#F87171;margin:0.8rem 0 0.3rem">Type 5: from_other (2.5%)</h4>
+  <div class="g2 steer-samples">
+    <div class="ib"><img src="steer_sub_08.jpg" alt="T8" loading="lazy"><div class="cap" style="font-size:0.7rem">S9: "Move diagonally up-left from the chestnut tree until you reach the gre"<br><em style="color:#F87171">anchor=[0.639,0.641] &rarr; target=[0.590,0.564]</em></div></div>
+    <div class="ib"><img src="steer_sub_09.jpg" alt="T9" loading="lazy"><div class="cap" style="font-size:0.7rem">S10: "From the roof, move diagonally down-right until you reach the pool."<br><em style="color:#F87171">anchor=[0.722,0.068] &rarr; target=[0.883,0.381]</em></div></div>
+  </div>
+
+  <div class="tw" style="margin-top:1.5rem"><h3>5 Sub-Type Pipeline Distribution</h3><table><thead><tr><th>#</th><th>Task Type</th><th>Ratio</th><th>Samples</th><th>Pipeline Logic</th></tr></thead><tbody>
+    <tr><td>1</td><td style="color:var(--green);font-weight:700">move_until_axis_fixed</td><td>85%</td><td>8,500</td><td>anchor &rarr; straight direction &rarr; first target on same axis</td></tr>
+    <tr><td>2</td><td style="color:var(--blue);font-weight:700">nearest_among_objects</td><td>5%</td><td>500</td><td>anchor &rarr; direction scan &rarr; nearest object in path</td></tr>
+    <tr><td>3</td><td style="color:var(--cyan);font-weight:700">nearest_axis_constrained</td><td>5%</td><td>500</td><td>anchor &rarr; direction + axis constraint &rarr; nearest in region</td></tr>
+    <tr><td>4</td><td style="color:var(--purple);font-weight:700">move_then_axis_limited</td><td>2.5%</td><td>250</td><td>anchor &rarr; move step &rarr; axis-limited target search</td></tr>
+    <tr><td>5</td><td style="color:var(--red);font-weight:700">move_until_from_other</td><td>2.5%</td><td>250</td><td>anchor &rarr; axis from other object reference &rarr; target</td></tr>
+  </tbody></table></div>
+
+  <div class="tw" style="margin-top:1.5rem"><h3>10 Steerable Samples &mdash; Data Table</h3><table><thead><tr><th>#</th><th>Task Type</th><th>Anchor</th><th>Target</th><th>Question</th></tr></thead><tbody>
+<tr><td>1</td><td style="color:#34D399;font-weight:700">axis_fixed</td><td>[0.873,0.826]</td><td>[0.946,0.838]</td><td>Use the blue point as your reference and point to the white stove</td></tr>
+<tr><td>2</td><td style="color:#34D399;font-weight:700">axis_fixed</td><td>[0.204,0.751]</td><td>[0.429,0.779]</td><td>Take the blue point as the guide and find the quilt fabric to the</td></tr>
+<tr><td>3</td><td style="color:#4F9CF5;font-weight:700">nearest</td><td>[0.128,0.443]</td><td>[0.184,0.311]</td><td>Using the blue point only for distance, show the nearest buritto.</td></tr>
+<tr><td>4</td><td style="color:#4F9CF5;font-weight:700">nearest</td><td>[0.931,0.953]</td><td>[0.775,0.926]</td><td>Treat the blue point as your guide and locate the bud nearest to </td></tr>
+<tr><td>5</td><td style="color:#22D3EE;font-weight:700">nearest_axis_constrain</td><td>[0.484,0.510]</td><td>[0.342,0.485]</td><td>Treat the blue point as your guide and identify the nearest bould</td></tr>
+<tr><td>6</td><td style="color:#22D3EE;font-weight:700">nearest_axis_constrain</td><td>[0.803,0.453]</td><td>[0.936,0.454]</td><td>From the blue point, identify the nearest gold square to the righ</td></tr>
+<tr><td>7</td><td style="color:#A78BFA;font-weight:700">then_axis</td><td>[0.942,0.730]</td><td>[0.810,0.557]</td><td>Proceed up from the blue point, then turn left to select the dog.</td></tr>
+<tr><td>8</td><td style="color:#A78BFA;font-weight:700">then_axis</td><td>[0.401,0.495]</td><td>[0.482,0.419]</td><td>From the blue point, shift up, then shift right, to the hour hand</td></tr>
+<tr><td>9</td><td style="color:#F87171;font-weight:700">from_other</td><td>[0.639,0.641]</td><td>[0.590,0.564]</td><td>Move diagonally up-left from the chestnut tree until you reach th</td></tr>
+<tr><td>10</td><td style="color:#F87171;font-weight:700">from_other</td><td>[0.722,0.068]</td><td>[0.883,0.381]</td><td>From the roof, move diagonally down-right until you reach the poo</td></tr>
+  </tbody></table></div>
+</div></section>
+
+<section class="sec" id="attnres">
+  <span class="ey" style="color:var(--purple)">Innovation 2</span><h2 class="st">AttnRes Architecture</h2>
+  <div class="g2"><div class="card"><h4 style="color:var(--purple)">Design</h4><p style="font-size:0.78rem;color:var(--gray)">Gate-init=0 &middot; Every 4 layers &middot; LoRA r=64 + AttnRes (810 keys) &middot; Dual-backbone (Steerability only)</p></div>
+  <div class="tw" style="margin:0"><h3>Steerability Sweep</h3><table><thead><tr><th>Config</th><th>Default</th><th>AttnRes</th><th>&Delta;</th></tr></thead><tbody><tr><td>0-shot</td><td colspan="2">&mdash;</td><td>50.5%</td></tr><tr><td>n=2</td><td>59.5%</td><td class="hl">63.5%</td><td class="hl">+4.0</td></tr></tbody></table></div></div>
+    <div class="fc" style="margin-top:0.8rem"><svg viewBox="0 0 900 440" width="100%" height="auto">
+    <defs>
+      <marker id="attnres_down" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#707080"/></marker>
+      <marker id="attnres_right" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><path d="M0,0 L8,3 L0,6 Z" fill="#A78BFA"/></marker>
+    </defs>
+    <text x="450" y="24" text-anchor="middle" fill="#FFFFFF" font-size="14" font-weight="700">Standard Molmo2 vs AttnRes Architecture</text>
+    <line x1="450" y1="58" x2="450" y2="392" stroke="#707080" stroke-width="1" stroke-dasharray="6,5" opacity="0.6"/>
+
+    <text x="195" y="54" text-anchor="middle" fill="#AAABBB" font-size="11" font-weight="700">Standard Molmo2</text>
+    <text x="195" y="70" text-anchor="middle" fill="#707080" font-size="8">Independent transformer blocks</text>
+    <g fill="#161B28" stroke="#4F9CF5" stroke-width="1.5">
+      <rect x="120" y="82" width="150" height="26" rx="4"/><rect x="120" y="122" width="150" height="26" rx="4"/>
+      <rect x="120" y="162" width="150" height="26" rx="4"/><rect x="120" y="202" width="150" height="26" rx="4"/>
+      <rect x="120" y="282" width="150" height="26" rx="4"/><rect x="120" y="322" width="150" height="26" rx="4"/>
+    </g>
+    <g fill="#AAABBB" font-size="9" text-anchor="middle">
+      <text x="195" y="99">Block 1: Self-Attn + FFN</text><text x="195" y="139">Block 2: Self-Attn + FFN</text>
+      <text x="195" y="179">Block 3: Self-Attn + FFN</text><text x="195" y="219">Block 4: Self-Attn + FFN</text>
+      <text x="195" y="258" fill="#707080">...</text>
+      <text x="195" y="299">Block 11: Self-Attn + FFN</text><text x="195" y="339">Block 12: Self-Attn + FFN</text>
+    </g>
+    <g stroke="#707080" stroke-width="1.1" marker-end="url(#attnres_down)">
+      <line x1="195" y1="108" x2="195" y2="121"/><line x1="195" y1="148" x2="195" y2="161"/>
+      <line x1="195" y1="188" x2="195" y2="201"/><line x1="195" y1="228" x2="195" y2="244"/>
+      <line x1="195" y1="266" x2="195" y2="281"/><line x1="195" y1="308" x2="195" y2="321"/>
+    </g>
+    <text x="195" y="382" text-anchor="middle" fill="#F87171" font-size="9">No explicit cross-block history path</text>
+
+    <text x="670" y="54" text-anchor="middle" fill="#A78BFA" font-size="11" font-weight="700">AttnRes-Enhanced Molmo2</text>
+    <text x="670" y="70" text-anchor="middle" fill="#707080" font-size="8">Every 4 layers: gated attention over historical block outputs</text>
+    <g fill="#161B28" stroke="#A78BFA" stroke-width="1.5">
+      <rect x="500" y="82" width="132" height="26" rx="4"/><rect x="500" y="122" width="132" height="26" rx="4"/>
+      <rect x="500" y="162" width="132" height="26" rx="4"/><rect x="500" y="202" width="132" height="26" rx="4"/>
+      <rect x="500" y="282" width="132" height="26" rx="4"/><rect x="500" y="322" width="132" height="26" rx="4"/>
+    </g>
+    <g fill="#AAABBB" font-size="9" text-anchor="middle">
+      <text x="566" y="99">Block 1</text><text x="566" y="139">Block 2</text>
+      <text x="566" y="179">Block 3</text><text x="566" y="219">Block 4</text>
+      <text x="566" y="258" fill="#707080">...</text>
+      <text x="566" y="299">Block 11</text><text x="566" y="339">Block 12</text>
+    </g>
+    <g stroke="#707080" stroke-width="1.1" marker-end="url(#attnres_down)">
+      <line x1="566" y1="108" x2="566" y2="121"/><line x1="566" y1="148" x2="566" y2="161"/>
+      <line x1="566" y1="188" x2="566" y2="201"/><line x1="566" y1="228" x2="566" y2="244"/>
+      <line x1="566" y1="266" x2="566" y2="281"/><line x1="566" y1="308" x2="566" y2="321"/>
+    </g>
+
+    <rect x="670" y="78" width="170" height="154" rx="6" fill="#1E2435" stroke="#A78BFA" stroke-width="2"/>
+    <text x="755" y="103" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="700">AttnRes Module 1</text>
+    <text x="755" y="120" text-anchor="middle" fill="#AAABBB" font-size="7">Attention over blocks 1-4</text>
+    <text x="755" y="136" text-anchor="middle" fill="#707080" font-size="7">tanh(gate), gate_init=0</text>
+    <text x="755" y="152" text-anchor="middle" fill="#707080" font-size="7">LoRA r=64 + saved AttnRes</text>
+    <rect x="670" y="246" width="170" height="28" rx="6" fill="#1E2435" stroke="#A78BFA" stroke-width="1.5" opacity="0.9"/>
+    <text x="755" y="264" text-anchor="middle" fill="#A78BFA" font-size="8" font-weight="700">AttnRes Module 2: blocks 5-8</text>
+    <rect x="670" y="286" width="170" height="74" rx="6" fill="#1E2435" stroke="#A78BFA" stroke-width="2"/>
+    <text x="755" y="311" text-anchor="middle" fill="#A78BFA" font-size="9" font-weight="700">AttnRes Module 3</text>
+    <text x="755" y="328" text-anchor="middle" fill="#AAABBB" font-size="7">Attention over blocks 9-12</text>
+    <text x="755" y="344" text-anchor="middle" fill="#707080" font-size="7">uses prior hidden states</text>
+
+    <g stroke="#A78BFA" stroke-width="1.4" stroke-dasharray="4,3" marker-end="url(#attnres_right)">
+      <line x1="634" y1="95" x2="668" y2="95"/><line x1="634" y1="135" x2="668" y2="135"/>
+      <line x1="634" y1="175" x2="668" y2="175"/><line x1="634" y1="215" x2="668" y2="215"/>
+      <line x1="634" y1="260" x2="668" y2="260"/>
+      <line x1="634" y1="295" x2="668" y2="295"/><line x1="634" y1="335" x2="668" y2="335"/>
+    </g>
+    <text x="755" y="388" text-anchor="middle" fill="#34D399" font-size="9">810 trainable keys; dual-backbone routing for Steerability</text>
+  </svg><div class="cap">Left: Standard Molmo2 keeps the normal top-to-bottom block flow. Right: AttnRes adds a tight side branch beside the enhanced blocks; the dashed history arrows stay next to the AttnRes modules and point right into the module edge.</div></div>
+  <div class="claim"><h3>Claim: AttnRes is a targeted fix for anchor-relative reasoning, not a universal backbone.</h3><p>The clean architecture comparison is the n=2 setting: Default reaches 59.5% Steerability, while AttnRes reaches 63.5%. The same report also shows the boundary condition: too little Steerable signal underuses the module, while too much repetition overfits.</p></div>
+  <div class="proof"><div class="card"><h4 style="color:var(--purple)">Ablation: architecture</h4><div class="kv"><span class="k">Default n=2</span><span class="v">59.5%</span></div><div class="kv"><span class="k">AttnRes n=2</span><span class="v" style="color:var(--green)">63.5%</span></div><p class="take">Same Steerable weight, different architecture. The +4.0pp gain supports the cross-block residual module.</p></div><div class="card"><h4 style="color:var(--orange)">Parameter sweep: data weight</h4><div class="kv"><span class="k">n=1</span><span class="v">Default +2.5</span></div><div class="kv"><span class="k">n=2</span><span class="v" style="color:var(--green)">AttnRes +4.0</span></div><div class="kv"><span class="k">n=4</span><span class="v">Default +2.0</span></div><p class="take">AttnRes needs enough anchor-relative data, but repeated Steerable samples hurt generalization.</p></div><div class="card"><h4 style="color:var(--red)">Boundary: do not over-compose</h4><div class="kv"><span class="k">Pure AttnRes</span><span class="v" style="color:var(--green)">63.5%</span></div><div class="kv"><span class="k">+Anchor enc.</span><span class="v">62.0%</span></div><div class="kv"><span class="k">+Iter corr.</span><span class="v">62.0%</span></div><p class="take">Adding PointMLP+ViT on top of AttnRes does not improve peak Steerability, so the module should stay focused.</p></div></div>
+  <div class="callout">Attribution: Steerability instructions require propagating an anchor state through directional steps. Absolute point encoders help locate coordinates, but they do not replace cross-layer state flow. That is why ABC-C reaches 62.5% while pure AttnRes_n2 reaches 63.5%.</div>
+  <details class="det"><summary>Detailed AttnRes Evidence Tables <span class="pill">ablation + sweep</span></summary><div class="det-body"><div class="tw" style="margin:0 0 0.8rem"><h3>Steerability Sweep: When AttnRes Helps</h3><table><thead><tr><th>Steerable Weight</th><th>Default Best</th><th>Default Step</th><th>AttnRes Best</th><th>AttnRes Step</th><th>Winner</th><th>Meaning</th></tr></thead><tbody><tr><td>n=1 (2,536 steer)</td><td class="hl">62.5%</td><td>2k</td><td>60.0%</td><td>18k</td><td>Default +2.5</td><td>signal too small for extra module</td></tr><tr><td>n=2 (5,072 steer)</td><td>59.5%</td><td>10k</td><td class="hl">63.5%</td><td class="hl">14k</td><td class="hl">AttnRes +4.0</td><td>best cross-block regime</td></tr><tr><td>n=4 (10,000 steer)</td><td class="hl">60.0%</td><td>14k</td><td>58.0%</td><td>2k</td><td>Default +2.0</td><td>repetition overfits</td></tr></tbody></table></div><div class="tw" style="margin:0"><h3>AttnRes + Anchor Encoding Ablation</h3><table><thead><tr><th>Experiment</th><th>Architecture</th><th>Extra Point Encoding</th><th>Correction Training</th><th>Best Steer</th><th>Best Ckpt/Round</th><th>Takeaway</th></tr></thead><tbody><tr><td>AttnRes_n2 sweep</td><td>AttnRes</td><td>None</td><td>No</td><td class="hl">63.5%</td><td>ckpt-14000</td><td>pure AttnRes LoRA is strongest</td></tr><tr><td>steer_base</td><td>AttnRes</td><td>PointMLP + ViT</td><td>No</td><td>62.0%</td><td>ckpt-16000 R0</td><td>anchor encoding does not add gain</td></tr><tr><td>steer_iter</td><td>AttnRes</td><td>PointMLP + ViT</td><td>Yes</td><td>62.0%</td><td>ckpt-2000 R2</td><td>iter helps R2 stability, not peak</td></tr><tr><td>ABC-C reference</td><td>Default</td><td>PointMLP + ViT + CoordMap</td><td>Yes</td><td>62.5%</td><td>ckpt-2000 R2</td><td>encoding helps, but below AttnRes_n2</td></tr></tbody></table></div><div class="tw"><h3>Why Dual Backbone Is Necessary</h3><table><thead><tr><th>Model</th><th>Afford.</th><th>Counting</th><th>Reason.</th><th>Spatial</th><th>Steer.</th><th>Interpretation</th></tr></thead><tbody><tr><td>steer_base ckpt-16000 R0</td><td>91.9%</td><td class="hr">16.3%</td><td>76.7%</td><td>77.9%</td><td class="hl">62.0%</td><td>Steerable-only recipe destroys Counting</td></tr><tr><td>steer_iter ckpt-2000 R2</td><td>87.4%</td><td class="hr">23.5%</td><td>76.7%</td><td>77.9%</td><td class="hl">62.0%</td><td>correction recovers rounds, not category balance</td></tr></tbody></table></div></div></details>
+</section>
+<section class="sec alt" id="abc"><div class="sin">
+  <span class="ey" style="color:var(--orange)">Innovation 3</span><h2 class="st">ABC Encoding</h2>
+  <div class="ib"><img src="arch_abc_encoding_v4.png" alt="ABC" loading="lazy"><div class="cap">A: text-only correction. B: PointMLP + ViT visual features. C: B plus CoordMap CNN.</div></div>
+  <div class="claim"><h3>Claim: the main gain comes from grounding perturbed coordinates in visual features.</h3><p>A text-only correction learns the wording but cannot reliably bind the perturbed point to image evidence. B injects a learned point embedding plus ViT features and gives the core gain. C adds a coordinate map, which mostly helps Spatial but has lower ROI.</p></div>
+  <div class="proof"><div class="card"><h4 style="color:var(--orange)">Ablation: text-only is insufficient</h4><div class="kv"><span class="k">A overall</span><span class="v">72.3%</span></div><div class="kv"><span class="k">B overall</span><span class="v" style="color:var(--green)">75.5%</span></div><div class="kv"><span class="k">Gain</span><span class="v" style="color:var(--green)">+3.2pp</span></div><p class="take">Same correction task, but B injects point + visual features instead of relying on text coordinates.</p></div><div class="card"><h4 style="color:var(--cyan)">Where B helps most</h4><div class="kv"><span class="k">Counting</span><span class="v" style="color:var(--green)">+7.2pp</span></div><div class="kv"><span class="k">Reasoning</span><span class="v" style="color:var(--green)">+7.3pp</span></div><div class="kv"><span class="k">Afford.</span><span class="v" style="color:var(--green)">+3.0pp</span></div><p class="take">Point-conditioned visual features help multi-point perception and spatial-semantic reasoning.</p></div><div class="card"><h4 style="color:var(--green)">C is useful, but targeted</h4><div class="kv"><span class="k">C overall</span><span class="v" style="color:var(--green)">77.0%</span></div><div class="kv"><span class="k">C vs B</span><span class="v">+1.5pp</span></div><div class="kv"><span class="k">Spatial</span><span class="v" style="color:var(--green)">+3.6pp</span></div><p class="take">CoordMap mainly contributes dense spatial context; Reasoning is slightly better with B.</p></div></div>
+  <div class="tw"><h3>Core ABC Ablation</h3><table><thead><tr><th>Module</th><th>Point Representation</th><th>Overall</th><th>Counting</th><th>Reasoning</th><th>Spatial</th><th>Interpretation</th></tr></thead><tbody><tr><td>A</td><td>text-only coordinates</td><td>72.3%</td><td class="hr">61.7%</td><td>72.5%</td><td>80.0%</td><td>weak binding between text coords and image features</td></tr><tr><td>B</td><td>PointMLP + ViT features</td><td class="hl">75.5%</td><td>68.9%</td><td class="hl">79.8%</td><td>79.0%</td><td>best cost/performance point encoding</td></tr><tr><td>C</td><td>B + CoordMap CNN</td><td class="hl">77.0%</td><td class="hl">69.9%</td><td>79.3%</td><td class="hl">82.6%</td><td>best final score; Spatial-specific gain</td></tr></tbody></table></div>
+  <div class="callout">Attribution: the loss report shows fixed protocol tokens and label text are already learned, while coordinate digits dominate 91-95% of the supervised CE. The model needs a representation that aligns coordinates with visual evidence, not more text-only coordinate formatting.</div>
+  <details class="det"><summary>Detailed ABC Evidence and Failure Analysis <span class="pill">ablation + attribution</span></summary><div class="det-body"><div class="tw" style="margin:0 0 0.8rem"><h3>Correction Rounds: Iteration Is Not the Main Source of Gain</h3><table><thead><tr><th>Architecture</th><th>R0 Best</th><th>R1 Best</th><th>R2 Best</th><th>Best Round</th><th>Observed Effect</th></tr></thead><tbody><tr><td>A Text-only</td><td class="hl">72.3%</td><td>72.2%</td><td>72.0%</td><td>R0</td><td>late training improves text-only but remains below B/C</td></tr><tr><td>B PointMLP+ViT</td><td class="hl">75.5%</td><td class="hl">75.5%</td><td class="hl">75.5%</td><td>R0/R1/R2 tie</td><td>point encoding already resolves most correction signal</td></tr><tr><td>C +CoordMap</td><td class="hl">77.0%</td><td>75.5%</td><td>76.7%</td><td>R0</td><td>CoordMap is strongest early; extra rounds slightly decay</td></tr></tbody></table></div><div class="g2"><div class="tw" style="margin:0"><h3>B vs C ROI</h3><table><thead><tr><th>Metric</th><th>B Best</th><th>C Best</th><th>C Gain</th></tr></thead><tbody><tr><td>Overall</td><td>75.5%</td><td class="hl">77.0%</td><td class="hl">+1.5</td></tr><tr><td>Counting</td><td>68.9%</td><td class="hl">69.9%</td><td>+1.0</td></tr><tr><td>Reasoning</td><td class="hl">79.8%</td><td>79.3%</td><td>-0.5</td></tr><tr><td>Spatial</td><td>79.0%</td><td class="hl">82.6%</td><td class="hl">+3.6</td></tr><tr><td>Steerability</td><td>61.5%</td><td class="hl">62.5%</td><td>+1.0</td></tr></tbody></table></div><div class="tw" style="margin:0"><h3>Training Objective Diagnosis</h3><table><thead><tr><th>Signal</th><th>Step 2000</th><th>Step 20000</th><th>What It Shows</th></tr></thead><tbody><tr><td>Total CE</td><td>0.6235</td><td class="hl">0.5474</td><td>loss keeps falling</td></tr><tr><td>Overall eval</td><td class="hl">73.42%</td><td>73.01%</td><td>metric does not rise</td></tr><tr><td>Coord loss share</td><td>91.19%</td><td class="hr">95.38%</td><td>coordinates dominate errors</td></tr><tr><td>Label loss</td><td>0.5425</td><td class="hl">0.1757</td><td>text label already learned</td></tr><tr><td>Coord ones loss</td><td>2.1359</td><td>2.0295</td><td>fine digits remain hard</td></tr></tbody></table></div></div><div class="tw"><h3>SinglePOS Negative Control</h3><table><thead><tr><th>Encoding</th><th>Format</th><th>Best Overall</th><th>Counting</th><th>Status</th><th>Lesson</th></tr></thead><tbody><tr><td>Baseline D</td><td>Molmo2 HTML continuous coords</td><td class="hl">73.42%</td><td>67.3%</td><td>stable</td><td>keep native coordinate protocol</td></tr><tr><td>singlepos original</td><td>N POS_x POS_y...</td><td>64.56%</td><td>40.8%</td><td>learns slowly</td><td>discrete tokens need strong structure</td></tr><tr><td>singlepos_long</td><td>POS_x POS_y...</td><td class="hr">13.95%</td><td>1.5%</td><td>failed</td><td>no count prefix breaks structure</td></tr><tr><td>legacy_long</td><td>1 x y 2 x y...</td><td>56.11% -> 13.24%</td><td>32.1% -> 0.5%</td><td>epoch-2 collapse</td><td>sequence can loop without total count</td></tr><tr><td>count_long</td><td>N 1 x y 2 x y...</td><td class="hr">14.66%</td><td>2.6%</td><td>failed</td><td>extra structure dilutes POS learning</td></tr></tbody></table></div></div></details>
+</div></section>
+
+<!-- ========== RESULTS ========== -->
+<section class="sec" id="results">
+  <span class="ey" style="color:var(--green)">Final Results</span><h2 class="st">Multi-Expert Routing</h2>
+  <div class="claim"><h3>Claim: the final score is the end of a proof chain, not a single checkpoint.</h3><p>The reports break into three evidence types. Ablations show which module removes which failure mode. Parameter sweeps only tune how much signal each module gets. Negative controls reject simpler substitutes. The final ensemble wins because it routes each category to the expert that matches its error pattern.</p></div>
+  <div class="callout">Evidence map: `ABC_analysis.md` and `steerability_sweep_report.md` are module evidence; `runs_overview_report.md` is hyperparameter tuning; `metadata_prompt_variants_A_F_report.md` and `singlepos_experiments_report.md` are negative controls; `output_D_lr2e4_ga16_training_eval_loss_report.md` and `output_D_lr2e4_ga16_counting_error_analysis.md` explain why the gains do or do not transfer.</div>
+  <div class="ladder">
+    <div class="step"><span class="tag">Step 1 · data</span><div class="numv">55,372 → 37,574</div><h4>Audited pools feed balanced runs</h4><p>The cloud inventory has 53,772 unique sample IDs and 37,574 trainable rows. The 3,815-row set is only the early semantic baseline subset.</p></div>
+    <div class="step"><span class="tag">Step 2 · ablation</span><div class="numv">72.3 → 75.5 → 77.0</div><h4>ABC fixes coordinate-image binding</h4><p>Text-only A underperforms. B gets the core gain from PointMLP + ViT. C mostly buys Spatial, so B is the better ROI while C is the higher ceiling.</p></div>
+    <div class="step"><span class="tag">Step 3 · tuning</span><div class="numv">59.5 → 63.5</div><h4>AttnRes only helps at the right weight</h4><p>n=2 is the sweet spot. n=1 underuses the module and n=4 overfits. That makes AttnRes a targeted fix for anchor-relative Steerability, not a universal backbone.</p></div>
+    <div class="step"><span class="tag">Step 4 · routing</span><div class="numv">77.2%</div><h4>Category experts win</h4><p>Affordance C 93.94, Counting C 70.41, Reasoning B 78.24, Spatial C 82.56, Steerable AttnRes 63.00. These are local expert-selection scores; the final overall is the submitted benchmark score.</p></div>
+  </div>
+  <div class="tw"><h3>Proof Table 1: Data Base Before Model Changes</h3>
+    <div class="viz"><h4>Funnel view: cloud inventory first, experiment subsets second</h4>
+      <div class="barrow"><span class="lab">Processed outputs</span><div class="bar"><span style="width:100%"></span></div><span class="val">55,372</span></div>
+      <div class="barrow"><span class="lab">Unique IDs</span><div class="bar"><span style="width:97.1%"></span></div><span class="val">53,772</span></div>
+      <div class="barrow"><span class="lab">Trainable rows</span><div class="bar orange"><span style="width:67.9%"></span></div><span class="val">37,574</span></div>
+      <div class="barrow"><span class="lab">Mixed D subset</span><div class="bar purple"><span style="width:22.9%"></span></div><span class="val">12,680</span></div>
+      <div class="barrow"><span class="lab">Early subset</span><div class="bar purple"><span style="width:6.9%"></span></div><span class="val">3,815</span></div>
+      <p class="chart-note">The 3,815-row bar is a deliberate early semantic subset, not the total data volume. Later D-format and steerability runs resample larger balanced subsets from the audited cloud pools.</p>
+    </div>
+    <table><thead><tr><th>Evidence</th><th>Count</th><th>Operation</th><th>Mark</th><th>Analysis</th></tr></thead><tbody>
+      <tr><td>Processed cloud outputs</td><td>55,372</td><td>merge Gemini + Qwen + SAM-clean batches</td><td><span class="badge b-sweep">cloud pool</span></td><td>shows the full multi-batch inventory, not only the early filtered-data run</td></tr>
+      <tr><td>Unique sample IDs</td><td>53,772</td><td>deduplicate repeated workflows</td><td><span class="badge b-proof">clean base</span></td><td>removes repeated attempts before counting usable samples</td></tr>
+      <tr class="proof-row"><td>Trainable completed rows</td><td class="mark">37,574</td><td>latest judgement completed/accepted</td><td><span class="badge b-proof">module output</span></td><td>usable rows available before experiment-specific balancing</td></tr>
+      <tr><td>Early Gemini trainable rows</td><td>24,415</td><td>semantic cache only</td><td><span class="badge b-proof">early pool</span></td><td>valid for the original Pipeline A baseline, not the full server count</td></tr>
+      <tr class="proof-row"><td>Early FT subset</td><td class="mark">3,815</td><td>763 per category x 5</td><td><span class="badge b-route">early balance</span></td><td>small controlled subset used for the early semantic comparison</td></tr>
+    </tbody></table><p class="rn">Attribution: the data module is not just more rows. The full cloud pool provides 37,574 trainable rows; the 3,815-row set is a deliberately balanced early subset where Spatial's 763 eligible examples define the quota.</p></div>
+  <div class="tw"><h3>Proof Table 2: Module Ablation, Not Hyperparameter Tuning</h3>
+    <div class="split-viz">
+      <div class="viz"><h4>Overall ablation: A to B is the core jump</h4>
+        <div class="barrow"><span class="lab">A text-only</span><div class="bar red"><span style="width:72.3%"></span></div><span class="val">72.3%</span></div>
+        <div class="barrow"><span class="lab">B PointMLP+ViT</span><div class="bar"><span style="width:75.5%"></span></div><span class="val">75.5%</span></div>
+        <div class="barrow"><span class="lab">C + CoordMap</span><div class="bar purple"><span style="width:77.0%"></span></div><span class="val">77.0%</span></div>
+        <p class="chart-note">B vs A is the module proof (+3.2pp). C vs B is a smaller, targeted spatial refinement (+1.5pp).</p>
+      </div>
+      <div class="viz"><h4>Where the gain comes from</h4>
+        <div class="barrow"><span class="lab">Counting B-A</span><div class="bar orange"><span style="width:72%"></span></div><span class="val">+7.2</span></div>
+        <div class="barrow"><span class="lab">Reasoning B-A</span><div class="bar orange"><span style="width:73%"></span></div><span class="val">+7.3</span></div>
+        <div class="barrow"><span class="lab">Spatial C-B</span><div class="bar purple"><span style="width:36%"></span></div><span class="val">+3.6</span></div>
+        <div class="barrow"><span class="lab">Overall C-B</span><div class="bar purple"><span style="width:15%"></span></div><span class="val">+1.5</span></div>
+        <p class="chart-note">The biggest jumps are Counting and Reasoning from visual point grounding; CoordMap mainly helps Spatial.</p>
+      </div>
+    </div>
+    <table><thead><tr><th>Module</th><th>Representation</th><th>Overall</th><th>Afford.</th><th>Counting</th><th>Reason.</th><th>Spatial</th><th>Steer.</th><th>Mark</th><th>Analysis</th></tr></thead><tbody>
+      <tr><td>A</td><td>text-only coordinates</td><td>72.3%</td><td>90.9%</td><td class="bad">61.7%</td><td>72.5%</td><td>80.0%</td><td>61.5%</td><td><span class="badge b-risk">baseline</span></td><td>wording can be learned, but coordinate-image binding is weak</td></tr>
+      <tr class="proof-row"><td>B</td><td>PointMLP + ViT</td><td class="mark">75.5%</td><td>93.9%</td><td class="mark">68.9%</td><td class="mark">79.8%</td><td>79.0%</td><td>61.5%</td><td><span class="badge b-proof">core ablation</span></td><td>main gain comes from point-conditioned visual grounding</td></tr>
+      <tr class="proof-row"><td>C</td><td>B + CoordMap CNN</td><td class="mark">77.0%</td><td class="mark">94.4%</td><td class="mark">69.9%</td><td>79.3%</td><td class="mark">82.6%</td><td class="mark">62.5%</td><td><span class="badge b-route">targeted boost</span></td><td>best final score, but its distinctive value is Spatial</td></tr>
+    </tbody></table><p class="rn">Attribution: B over A is the strongest module proof: Counting +7.2pp and Reasoning +7.3pp indicate that visual point features solve a grounding problem. C is still useful, but its extra value is concentrated in Spatial (+3.6pp), so the page should describe C as targeted rather than universally better.</p></div>
+  <div class="tw"><h3>Proof Table 3: AttnRes Architecture and Steerable Weight Sweep</h3>
+    <div class="split-viz">
+      <div class="viz"><h4>Default vs AttnRes by steerable weight</h4>
+        <div class="barrow"><span class="lab">n=1 Default</span><div class="bar"><span style="width:62.5%"></span></div><span class="val">62.5</span></div>
+        <div class="barrow"><span class="lab">n=1 AttnRes</span><div class="bar purple"><span style="width:60.0%"></span></div><span class="val">60.0</span></div>
+        <div class="barrow"><span class="lab">n=2 Default</span><div class="bar"><span style="width:59.5%"></span></div><span class="val">59.5</span></div>
+        <div class="barrow"><span class="lab">n=2 AttnRes</span><div class="bar purple"><span style="width:63.5%"></span></div><span class="val">63.5</span></div>
+        <div class="barrow"><span class="lab">n=4 Default</span><div class="bar"><span style="width:60.0%"></span></div><span class="val">60.0</span></div>
+        <div class="barrow"><span class="lab">n=4 AttnRes</span><div class="bar purple"><span style="width:58.0%"></span></div><span class="val">58.0</span></div>
+        <p class="chart-note">Only n=2 is the clean architecture proof: same data weight, AttnRes +4.0pp over default.</p>
+      </div>
+      <div class="viz"><h4>Interpretation of the sweep</h4>
+        <div class="barrow"><span class="lab">n=1 signal</span><div class="bar red"><span style="width:35%"></span></div><span class="val">too low</span></div>
+        <div class="barrow"><span class="lab">n=2 signal</span><div class="bar purple"><span style="width:78%"></span></div><span class="val">sweet spot</span></div>
+        <div class="barrow"><span class="lab">n=4 repeat</span><div class="bar red"><span style="width:100%"></span></div><span class="val">overfit</span></div>
+        <div class="barrow"><span class="lab">Peak step</span><div class="bar orange"><span style="width:70%"></span></div><span class="val">14k</span></div>
+        <p class="chart-note">The sweep is not just ranking models; it explains the usage rule: enough steerable data for AttnRes, but not repeated to saturation.</p>
+      </div>
+    </div>
+    <table><thead><tr><th>Steerable Weight</th><th>Default Best</th><th>Default Step</th><th>AttnRes Best</th><th>AttnRes Step</th><th>Winner</th><th>Evidence Type</th><th>Interpretation</th></tr></thead><tbody>
+      <tr class="sweep-row"><td>n=1 / 2,536 steer</td><td class="mark">62.5%</td><td>2k</td><td>60.0%</td><td>18k</td><td class="warn">Default +2.5</td><td><span class="badge b-sweep">boundary</span></td><td>too little steerable signal underuses AttnRes</td></tr>
+      <tr class="proof-row"><td>n=2 / 5,072 steer</td><td>59.5%</td><td>10k</td><td class="mark">63.5%</td><td class="mark">14k</td><td class="mark">AttnRes +4.0</td><td><span class="badge b-proof">architecture proof</span></td><td>same data weight, cross-block residual attention wins</td></tr>
+      <tr class="sweep-row"><td>n=4 / 10,000 steer</td><td class="mark">60.0%</td><td>14k</td><td class="bad">58.0%</td><td>2k</td><td class="warn">Default +2.0</td><td><span class="badge b-risk">overfit boundary</span></td><td>repetition hurts generalization and narrows the useful regime</td></tr>
+    </tbody></table><p class="rn">Attribution: AttnRes should be claimed narrowly. The n=2 row proves the architecture helps anchor-relative Steerability; n=1 and n=4 explain why it must be paired with the right data weight and early stopping.</p></div>
+  <div class="tw"><h3>Proof Table 4: Negative Controls and Failure Attribution</h3>
+    <div class="split-viz">
+      <div class="viz"><h4>Rejected shortcuts</h4>
+        <div class="barrow"><span class="lab">No meta prompt</span><div class="bar"><span style="width:71.38%"></span></div><span class="val">71.38</span></div>
+        <div class="barrow"><span class="lab">Best prompt D</span><div class="bar"><span style="width:71.69%"></span></div><span class="val">71.69</span></div>
+        <div class="barrow"><span class="lab">SinglePOS best</span><div class="bar red"><span style="width:64.56%"></span></div><span class="val">64.56</span></div>
+        <div class="barrow"><span class="lab">SinglePOS fail</span><div class="bar red"><span style="width:14.66%"></span></div><span class="val">14.66</span></div>
+        <p class="chart-note">Prompt-only and token-format shortcuts do not explain the final gain; most remain below the trained modules.</p>
+      </div>
+      <div class="viz"><h4>Counting error anatomy @ ckpt-2000</h4>
+        <div class="barrow"><span class="lab">Success</span><div class="bar"><span style="width:67.35%"></span></div><span class="val">132/196</span></div>
+        <div class="barrow"><span class="lab">Wrong count</span><div class="bar red"><span style="width:25.51%"></span></div><span class="val">50/196</span></div>
+        <div class="barrow"><span class="lab">Out of mask</span><div class="bar red"><span style="width:22.45%"></span></div><span class="val">44/196</span></div>
+        <div class="barrow"><span class="lab">Invalid parse</span><div class="bar orange"><span style="width:2.55%"></span></div><span class="val">5/196</span></div>
+        <p class="chart-note">Counting fails structurally: wrong number of points and mask misses dominate; parser failures are small.</p>
+      </div>
+    </div>
+    <table><thead><tr><th>Test</th><th>Best / Key Result</th><th>Counting</th><th>Steer.</th><th>Mark</th><th>What It Rules Out</th><th>What It Proves</th></tr></thead><tbody>
+      <tr><td>Prompt metadata A-F</td><td class="warn">D = 71.69%, C = 71.38%</td><td>66.84%</td><td>50.5%</td><td><span class="badge b-sweep">small delta</span></td><td>prompt-only coordinate injection is not enough</td><td>training modules are needed, not just coordinate wording</td></tr>
+      <tr class="risk-row"><td>SinglePOS original</td><td class="bad">64.56%</td><td class="bad">40.8%</td><td>53.0%</td><td><span class="badge b-risk">negative control</span></td><td>discrete POS tokens do not solve coordinates by themselves</td><td>output structure and coordinate grounding remain bottlenecks</td></tr>
+      <tr class="risk-row"><td>SinglePOS failed variants</td><td class="bad">13.95% / 14.66%</td><td class="bad">1.5% / 2.6%</td><td class="bad">12.5% / 13.0%</td><td><span class="badge b-risk">collapse</span></td><td>format changes can collapse parsing and point count</td><td>native Molmo2 coordinate protocol is safer</td></tr>
+      <tr><td>Loss diagnosis</td><td class="warn">CE 0.6235 -> 0.5474, eval 73.42 -> 73.01</td><td class="bad">loss highest 0.6200</td><td>label loss near 0</td><td><span class="badge b-sweep">metric gap</span></td><td>lower token CE does not imply better mask accuracy</td><td>coordinate digits dominate 91-95% of supervised CE</td></tr>
+      <tr class="proof-row"><td>Counting error anatomy</td><td class="mark">132/196 success</td><td class="bad">50 wrong count, 44 out mask</td><td>N/A</td><td><span class="badge b-route">routing cause</span></td><td>errors are not mainly parser failures</td><td>Counting needs a category expert for multi-point structure</td></tr>
+    </tbody></table><p class="rn">Attribution: the negative controls prevent overclaiming. The method advantage is not from a lucky prompt or a coordinate-token trick; it comes from modules that match the real failure modes.</p></div>
+  <div class="proof"><div class="card"><h4 style="color:var(--blue)">Data module</h4><div class="kv"><span class="k">0-shot</span><span class="v">72.7%</span></div><div class="kv"><span class="k">Pipeline A</span><span class="v" style="color:var(--green)">75.3%</span></div><div class="kv"><span class="k">Trainable</span><span class="v">37,574</span></div><p class="take">LLM cleaning, local filtering, steerable synthesis, and balanced resampling lift semantic categories before model specialization.</p></div><div class="card"><h4 style="color:var(--orange)">ABC module</h4><div class="kv"><span class="k">A overall</span><span class="v">72.3%</span></div><div class="kv"><span class="k">B overall</span><span class="v" style="color:var(--green)">75.5%</span></div><div class="kv"><span class="k">C overall</span><span class="v" style="color:var(--green)">77.0%</span></div><p class="take">Point-conditioned visual features recover coordinate grounding. B is the best ROI point; C is the best Spatial point.</p></div><div class="card"><h4 style="color:var(--purple)">Negative controls</h4><div class="kv"><span class="k">Prompt D</span><span class="v">71.69%</span></div><div class="kv"><span class="k">SinglePOS best</span><span class="v">64.56%</span></div><div class="kv"><span class="k">Count valid fmt</span><span class="v" style="color:var(--green)">82.65%</span></div><p class="take">Prompt-only changes buy little. Discrete POS variants mostly fail. The 82.65% Counting number is valid-output rate, not mask accuracy.</p></div></div>
+  <div class="tw"><h3>Final Routing Chart: Category Experts</h3>
+    <div class="viz"><h4>Per-category expert accuracy</h4>
+      <div class="barrow"><span class="lab c-af">Affordance · C</span><div class="bar"><span style="width:93.94%"></span></div><span class="val">93.94%</span></div>
+      <div class="barrow"><span class="lab c-co">Counting · C</span><div class="bar orange"><span style="width:70.41%"></span></div><span class="val">70.41%</span></div>
+      <div class="barrow"><span class="lab c-re">Reasoning · B</span><div class="bar"><span style="width:78.24%"></span></div><span class="val">78.24%</span></div>
+      <div class="barrow"><span class="lab c-sp">Spatial · C</span><div class="bar"><span style="width:82.56%"></span></div><span class="val">82.56%</span></div>
+      <div class="barrow"><span class="lab c-st">Steerable · AttnRes</span><div class="bar purple"><span style="width:63.00%"></span></div><span class="val">63.00%</span></div>
+      <p class="chart-note">These category bars are local validation evidence for choosing experts. The official submitted overall score is reported separately as 77.2%.</p>
+    </div>
+    <table><thead><tr><th>#</th><th>Category</th><th>Expert</th><th>Accuracy</th><th>Why This Expert</th><th>Mark</th></tr></thead><tbody>
+      <tr class="proof-row"><td>1</td><td class="c-af" style="font-weight:700">Affordance</td><td>C</td><td class="mark">93.94%</td><td>C keeps the highest semantic grounding score</td><td><span class="badge b-route">route</span></td></tr>
+      <tr class="proof-row"><td>2</td><td class="c-co" style="font-weight:700">Counting</td><td>C</td><td class="mark">70.41%</td><td>multi-point structure benefits from visual + CoordMap grounding</td><td><span class="badge b-route">route</span></td></tr>
+      <tr class="proof-row"><td>3</td><td class="c-re" style="font-weight:700">Reasoning</td><td>B</td><td class="mark">78.24%</td><td>B has better ROI and avoids C's slight Reasoning drop</td><td><span class="badge b-proof">B wins</span></td></tr>
+      <tr class="proof-row"><td>4</td><td class="c-sp" style="font-weight:700">Spatial</td><td>C</td><td class="mark">82.56%</td><td>CoordMap's clearest gain is Spatial +3.6pp over B</td><td><span class="badge b-proof">C wins</span></td></tr>
+      <tr class="proof-row"><td>5</td><td class="c-st" style="font-weight:700">Steerable</td><td>AttnRes</td><td class="mark">63.00%</td><td>anchor-relative reasoning needs cross-block state flow</td><td><span class="badge b-proof">AttnRes</span></td></tr>
+    </tbody></table></div>
+  <div style="background:var(--card);border-radius:8px;padding:0.8rem;border-left:3px solid var(--green);text-align:center;margin:0.8rem 0"><p style="font-weight:700;color:var(--green);font-size:1.3rem">Official submitted overall: 77.2%</p><p style="color:var(--gray);font-size:0.72rem;margin-top:0.25rem">Category values above are local validation scores used for routing, not a re-summed 982-sample ensemble.</p></div>
+  <div class="tw"><h3>Complete Evolution: What Each Stage Adds</h3>
+    <div class="viz"><h4>Overall progression</h4>
+      <div class="barrow"><span class="lab">Molmo2 0-shot</span><div class="bar red"><span style="width:72.7%"></span></div><span class="val">72.7%</span></div>
+      <div class="barrow"><span class="lab">+ Pipeline A</span><div class="bar"><span style="width:75.3%"></span></div><span class="val">75.3%</span></div>
+      <div class="barrow"><span class="lab">+ IterCorr B</span><div class="bar"><span style="width:75.5%"></span></div><span class="val">75.5%</span></div>
+      <div class="barrow"><span class="lab">Final Ensemble</span><div class="bar purple"><span style="width:77.2%"></span></div><span class="val">77.2%</span></div>
+      <p class="chart-note">The final gain is not monotonic in every category. Pipeline A improves semantic categories but hurts Counting/Steer; later modules recover hard categories, then routing selects per-category experts.</p>
+    </div>
+    <table><thead><tr><th>Experiment</th><th>Afford.</th><th>Spatial</th><th>Reason.</th><th>Count.</th><th>Steer.</th><th>Overall</th><th>Analysis</th></tr></thead><tbody>
+      <tr><td>Molmo2 (0-shot)</td><td>85.9%</td><td>76.9%</td><td>77.2%</td><td class="mark">73.0%</td><td>50.5%</td><td>72.7%</td><td>strong base, but Steerability is the first clear bottleneck</td></tr>
+      <tr><td>+ Pipeline A</td><td class="mark">93.9%</td><td class="mark">83.1%</td><td class="mark">82.9%</td><td class="bad">67.3%</td><td class="bad">49.5%</td><td class="mark">75.3%</td><td>data synthesis improves semantic pointing but does not solve hard structured categories</td></tr>
+      <tr><td>+ IterCorr B</td><td class="mark">93.9%</td><td>79.0%</td><td>79.8%</td><td>68.9%</td><td class="mark">61.5%</td><td class="mark">75.5%</td><td>point-conditioned visual grounding recovers Steerability and improves coordinate binding</td></tr>
+      <tr class="proof-row" style="font-weight:700"><td>Final Submission</td><td class="mark">93.9%</td><td class="mark">82.6%</td><td class="mark">78.2%</td><td class="mark">70.4%</td><td class="mark">63.0%</td><td class="mark">77.2%</td><td>official overall score; category cells show local expert-selection evidence</td></tr>
+    </tbody></table></div>
+  <div class="callout">Why routing wins: Counting errors are mostly wrong counts and out-of-mask points; Steerability needs cross-block anchor state; Spatial benefits most from CoordMap. The expert map is therefore a consequence of the failure analysis, not a cosmetic ensemble trick.</div>
+  <details class="det"><summary>Detailed Diagnostics by Evidence Type <span class="pill">supporting evidence</span></summary><div class="det-body"><div class="callout">Read these tables as support for the proof chain: cloud-pool auditing and balancing explain the training base; LR/GA and checkpoint timing are parameter sweeps; prompt-only and SinglePOS are negative controls; Counting error tables are failure attribution for category experts.</div><div class="tw" style="margin:0 0 0.8rem"><h3>Cloud Data Inventory Behind the Training Sets</h3><table><thead><tr><th>Stage</th><th>Count</th><th>Filter / Module</th><th>Role</th></tr></thead><tbody><tr><td>Processed outputs</td><td>55,372</td><td>Gemini + Qwen + SAM-clean cache</td><td>full audited cloud inventory</td></tr><tr><td>Unique sample IDs</td><td>53,772</td><td>latest-workflow selection</td><td>deduplicate repeated processing roots</td></tr><tr><td>Trainable completed rows</td><td class="hl">37,574</td><td>completed / accepted latest judgement</td><td>usable pool before experiment balancing</td></tr><tr><td>Early Gemini cache</td><td>24,415</td><td>semantic LLM pass only</td><td>source for the original filtered-data baseline</td></tr><tr><td>Early balanced subset</td><td class="hl">3,815</td><td>763 per category x 5</td><td>controlled semantic LoRA comparison</td></tr></tbody></table></div>
+  <div class="tw"><h3>Category Balancing: Why the Selector Matters</h3><table><thead><tr><th>Category</th><th>Eligible</th><th>Selected</th><th>Dropped</th><th>Why It Matters</th></tr></thead><tbody><tr><td>Affordance</td><td>1,778</td><td class="hl">763</td><td>1,015</td><td>avoid overfitting easy category</td></tr><tr><td>Counting</td><td>12,895</td><td class="hl">763</td><td>12,132</td><td>massive raw skew needs quota control</td></tr><tr><td>Object Reference</td><td>4,224</td><td class="hl">763</td><td>3,461</td><td>keeps semantic pointing balanced</td></tr><tr><td>Reasoning</td><td>2,478</td><td class="hl">763</td><td>1,715</td><td>preserve harder cognitive tasks</td></tr><tr><td>Spatial Relation</td><td>763</td><td class="hl">763</td><td>0</td><td>scarce class defines the quota</td></tr></tbody></table><p class="rn">Final source mix: 3,715 pixmo_points + 100 where2place. Robopoint was abundant but not selected after balancing.</p></div>
+  <div class="tw"><h3>Filtered-Data FT Grid: Best Runs</h3><table><thead><tr><th>Run</th><th>LR / GA</th><th>Best Step</th><th>Overall</th><th>Afford.</th><th>Spatial</th><th>Reason.</th><th>Steer.</th><th>Counting</th><th>Invalid</th></tr></thead><tbody><tr><td>lr1e4_ga16</td><td>1e-4 / 16</td><td>2000</td><td class="hl">75.25%</td><td>93.94%</td><td class="hl">83.08%</td><td class="hl">82.90%</td><td>49.5%</td><td>67.35%</td><td>9</td></tr><tr><td>lr2e4_ga16</td><td>2e-4 / 16</td><td>2000</td><td>74.85%</td><td>90.91%</td><td>81.54%</td><td>78.24%</td><td>54.0%</td><td class="hl">69.90%</td><td class="hl">4</td></tr><tr><td>lr1e4_ga8</td><td>1e-4 / 8</td><td>2000</td><td>73.83%</td><td>93.43%</td><td class="hl">83.08%</td><td>76.17%</td><td>52.0%</td><td>64.80%</td><td>7</td></tr><tr><td>lr2e4_ga8</td><td>2e-4 / 8</td><td>2000</td><td class="hr">14.87%</td><td>31.82%</td><td>16.92%</td><td>10.88%</td><td>12.5%</td><td class="hr">2.04%</td><td class="hr">103</td></tr></tbody></table><p class="rn">Higher LR with GA=8 collapses output format; stable LoRA needs the larger effective batch.</p></div>
+  <div class="tw"><h3>Prompt-Only Metadata Injection: Limited Gain</h3><table><thead><tr><th>Variant</th><th>Coordinate Prompt</th><th>Overall</th><th>Steer.</th><th>Invalid</th><th>Conclusion</th></tr></thead><tbody><tr><td>A</td><td>natural-language pixel coords</td><td>69.55%</td><td>40.5%</td><td>1</td><td>extra wording hurts Steerability</td></tr><tr><td>B</td><td>natural language + Molmo2 HTML</td><td>69.04%</td><td>38.0%</td><td>1</td><td>format match alone is insufficient</td></tr><tr><td>C</td><td>none</td><td>71.38%</td><td>49.5%</td><td>1</td><td>baseline prompt</td></tr><tr><td>D</td><td>direct legacy coordinate list</td><td class="hl">71.69%</td><td class="hl">50.5%</td><td>3</td><td>only prompt variant above no-injection</td></tr><tr><td>E</td><td>bare HTML points tag</td><td class="hr">68.33%</td><td class="hr">34.5%</td><td>2</td><td>empty tag disrupts generation</td></tr><tr><td>F</td><td>normalized bracket list</td><td>70.57%</td><td>45.5%</td><td>1</td><td>still below D/no-injection</td></tr></tbody></table><p class="rn">Prompt engineering cannot replace the training modules; direct D format is the only useful metadata prompt.</p></div>
+  <div class="g2"><div class="tw" style="margin:0"><h3>Counting Error Anatomy</h3><table><thead><tr><th>Metric @ ckpt-2000</th><th>Value</th></tr></thead><tbody><tr><td>Counting samples</td><td>196</td></tr><tr><td>Success</td><td class="hl">132 / 196 = 67.35%</td></tr><tr><td>Wrong number of points</td><td class="hr">50 / 196 = 25.51%</td></tr><tr><td>At least one point out of mask</td><td class="hr">44 / 196 = 22.45%</td></tr><tr><td>Correct count but out of mask</td><td>14 / 146 = 9.59%</td></tr><tr><td>Wrong count and out of mask</td><td class="hr">30 / 50 = 60.00%</td></tr><tr><td>Invalid parse</td><td>5 / 196 = 2.55%</td></tr></tbody></table><p class="rn">Counting failures are mostly structured multi-point mistakes, not only parsing errors.</p></div><div class="tw" style="margin:0"><h3>Counting-Specialized Model</h3><table><thead><tr><th>Setting</th><th>Value</th></tr></thead><tbody><tr><td>Architecture</td><td>AttnRes + C wrapper</td></tr><tr><td>Balance</td><td>Counting x2, others x1</td></tr><tr><td>Train data</td><td>18,516 samples</td></tr><tr><td>Best checkpoint</td><td>ckpt-1000</td></tr><tr><td>Counting valid output</td><td class="hl">162 / 196 = 82.65%</td></tr><tr><td>Wrapper params</td><td>PointMLP + ViT + CoordMap CNN</td></tr><tr><td>Use in story</td><td>format diagnostic, not accuracy</td></tr></tbody></table><p class="rn">Source: model_handover_AttnRes_n2.md and SUBMISSION_REPORT.md. The 82.65% value is valid-output rate; its Counting accuracy was lower than the C route's 70.41%.</p></div></div>
+  <div class="tw"><h3>Checkpoint Timing: Early Stop Beats Longer Training</h3><table><thead><tr><th>Run / Model</th><th>Early Best</th><th>Late Score</th><th>Loss Trend</th><th>Lesson</th></tr></thead><tbody><tr><td>lr1e4_ga16</td><td class="hl">75.25%@2k</td><td>69.65%@16k</td><td>train loss 0.553 -> 0.311</td><td>eval overfits while CE falls</td></tr><tr><td>output_D_lr2e4_ga16</td><td class="hl">73.42%@2k</td><td>73.01%@20k</td><td>CE 0.6235 -> 0.5474</td><td>digit loss drop does not equal mask accuracy</td></tr><tr><td>ABC-C</td><td class="hl">77.0%@2k R0</td><td>73.8%@20k R0</td><td>extra CoordMap peaks early</td><td>select early checkpoint for final expert</td></tr><tr><td>AttnRes_n2</td><td class="hl">63.5%@14k</td><td>60.0%@20k</td><td>post-peak decline</td><td>Steerability needs category-specific early stop</td></tr></tbody></table></div></div></details>
+</section>
+
+</main>
+<script>
+const nl=document.querySelectorAll('.sn a'),ss=document.querySelectorAll('section[id]');
+function ua(){let c='';ss.forEach(s=>{if(s.getBoundingClientRect().top<200)c=s.getAttribute('id')});nl.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c))}
+window.addEventListener('scroll',ua,{passive:true});ua();
+</script></body></html>

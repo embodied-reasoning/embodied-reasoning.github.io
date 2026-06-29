@@ -1,0 +1,337 @@
+{
+  "processing": {
+    "status": "completed",
+    "workflow": "cleaning->multipoint->three_type_classification->rewrite_same_session_local",
+    "started_at": "2026-05-16T13:34:28Z",
+    "completed_at": "2026-05-16T13:34:31Z",
+    "source": "refspatial",
+    "source_rank": 2817642,
+    "global_rank": 1546,
+    "source_file": "/mnt/data/lv_qi/PointArena/ans8/data/cleaned/by_source/refspatial.jsonl",
+    "output_path": "/mnt/data/lv_qi/PointArena/clean_3types_local/qwen3_8b_three_types_20k_forward_v2/refspatial/2817642__refspatial_reasoning_template_qa_12391_0.json",
+    "model": "Qwen3-8B",
+    "api_url": "http://127.0.0.1:8018/v1/chat/completions",
+    "classification_route": "classify_three_types_only",
+    "sample_attempt": 1,
+    "validation_errors": []
+  },
+  "record": {
+    "source": "refspatial",
+    "id": "refspatial::reasoning_template_qa::12391::0",
+    "query": "You are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?",
+    "image_path": "/mnt/data/lv_qi/PointArena/artifacts/raw/refspatial_full/images/ff87a7afe54f9ec1.jpg",
+    "width": 1000,
+    "height": 1000,
+    "points_abs": [
+      [
+        594.0,
+        706.0
+      ]
+    ],
+    "raw_meta": {
+      "raw_dataset": "refspatial_full",
+      "raw_file": "2D/reasoning_template_qa.json",
+      "raw_item_id": "ff87a7afe54f9ec1",
+      "raw_item_index": 12391,
+      "turn_index": 0,
+      "image_list": [
+        "ff87a7afe54f9ec1.jpg"
+      ],
+      "depth_list": [
+        "ff87a7afe54f9ec1.png"
+      ],
+      "answer": "The glossy dark blue armchair at center is located at point (0.594, 0.706).",
+      "points_raw": [
+        [
+          0.594,
+          0.706
+        ]
+      ],
+      "point_mode": "norm",
+      "image_size_mode": "fallback_1000",
+      "extra_fields": {}
+    }
+  },
+  "cleaning": {
+    "prompt": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?",
+    "raw_output": "{\n\n\n\"keep\": true,\n\"core_target\": \"the glossy dark blue armchair at center\",\n\"reason\": \"The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria.\"\n}",
+    "reasoning_content": "",
+    "parsed": {
+      "keep": true,
+      "core_target": "the glossy dark blue armchair at center",
+      "reason": "The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria."
+    },
+    "keep": true,
+    "core_target": "the glossy dark blue armchair at center",
+    "reason": "The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria.",
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "cleaning",
+        "attempt": 1,
+        "timestamp": "2026-05-16T13:34:28Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 120
+        },
+        "elapsed_sec": 1.364,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-80c41bc5a51c077e\",\"object\":\"chat.completion\",\"created\":1778938468,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n\\n\\n\\\"keep\\\": true,\\n\\\"core_target\\\": \\\"the glossy dark blue armchair at center\\\",\\n\\\"reason\\\": \\\"The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria.\\\"\\n}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":464,\"total_tokens\":516,\"completion_tokens\":52,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "cleaning",
+        "prompt": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?",
+        "raw_output": "{\n\n\n\"keep\": true,\n\"core_target\": \"the glossy dark blue armchair at center\",\n\"reason\": \"The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria.\"\n}",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": {
+          "keep": true,
+          "core_target": "the glossy dark blue armchair at center",
+          "reason": "The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria."
+        },
+        "normalized": {
+          "keep": true,
+          "core_target": "the glossy dark blue armchair at center",
+          "reason": "The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria."
+        },
+        "attempts": [
+          {
+            "stage": "cleaning",
+            "attempt": 1,
+            "timestamp": "2026-05-16T13:34:28Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 120
+            },
+            "elapsed_sec": 1.364,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-80c41bc5a51c077e\",\"object\":\"chat.completion\",\"created\":1778938468,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n\\n\\n\\\"keep\\\": true,\\n\\\"core_target\\\": \\\"the glossy dark blue armchair at center\\\",\\n\\\"reason\\\": \\\"The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria.\\\"\\n}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":464,\"total_tokens\":516,\"completion_tokens\":52,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+          }
+        ]
+      }
+    ]
+  },
+  "multipoint": {
+    "prompt": "# Role\nYou are a strict answer-shape judge for the Point Arena visual grounding dataset.\n\n# Task\nGiven the original instruction and the cleaned visual target, determine whether a correct answer should contain MULTIPLE valid points/coordinates rather than one single point.\n\n# DECISION RULES\n1. multi_point = true:\n- the task asks for all instances of something\n- the task asks for several/few/multiple points, spots, or locations\n- the target is a free/vacant/empty space where many coordinates are valid\n- the target is a plural/group target that should return more than one point\n2. multi_point = false:\n- the task asks for one best answer, one unique target, one option among choices, or one specific object/location/space\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"multi_point\": boolean\n- \"reason\": string\n\nOriginal instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?\n\nCleaned core_target:\nthe glossy dark blue armchair at center",
+    "raw_output": "{\"multi_point\": false, \"reason\": \"The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected.\"}",
+    "reasoning_content": "",
+    "parsed": {
+      "multi_point": false,
+      "reason": "The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected."
+    },
+    "multi_point": false,
+    "reason": "The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected.",
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "multipoint",
+        "attempt": 1,
+        "timestamp": "2026-05-16T13:34:29Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 120
+        },
+        "elapsed_sec": 0.954,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-98773e86f62eaaf5\",\"object\":\"chat.completion\",\"created\":1778938469,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"multi_point\\\": false, \\\"reason\\\": \\\"The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected.\\\"}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":760,\"total_tokens\":797,\"completion_tokens\":37,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "multipoint",
+        "prompt": "# Role\nYou are a strict answer-shape judge for the Point Arena visual grounding dataset.\n\n# Task\nGiven the original instruction and the cleaned visual target, determine whether a correct answer should contain MULTIPLE valid points/coordinates rather than one single point.\n\n# DECISION RULES\n1. multi_point = true:\n- the task asks for all instances of something\n- the task asks for several/few/multiple points, spots, or locations\n- the target is a free/vacant/empty space where many coordinates are valid\n- the target is a plural/group target that should return more than one point\n2. multi_point = false:\n- the task asks for one best answer, one unique target, one option among choices, or one specific object/location/space\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"multi_point\": boolean\n- \"reason\": string\n\nOriginal instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?\n\nCleaned core_target:\nthe glossy dark blue armchair at center",
+        "raw_output": "{\"multi_point\": false, \"reason\": \"The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected.\"}",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": {
+          "multi_point": false,
+          "reason": "The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected."
+        },
+        "normalized": {
+          "multi_point": false,
+          "reason": "The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected."
+        },
+        "attempts": [
+          {
+            "stage": "multipoint",
+            "attempt": 1,
+            "timestamp": "2026-05-16T13:34:29Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 120
+            },
+            "elapsed_sec": 0.954,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-98773e86f62eaaf5\",\"object\":\"chat.completion\",\"created\":1778938469,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"multi_point\\\": false, \\\"reason\\\": \\\"The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected.\\\"}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":760,\"total_tokens\":797,\"completion_tokens\":37,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+          }
+        ]
+      }
+    ]
+  },
+  "classification": {
+    "input_task": "You are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?",
+    "prompt": "# Role and Objective\nYou are a highly precise Data Classifier for PointArena-style object-pointing instructions.\n\nYour job is to classify the task into exactly ONE of THREE kept categories:\n- Affordance\n- Object Reference\n- Reasoning\n\nIf the task is fundamentally Counting-like or Spatial-Relation-like, output category \"None\" instead.\n\n# CRITICAL FORMATTING RULES\nYou must output ONLY a valid, flat JSON object.\n- NO Markdown formatting (DO NOT use ```json or ```).\n- NO conversational filler.\n- Output exactly two keys: \"thought\" and \"category\".\n- Keep \"thought\" under 20 words.\n\nExample output:\n{\n  \"thought\": \"Targets a precise text or pointer-relative reference.\",\n  \"category\": \"Object Reference\"\n}\n\n# Valid Category Values For This Run\n- Affordance\n- Object Reference\n- Reasoning\n- None\n\n# Strict Rejection To None\n- Output \"None\" for tasks about multiple instances, all items, plural collection scanning, exact counts, or several valid spots.\n- Output \"None\" for tasks whose primary bottleneck is geometric relation such as left/right/above/below/between/nearest/farthest/closest.\n- Do NOT force a Spatial Relation or Counting task into one of the three kept categories.\n\n# Semantic Category Definitions & Decision Boundaries\nDo not rely on keywords. Evaluate the PRIMARY mental effort required to solve the task.\n\n## 1. Object Reference\n- Semantic Feature: A precision crosshair task. The target is picked out by text, UI, cursor/existing-point relation, or very fine-grained pinpointing.\n- Key Characteristics:\n  - Reading text labels, fields, icons, or interface elements.\n  - Existing point / current point / cursor-relative movement.\n  - Fine-grained exact parts like the tip, base, crystal, or nearest side window.\n  - If the instruction says to move the current point, move slightly up/down/left/right, or find the next/nearest target relative to the existing point, treat it as Object Reference, not Spatial Relation.\n\n## 2. Affordance\n- Semantic Feature: The target is defined by explicit human interaction or use, not just by being a usable object.\n- Key Characteristics:\n  - \"tool used to...\", \"object people use to...\", \"where you would...\", \"part you would hold/open/press\".\n  - Keep Affordance only when the description explicitly frames the target by interaction, usage, or action.\n  - A bare object or part name is NOT Affordance just because the object can be used. Examples like \"handle\", \"tool\", \"amplifier\", or \"fire equipment\" are usually Object Reference unless the wording adds an interaction cue.\n  - If the target is defined by support/state/scene physics like \"holding up the car\" or \"supporting the cars\", it is more likely Reasoning.\n\n## 3. Reasoning\n- Semantic Feature: The target is isolated through world knowledge, state, ownership, order, direction, or scene-level deduction.\n- Key Characteristics:\n  - Direction of motion, tallest, second from the right, shoe of the cyclist.\n  - Part-whole ownership, physical state, function in scene context, or implicit deduction.\n  - If you must infer the direction another object is moving, or choose an object using that motion cue, it is Reasoning.\n  - If the phrase sounds symbolic, social, or semantic on a physical object/body part rather than literal UI/text reading, prefer Reasoning.\n  - If the instruction requires more than direct text reference or simple affordance naming, it often belongs here.\n\n# Output Guardrails\n- For \"nearest/closest/left/right/above/below/between\" style tasks, prefer \"None\" unless the real bottleneck is cursor-relative Object Reference.\n- For \"all\", \"several\", \"multiple\", exact-number, or grouped targets, output \"None\".\n- If the instruction explicitly mentions an existing point, current point, current location, or moving the point until a target is reached, do NOT output \"None\"; this usually belongs to Object Reference.\n- Do not use Affordance for scene-level containers, passive support roles, or abstract likely-to-contain/use cases; those are Reasoning.\n\n# Original instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?\n\n# Cleaned core target:\nthe glossy dark blue armchair at center",
+    "raw_output": "{\n  \"thought\": \"Identifies a specific object with precise text description.\",\n  \"category\": \"Object Reference\"\n}",
+    "reasoning_content": "",
+    "parsed": {
+      "thought": "Identifies a specific object with precise text description.",
+      "category": "Object Reference"
+    },
+    "thought": "Identifies a specific object with precise text description.",
+    "category": "Affordance",
+    "allowed_categories": [
+      "Affordance",
+      "Object Reference",
+      "Reasoning"
+    ],
+    "is_valid_category": true,
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "classification",
+        "attempt": 1,
+        "timestamp": "2026-05-16T13:34:30Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 120
+        },
+        "elapsed_sec": 0.82,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-b2153520856bc435\",\"object\":\"chat.completion\",\"created\":1778938470,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"thought\\\": \\\"Identifies a specific object with precise text description.\\\",\\n  \\\"category\\\": \\\"Object Reference\\\"\\n}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":1724,\"total_tokens\":1750,\"completion_tokens\":26,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "classification",
+        "prompt": "# Role and Objective\nYou are a highly precise Data Classifier for PointArena-style object-pointing instructions.\n\nYour job is to classify the task into exactly ONE of THREE kept categories:\n- Affordance\n- Object Reference\n- Reasoning\n\nIf the task is fundamentally Counting-like or Spatial-Relation-like, output category \"None\" instead.\n\n# CRITICAL FORMATTING RULES\nYou must output ONLY a valid, flat JSON object.\n- NO Markdown formatting (DO NOT use ```json or ```).\n- NO conversational filler.\n- Output exactly two keys: \"thought\" and \"category\".\n- Keep \"thought\" under 20 words.\n\nExample output:\n{\n  \"thought\": \"Targets a precise text or pointer-relative reference.\",\n  \"category\": \"Object Reference\"\n}\n\n# Valid Category Values For This Run\n- Affordance\n- Object Reference\n- Reasoning\n- None\n\n# Strict Rejection To None\n- Output \"None\" for tasks about multiple instances, all items, plural collection scanning, exact counts, or several valid spots.\n- Output \"None\" for tasks whose primary bottleneck is geometric relation such as left/right/above/below/between/nearest/farthest/closest.\n- Do NOT force a Spatial Relation or Counting task into one of the three kept categories.\n\n# Semantic Category Definitions & Decision Boundaries\nDo not rely on keywords. Evaluate the PRIMARY mental effort required to solve the task.\n\n## 1. Object Reference\n- Semantic Feature: A precision crosshair task. The target is picked out by text, UI, cursor/existing-point relation, or very fine-grained pinpointing.\n- Key Characteristics:\n  - Reading text labels, fields, icons, or interface elements.\n  - Existing point / current point / cursor-relative movement.\n  - Fine-grained exact parts like the tip, base, crystal, or nearest side window.\n  - If the instruction says to move the current point, move slightly up/down/left/right, or find the next/nearest target relative to the existing point, treat it as Object Reference, not Spatial Relation.\n\n## 2. Affordance\n- Semantic Feature: The target is defined by explicit human interaction or use, not just by being a usable object.\n- Key Characteristics:\n  - \"tool used to...\", \"object people use to...\", \"where you would...\", \"part you would hold/open/press\".\n  - Keep Affordance only when the description explicitly frames the target by interaction, usage, or action.\n  - A bare object or part name is NOT Affordance just because the object can be used. Examples like \"handle\", \"tool\", \"amplifier\", or \"fire equipment\" are usually Object Reference unless the wording adds an interaction cue.\n  - If the target is defined by support/state/scene physics like \"holding up the car\" or \"supporting the cars\", it is more likely Reasoning.\n\n## 3. Reasoning\n- Semantic Feature: The target is isolated through world knowledge, state, ownership, order, direction, or scene-level deduction.\n- Key Characteristics:\n  - Direction of motion, tallest, second from the right, shoe of the cyclist.\n  - Part-whole ownership, physical state, function in scene context, or implicit deduction.\n  - If you must infer the direction another object is moving, or choose an object using that motion cue, it is Reasoning.\n  - If the phrase sounds symbolic, social, or semantic on a physical object/body part rather than literal UI/text reading, prefer Reasoning.\n  - If the instruction requires more than direct text reference or simple affordance naming, it often belongs here.\n\n# Output Guardrails\n- For \"nearest/closest/left/right/above/below/between\" style tasks, prefer \"None\" unless the real bottleneck is cursor-relative Object Reference.\n- For \"all\", \"several\", \"multiple\", exact-number, or grouped targets, output \"None\".\n- If the instruction explicitly mentions an existing point, current point, current location, or moving the point until a target is reached, do NOT output \"None\"; this usually belongs to Object Reference.\n- Do not use Affordance for scene-level containers, passive support roles, or abstract likely-to-contain/use cases; those are Reasoning.\n\n# Original instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?\n\n# Cleaned core target:\nthe glossy dark blue armchair at center",
+        "raw_output": "{\n  \"thought\": \"Identifies a specific object with precise text description.\",\n  \"category\": \"Object Reference\"\n}",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": {
+          "thought": "Identifies a specific object with precise text description.",
+          "category": "Object Reference"
+        },
+        "normalized": {
+          "thought": "Identifies a specific object with precise text description.",
+          "raw_category": "Object Reference",
+          "category": "Affordance",
+          "category_refined": true,
+          "allowed_categories": [
+            "Affordance",
+            "Object Reference",
+            "Reasoning"
+          ],
+          "is_valid_category": true
+        },
+        "attempts": [
+          {
+            "stage": "classification",
+            "attempt": 1,
+            "timestamp": "2026-05-16T13:34:30Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 120
+            },
+            "elapsed_sec": 0.82,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-b2153520856bc435\",\"object\":\"chat.completion\",\"created\":1778938470,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"thought\\\": \\\"Identifies a specific object with precise text description.\\\",\\n  \\\"category\\\": \\\"Object Reference\\\"\\n}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":1724,\"total_tokens\":1750,\"completion_tokens\":26,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+          }
+        ]
+      }
+    ],
+    "input_core_target": "the glossy dark blue armchair at center",
+    "raw_category": "Object Reference",
+    "category_refined": true
+  },
+  "rewrite": {
+    "input_task": "the glossy dark blue armchair at center",
+    "prompt": "You have already classified the original instruction as Affordance.\n\nRewrite the original instruction into PointArena test-query style.\n\nRequirements:\n- Preserve the same target semantics and keep the task in the Affordance category.\n- The rewritten task must be a single natural English sentence.\n- It must start with \"Point to\".\n- Keep it short and template-like, matching PointArena affordance style.\n- Keep the focus on what a person can do with the object, or the object's human-use function.\n- Do not mention the category, dataset name, JSON, coordinates, masks, points, or explanations.\n- Output only the rewritten question text.\n\nOriginal instruction:\nthe glossy dark blue armchair at center",
+    "raw_output": "{\n  \"rewritten_query\": \"Point to the glossy dark blue armchair at center.\"\n}",
+    "reasoning_content": "",
+    "parsed": {
+      "rewritten_query": "Point to the glossy dark blue armchair at center."
+    },
+    "rewritten_query": "Point to the glossy dark blue armchair at center.",
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "rewrite",
+        "attempt": 1,
+        "timestamp": "2026-05-16T13:34:31Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 120
+        },
+        "elapsed_sec": 0.59,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-b6b4120a471b7822\",\"object\":\"chat.completion\",\"created\":1778938471,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"rewritten_query\\\": \\\"Point to the glossy dark blue armchair at center.\\\"\\n}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":2055,\"total_tokens\":2076,\"completion_tokens\":21,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "rewrite",
+        "prompt": "Your previous rewrite attempt did not produce a usable answer. Stay in the same session and answer again.\n\nReturn ONLY a flat JSON object with exactly one key:\n- \"rewritten_query\": string\n\nRequirements:\n- Preserve the same target semantics and keep the task in the Affordance category.\n- The rewritten_query value must be one natural English sentence.\n- It must start with \"Point to\".\n- Match PointArena style: short, direct, plain, and minimally rewritten.\n- If the original instruction already looks like a valid PointArena query, keep it unchanged or change as little as possible.\n- Do not change the final target entity or head noun. If the original targets a car, truck, person, book, or traffic light, the rewrite must still target that same kind of thing.\n- Do not replace the final target with an intermediate clue, cause, direction cue, or explanation.\n- Do not add explanation words such as \"located\", \"typically\", \"based on\", \"indicating\", \"operating\", \"current state\", or any extra justification unless absolutely necessary.\n- Keep the focus on what a person can do with the object, or the object's human-use function.\n- Do not add explanations or extra keys.\n\nStyle examples for Affordance:\n- Point to the item that tells time.\n- Point to the tool used for cutting trees.\n- Point to the tool that joins paper together.\n\nOriginal instruction:\nthe glossy dark blue armchair at center",
+        "raw_output": "{\n  \"rewritten_query\": \"Point to the glossy dark blue armchair at center.\"\n}",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": {
+          "rewritten_query": "Point to the glossy dark blue armchair at center."
+        },
+        "normalized": {
+          "rewritten_query": "Point to the glossy dark blue armchair at center."
+        },
+        "invalid_reason": null,
+        "attempts": [
+          {
+            "stage": "rewrite",
+            "attempt": 1,
+            "timestamp": "2026-05-16T13:34:31Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 120
+            },
+            "elapsed_sec": 0.59,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-b6b4120a471b7822\",\"object\":\"chat.completion\",\"created\":1778938471,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"rewritten_query\\\": \\\"Point to the glossy dark blue armchair at center.\\\"\\n}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":2055,\"total_tokens\":2076,\"completion_tokens\":21,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+          }
+        ]
+      }
+    ]
+  },
+  "session_messages": [
+    {
+      "role": "user",
+      "content": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n\n\n\"keep\": true,\n\"core_target\": \"the glossy dark blue armchair at center\",\n\"reason\": \"The task requires locating a specific object (glossy dark blue armchair) in the image, which meets the grounding criteria.\"\n}"
+    },
+    {
+      "role": "user",
+      "content": "# Role\nYou are a strict answer-shape judge for the Point Arena visual grounding dataset.\n\n# Task\nGiven the original instruction and the cleaned visual target, determine whether a correct answer should contain MULTIPLE valid points/coordinates rather than one single point.\n\n# DECISION RULES\n1. multi_point = true:\n- the task asks for all instances of something\n- the task asks for several/few/multiple points, spots, or locations\n- the target is a free/vacant/empty space where many coordinates are valid\n- the target is a plural/group target that should return more than one point\n2. multi_point = false:\n- the task asks for one best answer, one unique target, one option among choices, or one specific object/location/space\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"multi_point\": boolean\n- \"reason\": string\n\nOriginal instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?\n\nCleaned core_target:\nthe glossy dark blue armchair at center"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"multi_point\": false, \"reason\": \"The task refers to a single specific object (the glossy dark blue armchair at center), indicating a single point is expected.\"}"
+    },
+    {
+      "role": "user",
+      "content": "# Role and Objective\nYou are a highly precise Data Classifier for PointArena-style object-pointing instructions.\n\nYour job is to classify the task into exactly ONE of THREE kept categories:\n- Affordance\n- Object Reference\n- Reasoning\n\nIf the task is fundamentally Counting-like or Spatial-Relation-like, output category \"None\" instead.\n\n# CRITICAL FORMATTING RULES\nYou must output ONLY a valid, flat JSON object.\n- NO Markdown formatting (DO NOT use ```json or ```).\n- NO conversational filler.\n- Output exactly two keys: \"thought\" and \"category\".\n- Keep \"thought\" under 20 words.\n\nExample output:\n{\n  \"thought\": \"Targets a precise text or pointer-relative reference.\",\n  \"category\": \"Object Reference\"\n}\n\n# Valid Category Values For This Run\n- Affordance\n- Object Reference\n- Reasoning\n- None\n\n# Strict Rejection To None\n- Output \"None\" for tasks about multiple instances, all items, plural collection scanning, exact counts, or several valid spots.\n- Output \"None\" for tasks whose primary bottleneck is geometric relation such as left/right/above/below/between/nearest/farthest/closest.\n- Do NOT force a Spatial Relation or Counting task into one of the three kept categories.\n\n# Semantic Category Definitions & Decision Boundaries\nDo not rely on keywords. Evaluate the PRIMARY mental effort required to solve the task.\n\n## 1. Object Reference\n- Semantic Feature: A precision crosshair task. The target is picked out by text, UI, cursor/existing-point relation, or very fine-grained pinpointing.\n- Key Characteristics:\n  - Reading text labels, fields, icons, or interface elements.\n  - Existing point / current point / cursor-relative movement.\n  - Fine-grained exact parts like the tip, base, crystal, or nearest side window.\n  - If the instruction says to move the current point, move slightly up/down/left/right, or find the next/nearest target relative to the existing point, treat it as Object Reference, not Spatial Relation.\n\n## 2. Affordance\n- Semantic Feature: The target is defined by explicit human interaction or use, not just by being a usable object.\n- Key Characteristics:\n  - \"tool used to...\", \"object people use to...\", \"where you would...\", \"part you would hold/open/press\".\n  - Keep Affordance only when the description explicitly frames the target by interaction, usage, or action.\n  - A bare object or part name is NOT Affordance just because the object can be used. Examples like \"handle\", \"tool\", \"amplifier\", or \"fire equipment\" are usually Object Reference unless the wording adds an interaction cue.\n  - If the target is defined by support/state/scene physics like \"holding up the car\" or \"supporting the cars\", it is more likely Reasoning.\n\n## 3. Reasoning\n- Semantic Feature: The target is isolated through world knowledge, state, ownership, order, direction, or scene-level deduction.\n- Key Characteristics:\n  - Direction of motion, tallest, second from the right, shoe of the cyclist.\n  - Part-whole ownership, physical state, function in scene context, or implicit deduction.\n  - If you must infer the direction another object is moving, or choose an object using that motion cue, it is Reasoning.\n  - If the phrase sounds symbolic, social, or semantic on a physical object/body part rather than literal UI/text reading, prefer Reasoning.\n  - If the instruction requires more than direct text reference or simple affordance naming, it often belongs here.\n\n# Output Guardrails\n- For \"nearest/closest/left/right/above/below/between\" style tasks, prefer \"None\" unless the real bottleneck is cursor-relative Object Reference.\n- For \"all\", \"several\", \"multiple\", exact-number, or grouped targets, output \"None\".\n- If the instruction explicitly mentions an existing point, current point, current location, or moving the point until a target is reached, do NOT output \"None\"; this usually belongs to Object Reference.\n- Do not use Affordance for scene-level containers, passive support roles, or abstract likely-to-contain/use cases; those are Reasoning.\n\n# Original instruction:\nYou are standing in the living room and want to sit down. Where is the glossy dark blue armchair at center located?\n\n# Cleaned core target:\nthe glossy dark blue armchair at center"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"thought\": \"Identifies a specific object with precise text description.\",\n  \"category\": \"Object Reference\"\n}"
+    },
+    {
+      "role": "user",
+      "content": "Your previous rewrite attempt did not produce a usable answer. Stay in the same session and answer again.\n\nReturn ONLY a flat JSON object with exactly one key:\n- \"rewritten_query\": string\n\nRequirements:\n- Preserve the same target semantics and keep the task in the Affordance category.\n- The rewritten_query value must be one natural English sentence.\n- It must start with \"Point to\".\n- Match PointArena style: short, direct, plain, and minimally rewritten.\n- If the original instruction already looks like a valid PointArena query, keep it unchanged or change as little as possible.\n- Do not change the final target entity or head noun. If the original targets a car, truck, person, book, or traffic light, the rewrite must still target that same kind of thing.\n- Do not replace the final target with an intermediate clue, cause, direction cue, or explanation.\n- Do not add explanation words such as \"located\", \"typically\", \"based on\", \"indicating\", \"operating\", \"current state\", or any extra justification unless absolutely necessary.\n- Keep the focus on what a person can do with the object, or the object's human-use function.\n- Do not add explanations or extra keys.\n\nStyle examples for Affordance:\n- Point to the item that tells time.\n- Point to the tool used for cutting trees.\n- Point to the tool that joins paper together.\n\nOriginal instruction:\nthe glossy dark blue armchair at center"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"rewritten_query\": \"Point to the glossy dark blue armchair at center.\"\n}"
+    }
+  ]
+}

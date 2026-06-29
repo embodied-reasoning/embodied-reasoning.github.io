@@ -1,0 +1,227 @@
+{
+  "image_id": "70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7",
+  "image_path": "/mnt/data/lv_qi/PointArena/artifacts/raw/pixmo_points_full/images/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7.jpg",
+  "width": 225,
+  "height": 300,
+  "sam_repo_id": "onnx-community/sam3-tracker-ONNX",
+  "sam_dtype": "q4f16",
+  "mask_dilate_px": 5,
+  "label_groups": [
+    {
+      "label_group_id": "label_000",
+      "same_class_key": "arms carrying boxes",
+      "label_display": "arms carrying boxes",
+      "object_ids": [
+        "0001_004"
+      ],
+      "points_xy": [
+        [
+          87.188,
+          112.768
+        ],
+        [
+          133.795,
+          114.911
+        ]
+      ],
+      "mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_000_arms_carrying_boxes.png",
+      "dilated_mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_000_arms_carrying_boxes_dilated.png",
+      "area_pixels": 608,
+      "dilated_area_pixels": 2197,
+      "color_rgb": [
+        244,
+        68,
+        68
+      ],
+      "selected_iou_score": 0.6611328125,
+      "object_score_logit": 24.0513916015625
+    },
+    {
+      "label_group_id": "label_001",
+      "same_class_key": "black man",
+      "label_display": "black man",
+      "object_ids": [
+        "0001_003"
+      ],
+      "points_xy": [
+        [
+          113.973,
+          135.0
+        ]
+      ],
+      "mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_001_black_man.png",
+      "dilated_mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_001_black_man_dilated.png",
+      "area_pixels": 4671,
+      "dilated_area_pixels": 7724,
+      "color_rgb": [
+        68,
+        119,
+        244
+      ],
+      "selected_iou_score": 0.95654296875,
+      "object_score_logit": 17.2388916015625
+    },
+    {
+      "label_group_id": "label_002",
+      "same_class_key": "black pants",
+      "label_display": "black pants",
+      "object_ids": [
+        "0001_006"
+      ],
+      "points_xy": [
+        [
+          115.848,
+          226.875
+        ],
+        [
+          122.277,
+          219.375
+        ]
+      ],
+      "mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_002_black_pants.png",
+      "dilated_mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_002_black_pants_dilated.png",
+      "area_pixels": 4684,
+      "dilated_area_pixels": 7733,
+      "color_rgb": [
+        171,
+        244,
+        68
+      ],
+      "selected_iou_score": 0.93115234375,
+      "object_score_logit": 22.0045166015625
+    },
+    {
+      "label_group_id": "label_003",
+      "same_class_key": "blue and white truck",
+      "label_display": "blue and white truck",
+      "object_ids": [
+        "0001_002"
+      ],
+      "points_xy": [
+        [
+          32.545,
+          128.839
+        ]
+      ],
+      "mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_003_blue_and_white_truck.png",
+      "dilated_mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_003_blue_and_white_truck_dilated.png",
+      "area_pixels": 2401,
+      "dilated_area_pixels": 3253,
+      "color_rgb": [
+        244,
+        68,
+        222
+      ],
+      "selected_iou_score": 0.90673828125,
+      "object_score_logit": 20.0357666015625
+    },
+    {
+      "label_group_id": "label_004",
+      "same_class_key": "brown shoes",
+      "label_display": "brown shoes",
+      "object_ids": [
+        "0001_005"
+      ],
+      "points_xy": [
+        [
+          93.08,
+          256.071
+        ],
+        [
+          120.134,
+          265.179
+        ]
+      ],
+      "mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_004_brown_shoes.png",
+      "dilated_mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_004_brown_shoes_dilated.png",
+      "area_pixels": 4788,
+      "dilated_area_pixels": 7933,
+      "color_rgb": [
+        68,
+        244,
+        215
+      ],
+      "selected_iou_score": 0.51708984375,
+      "object_score_logit": 22.7076416015625
+    },
+    {
+      "label_group_id": "label_005",
+      "same_class_key": "gold car",
+      "label_display": "gold car",
+      "object_ids": [
+        "0001_001"
+      ],
+      "points_xy": [
+        [
+          212.009,
+          138.214
+        ]
+      ],
+      "mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_005_gold_car.png",
+      "dilated_mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_005_gold_car_dilated.png",
+      "area_pixels": 543,
+      "dilated_area_pixels": 907,
+      "color_rgb": [
+        244,
+        163,
+        68
+      ],
+      "selected_iou_score": 0.896484375,
+      "object_score_logit": 20.9263916015625
+    },
+    {
+      "label_group_id": "label_006",
+      "same_class_key": "white shirt",
+      "label_display": "white shirt",
+      "object_ids": [
+        "0001_007"
+      ],
+      "points_xy": [
+        [
+          101.92,
+          161.25
+        ],
+        [
+          122.812,
+          156.696
+        ]
+      ],
+      "mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_006_white_shirt.png",
+      "dilated_mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_006_white_shirt_dilated.png",
+      "area_pixels": 4747,
+      "dilated_area_pixels": 7883,
+      "color_rgb": [
+        112,
+        68,
+        244
+      ],
+      "selected_iou_score": 0.90625,
+      "object_score_logit": 23.2388916015625
+    },
+    {
+      "label_group_id": "label_007",
+      "same_class_key": "white van",
+      "label_display": "white van",
+      "object_ids": [
+        "0001_000"
+      ],
+      "points_xy": [
+        [
+          152.813,
+          141.161
+        ]
+      ],
+      "mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_007_white_van.png",
+      "dilated_mask_path": "/mnt/data/lv_qi/PointArena/make_steerable1/guide4/outputs_strict_smoke100_v2/02_sam_masks/70643205954b58bc5bc88db9afd9fd94994c14c505ed8ace74dce85bad09f3f7/masks/label_007_white_van_dilated.png",
+      "area_pixels": 1450,
+      "dilated_area_pixels": 3335,
+      "color_rgb": [
+        76,
+        244,
+        68
+      ],
+      "selected_iou_score": 0.7685546875,
+      "object_score_logit": 21.9107666015625
+    }
+  ]
+}

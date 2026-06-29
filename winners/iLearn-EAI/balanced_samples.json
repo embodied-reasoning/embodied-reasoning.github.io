@@ -1,0 +1,102 @@
+[
+  {
+    "num": 1,
+    "query": "Point to the place to hold coffee cup.",
+    "label": "place to hold coffee cup",
+    "category": "Affordance",
+    "gatekeeper_keep": true,
+    "core_target": "the place to hold coffee cup",
+    "multi_point": false,
+    "rewrite": "Point to the place for holding a coffee cup — the recessed area in the lid designed for stable cup placement, where a person would rest their drink."
+  },
+  {
+    "num": 2,
+    "query": "Point to the area for cutting.",
+    "label": "area for cutting",
+    "category": "Affordance",
+    "gatekeeper_keep": true,
+    "core_target": "the area for cutting",
+    "multi_point": false,
+    "rewrite": "Point to the surface intended for cutting — the flat preparation area suitable for slicing ingredients, used as a kitchen workstation."
+  },
+  {
+    "num": 3,
+    "query": "Point to the handle where you would hold the knife.",
+    "label": "handle where you would hold the knife",
+    "category": "Affordance",
+    "gatekeeper_keep": true,
+    "core_target": "the handle where you would hold the knife",
+    "multi_point": false,
+    "rewrite": "Point to the knife handle — the gripping part of the kitchen tool designed for safe holding during cutting, where you would wrap your fingers around."
+  },
+  {
+    "num": 4,
+    "query": "Point to the Bare area in front of rabbit left eye.",
+    "label": "Bare area in front of rabbit left eye",
+    "category": "Spatial Relation",
+    "gatekeeper_keep": true,
+    "core_target": "the Bare area in front of rabbit left eye",
+    "multi_point": false,
+    "rewrite": "Point to the bare area located directly in front of the rabbit's left eye — the exposed skin patch positioned relative to the animal's facial features."
+  },
+  {
+    "num": 5,
+    "query": "Point to the yellow bird on top of head.",
+    "label": "yellow bird on top of head",
+    "category": "Spatial Relation",
+    "gatekeeper_keep": true,
+    "core_target": "the yellow bird on top of head",
+    "multi_point": false,
+    "rewrite": "Point to the yellow bird positioned on top of the head — the small decorative figure situated above the person's crown, relative to the body's highest point."
+  },
+  {
+    "num": 6,
+    "query": "Point to the rock.",
+    "label": "rock",
+    "category": "Spatial Relation",
+    "gatekeeper_keep": true,
+    "core_target": "the rock",
+    "multi_point": false,
+    "rewrite": "Point to the rock situated on the ground surface — the geological object positioned below and to the side of the surrounding vegetation in the outdoor scene."
+  },
+  {
+    "num": 7,
+    "query": "Point to the head.",
+    "label": "head",
+    "category": "Reasoning",
+    "gatekeeper_keep": true,
+    "core_target": "the head",
+    "multi_point": false,
+    "rewrite": "Point to the head — the uppermost anatomical structure of the human body, identified as the body part housing the brain and facial features, which is the topmost region in a standing person."
+  },
+  {
+    "num": 8,
+    "query": "Point to the window.",
+    "label": "window",
+    "category": "Object Reference",
+    "gatekeeper_keep": true,
+    "core_target": "the window",
+    "multi_point": false,
+    "rewrite": "Point to the window — the specific rectangular opening visible in the wall, identifiable by its framed glass pane and distinct contrast with the surrounding surface."
+  },
+  {
+    "num": 9,
+    "query": "Point to the DOG NOSE.",
+    "label": "DOG NOSE",
+    "category": "Object Reference",
+    "gatekeeper_keep": true,
+    "core_target": "the DOG NOSE",
+    "multi_point": false,
+    "rewrite": "Point to the dog's nose — the prominent sensory organ visible on the animal's face, identifiable by its central position on the snout and distinct dark coloration."
+  },
+  {
+    "num": 10,
+    "query": "Point to the sign.",
+    "label": "sign",
+    "category": "Object Reference",
+    "gatekeeper_keep": true,
+    "core_target": "the sign",
+    "multi_point": false,
+    "rewrite": "Point to the sign — the specific information board shown in the image, recognizable by its rectangular shape and text content displayed to viewers."
+  }
+]

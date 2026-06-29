@@ -1,0 +1,312 @@
+{
+  "processing": {
+    "status": "completed",
+    "workflow": "cleaning->multipoint->classification_or_forced_counting->rewrite_same_session",
+    "started_at": "2026-03-21T03:18:49Z",
+    "completed_at": "2026-03-21T03:19:05Z",
+    "source": "pixmo_points",
+    "source_rank": 319141,
+    "global_rank": 3,
+    "source_file": "/mnt/data/lv_qi/PointArena/ans8/data/cleaned/by_source/pixmo_points.jsonl",
+    "output_path": "/mnt/data/lv_qi/PointArena/pointarena_extract/mix4_pointsabs_len1_10000_rule_llm/pixmo_points/319141__pixmo_points_train-00000-of-00002.parquet_319140.json",
+    "model": "gemini-3-flash-preview-thinking",
+    "api_url": "https://api.vectorengine.ai/v1/chat/completions",
+    "sample_attempt": 1,
+    "validation_errors": []
+  },
+  "record": {
+    "source": "pixmo_points",
+    "id": "pixmo_points::train-00000-of-00002.parquet::319140",
+    "query": "Point to the sheet with shields logo.",
+    "image_path": "/mnt/data/lv_qi/PointArena/artifacts/raw/pixmo_points_full/images/fa55de563cfa9562e9afd78a7921753e1f45895d786ed01140f2c4d3f72783a9.jpg",
+    "width": 1290,
+    "height": 968,
+    "points_abs": [
+      [
+        960.7556,
+        128.5889
+      ]
+    ],
+    "raw_meta": {
+      "raw_dataset": "pixmo_points_full",
+      "raw_file": "train-00000-of-00002.parquet",
+      "raw_row_index": 319140,
+      "image_url": "https://www.greatplacetowork.com/images/profiles/7026076/company_image_5.jpg",
+      "image_sha256": "fa55de563cfa9562e9afd78a7921753e1f45895d786ed01140f2c4d3f72783a9",
+      "label": "sheet with shields logo",
+      "collection_method": "pointing",
+      "count": null,
+      "points_raw": [
+        {
+          "x": 74.47717562401618,
+          "y": 13.28397492136178
+        }
+      ],
+      "image_size_mode": "image"
+    }
+  },
+  "cleaning": {
+    "prompt": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nPoint to the sheet with shields logo.",
+    "raw_output": "{\n\"keep\": true,\n\"core_target\": \"the sheet with shields logo\",\n\"reason\": \"The instruction is a valid pointing task requiring the identification of a specific object's location.\"\n}",
+    "reasoning_content": "",
+    "parsed": {
+      "keep": true,
+      "core_target": "the sheet with shields logo",
+      "reason": "The instruction is a valid pointing task requiring the identification of a specific object's location."
+    },
+    "keep": true,
+    "core_target": "the sheet with shields logo",
+    "reason": "The instruction is a valid pointing task requiring the identification of a specific object's location.",
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "cleaning",
+        "attempt": 1,
+        "timestamp": "2026-03-21T03:18:49Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 60
+        },
+        "elapsed_sec": 4.411,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-20260321111850285597321h169ufGl\",\"model\":\"gemini-3-flash-preview-thinking\",\"object\":\"chat.completion\",\"created\":1774063133,\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n\\\"keep\\\": true,\\n\\\"core_target\\\": \\\"the sheet with shields logo\\\",\\n\\\"reason\\\": \\\"The instruction is a valid pointing task requiring the identification of a specific object's location.\\\"\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":460,\"completion_tokens\":311,\"total_tokens\":771,\"prompt_tokens_details\":{\"cached_tokens\":0,\"text_tokens\":460,\"audio_tokens\":0,\"image_tokens\":0},\"completion_tokens_details\":{\"text_tokens\":45,\"audio_tokens\":0,\"reasoning_tokens\":266},\"input_tokens\":0,\"output_tokens\":0,\"input_tokens_details\":null,\"claude_cache_creation_5_m_tokens\":0,\"claude_cache_creation_1_h_tokens\":0}}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "cleaning",
+        "prompt": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nPoint to the sheet with shields logo.",
+        "raw_output": "{\n\"keep\": true,\n\"core_target\": \"the sheet with shields logo\",\n\"reason\": \"The instruction is a valid pointing task requiring the identification of a specific object's location.\"\n}",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": {
+          "keep": true,
+          "core_target": "the sheet with shields logo",
+          "reason": "The instruction is a valid pointing task requiring the identification of a specific object's location."
+        },
+        "normalized": {
+          "keep": true,
+          "core_target": "the sheet with shields logo",
+          "reason": "The instruction is a valid pointing task requiring the identification of a specific object's location."
+        },
+        "attempts": [
+          {
+            "stage": "cleaning",
+            "attempt": 1,
+            "timestamp": "2026-03-21T03:18:49Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 60
+            },
+            "elapsed_sec": 4.411,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-20260321111850285597321h169ufGl\",\"model\":\"gemini-3-flash-preview-thinking\",\"object\":\"chat.completion\",\"created\":1774063133,\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n\\\"keep\\\": true,\\n\\\"core_target\\\": \\\"the sheet with shields logo\\\",\\n\\\"reason\\\": \\\"The instruction is a valid pointing task requiring the identification of a specific object's location.\\\"\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":460,\"completion_tokens\":311,\"total_tokens\":771,\"prompt_tokens_details\":{\"cached_tokens\":0,\"text_tokens\":460,\"audio_tokens\":0,\"image_tokens\":0},\"completion_tokens_details\":{\"text_tokens\":45,\"audio_tokens\":0,\"reasoning_tokens\":266},\"input_tokens\":0,\"output_tokens\":0,\"input_tokens_details\":null,\"claude_cache_creation_5_m_tokens\":0,\"claude_cache_creation_1_h_tokens\":0}}"
+          }
+        ]
+      }
+    ]
+  },
+  "multipoint": {
+    "prompt": "# Role\nYou are a strict answer-shape judge for the Point Arena visual grounding dataset.\n\n# Task\nGiven the original instruction and the cleaned visual target, determine whether a correct answer should contain MULTIPLE valid points/coordinates rather than one single point.\n\n# DECISION RULES\n1. multi_point = true:\n- the task asks for all instances of something\n- the task asks for several/few/multiple points, spots, or locations\n- the target is a free/vacant/empty space where many coordinates are valid\n- the target is a plural/group target that should return more than one point\n2. multi_point = false:\n- the task asks for one best answer, one unique target, one option among choices, or one specific object/location/space\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"multi_point\": boolean\n- \"reason\": string\n\nOriginal instruction:\nPoint to the sheet with shields logo.\n\nCleaned core_target:\nthe sheet with shields logo",
+    "raw_output": "{\n\"multi_point\": false,\n\"reason\": \"The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates.\"\n}",
+    "reasoning_content": "",
+    "parsed": {
+      "multi_point": false,
+      "reason": "The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates."
+    },
+    "multi_point": false,
+    "reason": "The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates.",
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "multipoint",
+        "attempt": 1,
+        "timestamp": "2026-03-21T03:18:53Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 60
+        },
+        "elapsed_sec": 3.605,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-2026032111185385268864446BSIsal\",\"model\":\"gemini-3-flash-preview-thinking\",\"object\":\"chat.completion\",\"created\":1774063136,\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n\\\"multi_point\\\": false,\\n\\\"reason\\\": \\\"The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates.\\\"\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":734,\"completion_tokens\":296,\"total_tokens\":1030,\"prompt_tokens_details\":{\"cached_tokens\":0,\"text_tokens\":734,\"audio_tokens\":0,\"image_tokens\":0},\"completion_tokens_details\":{\"text_tokens\":45,\"audio_tokens\":0,\"reasoning_tokens\":251},\"input_tokens\":0,\"output_tokens\":0,\"input_tokens_details\":null,\"claude_cache_creation_5_m_tokens\":0,\"claude_cache_creation_1_h_tokens\":0}}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "multipoint",
+        "prompt": "# Role\nYou are a strict answer-shape judge for the Point Arena visual grounding dataset.\n\n# Task\nGiven the original instruction and the cleaned visual target, determine whether a correct answer should contain MULTIPLE valid points/coordinates rather than one single point.\n\n# DECISION RULES\n1. multi_point = true:\n- the task asks for all instances of something\n- the task asks for several/few/multiple points, spots, or locations\n- the target is a free/vacant/empty space where many coordinates are valid\n- the target is a plural/group target that should return more than one point\n2. multi_point = false:\n- the task asks for one best answer, one unique target, one option among choices, or one specific object/location/space\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"multi_point\": boolean\n- \"reason\": string\n\nOriginal instruction:\nPoint to the sheet with shields logo.\n\nCleaned core_target:\nthe sheet with shields logo",
+        "raw_output": "{\n\"multi_point\": false,\n\"reason\": \"The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates.\"\n}",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": {
+          "multi_point": false,
+          "reason": "The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates."
+        },
+        "normalized": {
+          "multi_point": false,
+          "reason": "The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates."
+        },
+        "attempts": [
+          {
+            "stage": "multipoint",
+            "attempt": 1,
+            "timestamp": "2026-03-21T03:18:53Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 60
+            },
+            "elapsed_sec": 3.605,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-2026032111185385268864446BSIsal\",\"model\":\"gemini-3-flash-preview-thinking\",\"object\":\"chat.completion\",\"created\":1774063136,\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n\\\"multi_point\\\": false,\\n\\\"reason\\\": \\\"The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates.\\\"\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":734,\"completion_tokens\":296,\"total_tokens\":1030,\"prompt_tokens_details\":{\"cached_tokens\":0,\"text_tokens\":734,\"audio_tokens\":0,\"image_tokens\":0},\"completion_tokens_details\":{\"text_tokens\":45,\"audio_tokens\":0,\"reasoning_tokens\":251},\"input_tokens\":0,\"output_tokens\":0,\"input_tokens_details\":null,\"claude_cache_creation_5_m_tokens\":0,\"claude_cache_creation_1_h_tokens\":0}}"
+          }
+        ]
+      }
+    ]
+  },
+  "classification": {
+    "input_task": "the sheet with shields logo",
+    "prompt": "# Role and Objective\nYou are a highly precise Data Classifier for the Vision-Language Navigation dataset (Point Arena). Your task is to analyze an object-pointing instruction based on its underlying *semantic features and cognitive bottleneck*, classifying it into exactly ONE of FIVE predefined categories.\n\n# CRITICAL FORMATTING RULES\nYou must output ONLY a valid, flat JSON object. \n- NO Markdown formatting (DO NOT use ```json or ```).\n- NO conversational filler.\n- Output exactly two keys: \"thought\" (under 20 words analyzing the semantic feature) and \"category\".\n\nExample output:\n{\n  \"thought\": \"Focuses on reading text/semantic info (hotel name) to pinpoint an exact UI/text element.\",\n  \"category\": \"Object Reference\"\n}\n\n# Semantic Category Definitions & Decision Boundaries\nDo not rely on keywords. Evaluate the PRIMARY mental effort required to solve the task.\n\n## 1. Object Reference (UI, Text, and Fine-Grained Pinpointing)\n- **Semantic Feature:** The task acts like a precision crosshair. It targets purely digital interfaces, exact text strings, OR ultra-fine-grained extreme points of an object. It also includes relative navigation from a pre-existing cursor.\n- **Key Characteristics:**\n  - Reading text/labels (e.g., \"the name of the hotel\", \"the input bar\").\n  - Extreme fine-grained specific points (e.g., \"the tip of the shoes\", \"directly onto the blue lens\").\n  - Cursor-based relative movement (e.g., \"existing point\", \"moving downward until...\").\n\n## 2. Counting (Enumeration and Collections)\n- **Semantic Feature:** The task requires scanning the global scene to identify a *collection*, a mass of items, or a specific subset based on exact quantity. \n- **Key Characteristics:** \n  - Naked plural nouns acting as the main target without strict spatial anchors (e.g., \"the statues\", \"Jeep vehicles\").\n  - Mass nouns describing a grouped state (e.g., \"the sliced fruit\").\n  - Explicit counting (\"two yellow hats\", \"all the birds\").\n- *Exception:* If the plural objects are strictly located by a geometric anchor (e.g., \"objects *above the sofa*\"), the primary task is spatial, so it belongs to Spatial Relation.\n\n## 3. Spatial Relation (Geometric Layout and Distance)\n- **Semantic Feature:** The primary cognitive bottleneck is 2D mapping, absolute/relative positioning, or distance comparison. It requires no complex physics or functional deduction.\n- **Key Characteristics:**\n  - Distance comparisons (e.g., \"the nearest boat\", \"closest table\").\n  - Topological anchoring (e.g., \"above the sofa\", \"between X and Y\", \"front wheels of\").\n  - *Exception:* If the target relies on a part-whole ownership/semantic binding (e.g., \"the shoe of the cyclist\"), it requires semantic reasoning, NOT pure spatial layout.\n\n## 4. Affordance (Generic Human Tools and Instruments)\n- **Semantic Feature:** Extremely strict definition. It applies ONLY to generic, manipulable tools, instruments, or standard devices defined purely by human hand-scale operations (eating, writing, hammering, playing music).\n- **Key Characteristics:**\n  - Generic objects named by their utility (e.g., \"tool that creates music\", \"tool made of wood\", \"object used to eat\").\n  - *Boundary Rule:* If the object is a structural sub-component of a vehicle/room (e.g., \"illuminate the car\", \"carry the baby\", \"where items are placed on a bike\"), it requires scene-level deduction and belongs to Reasoning!\n\n## 5. Reasoning (World Knowledge, States, and Complex Deduction)\n- **Semantic Feature:** The catch-all for complex semantics. The target is isolated through physical states, part-whole ownership, causal events, or scene-level structural functionality.\n- **Key Characteristics:**\n  - Action/Physical states (e.g., \"moving\", \"fastest\", \"direction in which...\").\n  - Scene-level functional deduction (e.g., \"where people sit\", \"what illuminates the car\", \"object used to carry the baby\").\n  - Part-whole ownership linking specific actors (e.g., \"the shoe of the cyclist\", \"part of the train\").\n  - Indirect logic/World knowledge (e.g., \"caused it to fall\", \"color of grass\").\n\n---\n# Input Task:\nthe sheet with shields logo",
+    "raw_output": "{\n  \"thought\": \"Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.\",\n  \"category\": \"Object Reference\"\n}",
+    "reasoning_content": "",
+    "parsed": {
+      "thought": "Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.",
+      "category": "Object Reference"
+    },
+    "thought": "Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.",
+    "category": "Object Reference",
+    "is_valid_category": true,
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "classification",
+        "attempt": 1,
+        "timestamp": "2026-03-21T03:18:57Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 60
+        },
+        "elapsed_sec": 4.393,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-20260321111857454475879IeaQ35JY\",\"model\":\"gemini-3-flash-preview-thinking\",\"object\":\"chat.completion\",\"created\":1774063141,\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"thought\\\": \\\"Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.\\\",\\n  \\\"category\\\": \\\"Object Reference\\\"\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":1749,\"completion_tokens\":66,\"total_tokens\":1815,\"prompt_tokens_details\":{\"cached_tokens\":0,\"text_tokens\":1749,\"audio_tokens\":0,\"image_tokens\":0},\"completion_tokens_details\":{\"text_tokens\":44,\"audio_tokens\":0,\"reasoning_tokens\":22},\"input_tokens\":0,\"output_tokens\":0,\"input_tokens_details\":null,\"claude_cache_creation_5_m_tokens\":0,\"claude_cache_creation_1_h_tokens\":0}}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "classification",
+        "prompt": "# Role and Objective\nYou are a highly precise Data Classifier for the Vision-Language Navigation dataset (Point Arena). Your task is to analyze an object-pointing instruction based on its underlying *semantic features and cognitive bottleneck*, classifying it into exactly ONE of FIVE predefined categories.\n\n# CRITICAL FORMATTING RULES\nYou must output ONLY a valid, flat JSON object. \n- NO Markdown formatting (DO NOT use ```json or ```).\n- NO conversational filler.\n- Output exactly two keys: \"thought\" (under 20 words analyzing the semantic feature) and \"category\".\n\nExample output:\n{\n  \"thought\": \"Focuses on reading text/semantic info (hotel name) to pinpoint an exact UI/text element.\",\n  \"category\": \"Object Reference\"\n}\n\n# Semantic Category Definitions & Decision Boundaries\nDo not rely on keywords. Evaluate the PRIMARY mental effort required to solve the task.\n\n## 1. Object Reference (UI, Text, and Fine-Grained Pinpointing)\n- **Semantic Feature:** The task acts like a precision crosshair. It targets purely digital interfaces, exact text strings, OR ultra-fine-grained extreme points of an object. It also includes relative navigation from a pre-existing cursor.\n- **Key Characteristics:**\n  - Reading text/labels (e.g., \"the name of the hotel\", \"the input bar\").\n  - Extreme fine-grained specific points (e.g., \"the tip of the shoes\", \"directly onto the blue lens\").\n  - Cursor-based relative movement (e.g., \"existing point\", \"moving downward until...\").\n\n## 2. Counting (Enumeration and Collections)\n- **Semantic Feature:** The task requires scanning the global scene to identify a *collection*, a mass of items, or a specific subset based on exact quantity. \n- **Key Characteristics:** \n  - Naked plural nouns acting as the main target without strict spatial anchors (e.g., \"the statues\", \"Jeep vehicles\").\n  - Mass nouns describing a grouped state (e.g., \"the sliced fruit\").\n  - Explicit counting (\"two yellow hats\", \"all the birds\").\n- *Exception:* If the plural objects are strictly located by a geometric anchor (e.g., \"objects *above the sofa*\"), the primary task is spatial, so it belongs to Spatial Relation.\n\n## 3. Spatial Relation (Geometric Layout and Distance)\n- **Semantic Feature:** The primary cognitive bottleneck is 2D mapping, absolute/relative positioning, or distance comparison. It requires no complex physics or functional deduction.\n- **Key Characteristics:**\n  - Distance comparisons (e.g., \"the nearest boat\", \"closest table\").\n  - Topological anchoring (e.g., \"above the sofa\", \"between X and Y\", \"front wheels of\").\n  - *Exception:* If the target relies on a part-whole ownership/semantic binding (e.g., \"the shoe of the cyclist\"), it requires semantic reasoning, NOT pure spatial layout.\n\n## 4. Affordance (Generic Human Tools and Instruments)\n- **Semantic Feature:** Extremely strict definition. It applies ONLY to generic, manipulable tools, instruments, or standard devices defined purely by human hand-scale operations (eating, writing, hammering, playing music).\n- **Key Characteristics:**\n  - Generic objects named by their utility (e.g., \"tool that creates music\", \"tool made of wood\", \"object used to eat\").\n  - *Boundary Rule:* If the object is a structural sub-component of a vehicle/room (e.g., \"illuminate the car\", \"carry the baby\", \"where items are placed on a bike\"), it requires scene-level deduction and belongs to Reasoning!\n\n## 5. Reasoning (World Knowledge, States, and Complex Deduction)\n- **Semantic Feature:** The catch-all for complex semantics. The target is isolated through physical states, part-whole ownership, causal events, or scene-level structural functionality.\n- **Key Characteristics:**\n  - Action/Physical states (e.g., \"moving\", \"fastest\", \"direction in which...\").\n  - Scene-level functional deduction (e.g., \"where people sit\", \"what illuminates the car\", \"object used to carry the baby\").\n  - Part-whole ownership linking specific actors (e.g., \"the shoe of the cyclist\", \"part of the train\").\n  - Indirect logic/World knowledge (e.g., \"caused it to fall\", \"color of grass\").\n\n---\n# Input Task:\nthe sheet with shields logo",
+        "raw_output": "{\n  \"thought\": \"Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.\",\n  \"category\": \"Object Reference\"\n}",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": {
+          "thought": "Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.",
+          "category": "Object Reference"
+        },
+        "normalized": {
+          "thought": "Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.",
+          "category": "Object Reference",
+          "is_valid_category": true
+        },
+        "attempts": [
+          {
+            "stage": "classification",
+            "attempt": 1,
+            "timestamp": "2026-03-21T03:18:57Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 60
+            },
+            "elapsed_sec": 4.393,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-20260321111857454475879IeaQ35JY\",\"model\":\"gemini-3-flash-preview-thinking\",\"object\":\"chat.completion\",\"created\":1774063141,\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\n  \\\"thought\\\": \\\"Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.\\\",\\n  \\\"category\\\": \\\"Object Reference\\\"\\n}\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":1749,\"completion_tokens\":66,\"total_tokens\":1815,\"prompt_tokens_details\":{\"cached_tokens\":0,\"text_tokens\":1749,\"audio_tokens\":0,\"image_tokens\":0},\"completion_tokens_details\":{\"text_tokens\":44,\"audio_tokens\":0,\"reasoning_tokens\":22},\"input_tokens\":0,\"output_tokens\":0,\"input_tokens_details\":null,\"claude_cache_creation_5_m_tokens\":0,\"claude_cache_creation_1_h_tokens\":0}}"
+          }
+        ]
+      }
+    ],
+    "skipped_for_multipoint": false,
+    "forced_by": null
+  },
+  "rewrite": {
+    "input_task": "the sheet with shields logo",
+    "prompt": "You have already classified the original instruction as Object Reference.\n\nRewrite the original instruction into PointArena test-query style.\n\nRequirements:\n- Preserve the same target semantics and keep the task in the Object Reference category.\n- The rewritten task must be a single natural English sentence.\n- It must start with \"Point to\".\n- Preserve any cue about an existing point, cursor, icon, text/UI element, or very fine-grained pinpointing.\n- Do not mention the category, dataset name, JSON, coordinates, masks, points, or explanations.\n- Output only the rewritten question text.\n\nOriginal instruction:\nthe sheet with shields logo",
+    "raw_output": "Point to the sheet with the shields logo.",
+    "reasoning_content": "",
+    "parsed": null,
+    "rewritten_query": "Point to the sheet with the shields logo.",
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "rewrite",
+        "attempt": 1,
+        "timestamp": "2026-03-21T03:19:01Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 60
+        },
+        "elapsed_sec": 4.112,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-20260321111901855552177Uj0AFfRX\",\"model\":\"gemini-3-flash-preview-thinking\",\"object\":\"chat.completion\",\"created\":1774063145,\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"Point to the sheet with the shields logo.\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":1928,\"completion_tokens\":408,\"total_tokens\":2336,\"prompt_tokens_details\":{\"cached_tokens\":0,\"text_tokens\":1928,\"audio_tokens\":0,\"image_tokens\":0},\"completion_tokens_details\":{\"text_tokens\":9,\"audio_tokens\":0,\"reasoning_tokens\":399},\"input_tokens\":0,\"output_tokens\":0,\"input_tokens_details\":null,\"claude_cache_creation_5_m_tokens\":0,\"claude_cache_creation_1_h_tokens\":0}}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "rewrite",
+        "prompt": "You have already classified the original instruction as Object Reference.\n\nRewrite the original instruction into PointArena test-query style.\n\nRequirements:\n- Preserve the same target semantics and keep the task in the Object Reference category.\n- The rewritten task must be a single natural English sentence.\n- It must start with \"Point to\".\n- Preserve any cue about an existing point, cursor, icon, text/UI element, or very fine-grained pinpointing.\n- Do not mention the category, dataset name, JSON, coordinates, masks, points, or explanations.\n- Output only the rewritten question text.\n\nOriginal instruction:\nthe sheet with shields logo",
+        "raw_output": "Point to the sheet with the shields logo.",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": null,
+        "normalized": {
+          "rewritten_query": "Point to the sheet with the shields logo."
+        },
+        "attempts": [
+          {
+            "stage": "rewrite",
+            "attempt": 1,
+            "timestamp": "2026-03-21T03:19:01Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 60
+            },
+            "elapsed_sec": 4.112,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-20260321111901855552177Uj0AFfRX\",\"model\":\"gemini-3-flash-preview-thinking\",\"object\":\"chat.completion\",\"created\":1774063145,\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"Point to the sheet with the shields logo.\"},\"finish_reason\":\"stop\"}],\"usage\":{\"prompt_tokens\":1928,\"completion_tokens\":408,\"total_tokens\":2336,\"prompt_tokens_details\":{\"cached_tokens\":0,\"text_tokens\":1928,\"audio_tokens\":0,\"image_tokens\":0},\"completion_tokens_details\":{\"text_tokens\":9,\"audio_tokens\":0,\"reasoning_tokens\":399},\"input_tokens\":0,\"output_tokens\":0,\"input_tokens_details\":null,\"claude_cache_creation_5_m_tokens\":0,\"claude_cache_creation_1_h_tokens\":0}}"
+          }
+        ]
+      }
+    ]
+  },
+  "session_messages": [
+    {
+      "role": "user",
+      "content": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nPoint to the sheet with shields logo."
+    },
+    {
+      "role": "assistant",
+      "content": "{\n\"keep\": true,\n\"core_target\": \"the sheet with shields logo\",\n\"reason\": \"The instruction is a valid pointing task requiring the identification of a specific object's location.\"\n}"
+    },
+    {
+      "role": "user",
+      "content": "# Role\nYou are a strict answer-shape judge for the Point Arena visual grounding dataset.\n\n# Task\nGiven the original instruction and the cleaned visual target, determine whether a correct answer should contain MULTIPLE valid points/coordinates rather than one single point.\n\n# DECISION RULES\n1. multi_point = true:\n- the task asks for all instances of something\n- the task asks for several/few/multiple points, spots, or locations\n- the target is a free/vacant/empty space where many coordinates are valid\n- the target is a plural/group target that should return more than one point\n2. multi_point = false:\n- the task asks for one best answer, one unique target, one option among choices, or one specific object/location/space\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"multi_point\": boolean\n- \"reason\": string\n\nOriginal instruction:\nPoint to the sheet with shields logo.\n\nCleaned core_target:\nthe sheet with shields logo"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n\"multi_point\": false,\n\"reason\": \"The instruction refers to a singular, specific object ('the sheet') rather than multiple instances, a group, or a vacant area requiring multiple coordinates.\"\n}"
+    },
+    {
+      "role": "user",
+      "content": "# Role and Objective\nYou are a highly precise Data Classifier for the Vision-Language Navigation dataset (Point Arena). Your task is to analyze an object-pointing instruction based on its underlying *semantic features and cognitive bottleneck*, classifying it into exactly ONE of FIVE predefined categories.\n\n# CRITICAL FORMATTING RULES\nYou must output ONLY a valid, flat JSON object. \n- NO Markdown formatting (DO NOT use ```json or ```).\n- NO conversational filler.\n- Output exactly two keys: \"thought\" (under 20 words analyzing the semantic feature) and \"category\".\n\nExample output:\n{\n  \"thought\": \"Focuses on reading text/semantic info (hotel name) to pinpoint an exact UI/text element.\",\n  \"category\": \"Object Reference\"\n}\n\n# Semantic Category Definitions & Decision Boundaries\nDo not rely on keywords. Evaluate the PRIMARY mental effort required to solve the task.\n\n## 1. Object Reference (UI, Text, and Fine-Grained Pinpointing)\n- **Semantic Feature:** The task acts like a precision crosshair. It targets purely digital interfaces, exact text strings, OR ultra-fine-grained extreme points of an object. It also includes relative navigation from a pre-existing cursor.\n- **Key Characteristics:**\n  - Reading text/labels (e.g., \"the name of the hotel\", \"the input bar\").\n  - Extreme fine-grained specific points (e.g., \"the tip of the shoes\", \"directly onto the blue lens\").\n  - Cursor-based relative movement (e.g., \"existing point\", \"moving downward until...\").\n\n## 2. Counting (Enumeration and Collections)\n- **Semantic Feature:** The task requires scanning the global scene to identify a *collection*, a mass of items, or a specific subset based on exact quantity. \n- **Key Characteristics:** \n  - Naked plural nouns acting as the main target without strict spatial anchors (e.g., \"the statues\", \"Jeep vehicles\").\n  - Mass nouns describing a grouped state (e.g., \"the sliced fruit\").\n  - Explicit counting (\"two yellow hats\", \"all the birds\").\n- *Exception:* If the plural objects are strictly located by a geometric anchor (e.g., \"objects *above the sofa*\"), the primary task is spatial, so it belongs to Spatial Relation.\n\n## 3. Spatial Relation (Geometric Layout and Distance)\n- **Semantic Feature:** The primary cognitive bottleneck is 2D mapping, absolute/relative positioning, or distance comparison. It requires no complex physics or functional deduction.\n- **Key Characteristics:**\n  - Distance comparisons (e.g., \"the nearest boat\", \"closest table\").\n  - Topological anchoring (e.g., \"above the sofa\", \"between X and Y\", \"front wheels of\").\n  - *Exception:* If the target relies on a part-whole ownership/semantic binding (e.g., \"the shoe of the cyclist\"), it requires semantic reasoning, NOT pure spatial layout.\n\n## 4. Affordance (Generic Human Tools and Instruments)\n- **Semantic Feature:** Extremely strict definition. It applies ONLY to generic, manipulable tools, instruments, or standard devices defined purely by human hand-scale operations (eating, writing, hammering, playing music).\n- **Key Characteristics:**\n  - Generic objects named by their utility (e.g., \"tool that creates music\", \"tool made of wood\", \"object used to eat\").\n  - *Boundary Rule:* If the object is a structural sub-component of a vehicle/room (e.g., \"illuminate the car\", \"carry the baby\", \"where items are placed on a bike\"), it requires scene-level deduction and belongs to Reasoning!\n\n## 5. Reasoning (World Knowledge, States, and Complex Deduction)\n- **Semantic Feature:** The catch-all for complex semantics. The target is isolated through physical states, part-whole ownership, causal events, or scene-level structural functionality.\n- **Key Characteristics:**\n  - Action/Physical states (e.g., \"moving\", \"fastest\", \"direction in which...\").\n  - Scene-level functional deduction (e.g., \"where people sit\", \"what illuminates the car\", \"object used to carry the baby\").\n  - Part-whole ownership linking specific actors (e.g., \"the shoe of the cyclist\", \"part of the train\").\n  - Indirect logic/World knowledge (e.g., \"caused it to fall\", \"color of grass\").\n\n---\n# Input Task:\nthe sheet with shields logo"
+    },
+    {
+      "role": "assistant",
+      "content": "{\n  \"thought\": \"Identifies a specific object based on a semantic label or logo, requiring fine-grained pinpointing of a text/graphic element.\",\n  \"category\": \"Object Reference\"\n}"
+    },
+    {
+      "role": "user",
+      "content": "You have already classified the original instruction as Object Reference.\n\nRewrite the original instruction into PointArena test-query style.\n\nRequirements:\n- Preserve the same target semantics and keep the task in the Object Reference category.\n- The rewritten task must be a single natural English sentence.\n- It must start with \"Point to\".\n- Preserve any cue about an existing point, cursor, icon, text/UI element, or very fine-grained pinpointing.\n- Do not mention the category, dataset name, JSON, coordinates, masks, points, or explanations.\n- Output only the rewritten question text.\n\nOriginal instruction:\nthe sheet with shields logo"
+    },
+    {
+      "role": "assistant",
+      "content": "Point to the sheet with the shields logo."
+    }
+  ]
+}

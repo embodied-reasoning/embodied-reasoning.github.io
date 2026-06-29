@@ -1,0 +1,166 @@
+{
+  "processing": {
+    "status": "filtered_out",
+    "workflow": "cleaning->multipoint->three_type_classification->rewrite_same_session_local",
+    "started_at": "2026-05-16T13:34:59Z",
+    "completed_at": "2026-05-16T13:34:59Z",
+    "source": "refspatial",
+    "source_rank": 3956830,
+    "global_rank": 1841,
+    "source_file": "/mnt/data/lv_qi/PointArena/ans8/data/cleaned/by_source/refspatial.jsonl",
+    "output_path": "/mnt/data/lv_qi/PointArena/clean_3types_local/qwen3_8b_three_types_20k_forward_v2/refspatial/3956830__refspatial_reasoning_template_qa_101629_0.json",
+    "model": "Qwen3-8B",
+    "api_url": "http://127.0.0.1:8018/v1/chat/completions",
+    "filter_stage": "cleaning",
+    "sample_attempt": 1,
+    "validation_errors": []
+  },
+  "record": {
+    "source": "refspatial",
+    "id": "refspatial::reasoning_template_qa::101629::0",
+    "query": "You are standing in the living room and want to hang a new picture exactly where the wooden framed painting at upper right is currently located. What are the coordinates you should use?",
+    "image_path": "/mnt/data/lv_qi/PointArena/artifacts/raw/refspatial_full/images/180d9fd5bdff98e3.jpg",
+    "width": 1000,
+    "height": 1000,
+    "points_abs": [
+      [
+        889.0,
+        191.0
+      ]
+    ],
+    "raw_meta": {
+      "raw_dataset": "refspatial_full",
+      "raw_file": "2D/reasoning_template_qa.json",
+      "raw_item_id": "180d9fd5bdff98e3",
+      "raw_item_index": 101629,
+      "turn_index": 0,
+      "image_list": [
+        "180d9fd5bdff98e3.jpg"
+      ],
+      "depth_list": [
+        "180d9fd5bdff98e3.png"
+      ],
+      "answer": "The coordinates for the wooden framed painting at upper right are at point (0.889, 0.191), so you should use those coordinates to hang the new picture.",
+      "points_raw": [
+        [
+          0.889,
+          0.191
+        ]
+      ],
+      "point_mode": "norm",
+      "image_size_mode": "fallback_1000",
+      "extra_fields": {}
+    }
+  },
+  "cleaning": {
+    "prompt": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nYou are standing in the living room and want to hang a new picture exactly where the wooden framed painting at upper right is currently located. What are the coordinates you should use?",
+    "raw_output": "{\"keep\":false,\"core_target\":\"\",\"reason\":\"The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task.\"}",
+    "reasoning_content": "",
+    "parsed": {
+      "keep": false,
+      "core_target": "",
+      "reason": "The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task."
+    },
+    "keep": false,
+    "core_target": "",
+    "reason": "The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task.",
+    "finish_reason": "stop",
+    "attempts": [
+      {
+        "stage": "cleaning",
+        "attempt": 1,
+        "timestamp": "2026-05-16T13:34:59Z",
+        "timeout": {
+          "connect_timeout_sec": 15,
+          "read_timeout_sec": 120
+        },
+        "elapsed_sec": 0.818,
+        "http_status": 200,
+        "response_text": "{\"id\":\"chatcmpl-b3271b2245b72682\",\"object\":\"chat.completion\",\"created\":1778938499,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"keep\\\":false,\\\"core_target\\\":\\\"\\\",\\\"reason\\\":\\\"The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task.\\\"}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":474,\"total_tokens\":512,\"completion_tokens\":38,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+      }
+    ],
+    "turns": [
+      {
+        "stage": "cleaning",
+        "prompt": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nYou are standing in the living room and want to hang a new picture exactly where the wooden framed painting at upper right is currently located. What are the coordinates you should use?",
+        "raw_output": "{\"keep\":false,\"core_target\":\"\",\"reason\":\"The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task.\"}",
+        "reasoning_content": "",
+        "finish_reason": "stop",
+        "parsed": {
+          "keep": false,
+          "core_target": "",
+          "reason": "The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task."
+        },
+        "normalized": {
+          "keep": false,
+          "core_target": "",
+          "reason": "The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task."
+        },
+        "attempts": [
+          {
+            "stage": "cleaning",
+            "attempt": 1,
+            "timestamp": "2026-05-16T13:34:59Z",
+            "timeout": {
+              "connect_timeout_sec": 15,
+              "read_timeout_sec": 120
+            },
+            "elapsed_sec": 0.818,
+            "http_status": 200,
+            "response_text": "{\"id\":\"chatcmpl-b3271b2245b72682\",\"object\":\"chat.completion\",\"created\":1778938499,\"model\":\"Qwen3-8B\",\"choices\":[{\"index\":0,\"message\":{\"role\":\"assistant\",\"content\":\"{\\\"keep\\\":false,\\\"core_target\\\":\\\"\\\",\\\"reason\\\":\\\"The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task.\\\"}\",\"refusal\":null,\"annotations\":null,\"audio\":null,\"function_call\":null,\"tool_calls\":[],\"reasoning\":null},\"logprobs\":null,\"finish_reason\":\"stop\",\"stop_reason\":null,\"token_ids\":null}],\"service_tier\":null,\"system_fingerprint\":null,\"usage\":{\"prompt_tokens\":474,\"total_tokens\":512,\"completion_tokens\":38,\"prompt_tokens_details\":null},\"prompt_logprobs\":null,\"prompt_token_ids\":null,\"kv_transfer_params\":null}"
+          }
+        ]
+      }
+    ]
+  },
+  "multipoint": {
+    "prompt": null,
+    "raw_output": null,
+    "reasoning_content": null,
+    "parsed": null,
+    "multi_point": null,
+    "reason": null,
+    "finish_reason": null,
+    "attempts": [],
+    "turns": []
+  },
+  "classification": {
+    "input_task": null,
+    "prompt": null,
+    "raw_output": null,
+    "reasoning_content": null,
+    "parsed": null,
+    "thought": null,
+    "category": null,
+    "allowed_categories": [
+      "Affordance",
+      "Object Reference",
+      "Reasoning"
+    ],
+    "is_valid_category": false,
+    "finish_reason": null,
+    "attempts": [],
+    "turns": []
+  },
+  "rewrite": {
+    "input_task": null,
+    "prompt": null,
+    "raw_output": null,
+    "reasoning_content": null,
+    "parsed": null,
+    "rewritten_query": null,
+    "finish_reason": null,
+    "attempts": [],
+    "turns": []
+  },
+  "session_messages": [
+    {
+      "role": "user",
+      "content": "# Role\nYou are a strict Data Gatekeeper for a Visual Grounding/Navigation dataset (Point Arena). Your ONLY job is to filter out invalid tasks and extract the pure visual target from valid ones.\n\n# CRITICAL RULES for Keeping (keep: true) vs Rejecting (keep: false)\n1. MUST BE A POINTING TASK (GROUNDING): The answer to the task MUST be a specific location, object, or space in the image (a coordinate).\n2. REJECT PURE QA (keep: false): If the instruction asks a question that should be answered with TEXT (e.g., \"What is the color...?\", \"How many...?\", \"Describe the...?\", \"Is there a...?\"), REJECT IT.\n3. ACCEPT EMPTY SPACE: Tasks asking to locate \"free space\", \"vacant area\", or \"empty space\" between/around objects are HIGHLY VALID. Keep them.\n4. ACCEPT LOGICAL POINTING: Tasks requiring reasoning to find a location (e.g., \"the direction the car is moving\", \"the tallest building\") are VALID. Keep them.\n\n# EXTRACTION RULE (If keep is true)\nExtract the \"core_target\".\n- Mentally DELETE ALL formatting garbage: \"Your answer should be formatted as a list of tuples\", \"normalized pixel locations\", \"Identify several spots\", \"Locate a few points\", \"Pinpoint\".\n- Extract ONLY the noun phrase describing the object or space.\n- Example 1: \"Pinpoint several spots within the vacant space situated to the left of the object.\" -> core_target: \"the vacant space to the left of the object\"\n- Example 2: \"Point to all 4 tined fork in the image.\" -> core_target: \"all 4 tined fork\"\n\n# OUTPUT FORMAT\nOutput ONLY a flat JSON object. NO Markdown formatting (DO NOT use ```json).\nKeys:\n- \"keep\": boolean\n- \"core_target\": string (the cleaned target phrase, empty string if keep is false)\n- \"reason\": string (briefly explain why kept or rejected, especially if rejecting QA)\n\nInput Instruction:\nYou are standing in the living room and want to hang a new picture exactly where the wooden framed painting at upper right is currently located. What are the coordinates you should use?"
+    },
+    {
+      "role": "assistant",
+      "content": "{\"keep\":false,\"core_target\":\"\",\"reason\":\"The instruction asks for coordinates (text) rather than a specific location, object, or space. It's a pure QA task.\"}"
+    }
+  ]
+}
